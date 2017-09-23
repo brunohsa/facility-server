@@ -1,7 +1,8 @@
 package br.com.facility.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonProperty.Access;
 
 import javax.persistence.*;
 
@@ -20,11 +21,10 @@ public class User {
     private String lastName;
 
     @Column(name = "USER_NAME", unique = true)
-    @JsonIgnore
     private String userName;
 
     @Column(name = "PASSWORD")
-    @JsonIgnore
+    @JsonProperty(access = Access.WRITE_ONLY)
     private String password;
 
     @Column(name = "EMAIL")
