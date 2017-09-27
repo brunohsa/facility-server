@@ -8,6 +8,7 @@ import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 @Entity(name = "FINANCE")
+@Inheritance(strategy = InheritanceType.JOINED)
 public class Finance {
 
     @Id

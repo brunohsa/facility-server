@@ -10,7 +10,7 @@ import java.time.LocalDate;
 
 @Entity(name = "EXPENSE")
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class Expense {
+public class Expense extends Finance{
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -22,11 +22,6 @@ public class Expense {
     @Column(name = "PAYMENT_DATE")
     @JsonInclude(JsonInclude.Include.NON_NULL)
     private LocalDate paymentDate;
-
-    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL, optional = false)
-    @JoinColumn(name = "FINANCE_ID", referencedColumnName = "ID", foreignKey = @ForeignKey(name = "FK_EXPENSE_FINANCE"))
-    @NotNull
-    private Finance finance;
 
     @Enumerated(EnumType.STRING)
     @Column(name = "STATUS")
@@ -55,14 +50,6 @@ public class Expense {
 
     public void setPaymentDate(LocalDate paymentDate) {
         this.paymentDate = paymentDate;
-    }
-
-    public Finance getFinance() {
-        return finance;
-    }
-
-    public void setFinance(Finance finance) {
-        this.finance = finance;
     }
 
     public StatusExpenses getStatus() {
