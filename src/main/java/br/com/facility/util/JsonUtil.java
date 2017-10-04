@@ -7,11 +7,9 @@ import java.io.IOException;
 
 public class JsonUtil {
 
-    private ObjectMapper mapper;
-
-    public <T> T convertJsonToObject(String json, Class<T> type) {
+    public static <T> T convertJsonToObject(String json, Class<T> type) {
         try {
-            mapper = new ObjectMapper();
+            ObjectMapper mapper = new ObjectMapper();
             return mapper.readValue(json, type);
         } catch (IOException e) {
             e.printStackTrace();
@@ -19,9 +17,9 @@ public class JsonUtil {
         return null;
     }
 
-    public String convertObjectToJson(Object object) {
+    public static String convertObjectToJson(Object object) {
         try {
-            mapper = new ObjectMapper();
+            ObjectMapper mapper = new ObjectMapper();
             return mapper.writeValueAsString(object);
         } catch (JsonProcessingException e) {
             e.printStackTrace();
