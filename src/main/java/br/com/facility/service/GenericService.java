@@ -5,7 +5,7 @@ import org.springframework.data.repository.CrudRepository;
 import java.io.Serializable;
 import java.util.List;
 
-public class GenericService implements Serializable {
+public class GenericService<E> implements IGenericService<E>, Serializable {
 
 	private final CrudRepository repository;
 
@@ -13,19 +13,23 @@ public class GenericService implements Serializable {
 		this.repository = repository;
 	}
 
-	public <E> E save(E entity) {
+	@Override
+	public E save(E entity) {
 		return (E) repository.save(entity);
 	}
 
-	public <T> T findById(Long id, Class<T> tClass) {
-		return (T) repository.findOne(id);
+	@Override
+	public List<E> getAll() {
+		return (List<E>) repository.findAll();
 	}
 
-	public <T> List<T> getAll(Class<T> tClass) {
-		return (List<T>) repository.findAll();
-	}
-
+	@Override
 	public void delete(Long id) {
 		repository.delete(id);
+	}
+
+	@Override
+	public E findById(Long id) {
+		return (E) repository.findOne(id);
 	}
 }

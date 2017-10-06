@@ -2,6 +2,7 @@ package br.com.facility.webservice;
 
 import br.com.facility.model.Expense;
 import br.com.facility.model.User;
+import br.com.facility.service.IUserService;
 import br.com.facility.service.UserService;
 import br.com.facility.util.JsonUtil;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,11 +21,15 @@ import java.util.Objects;
 public class UserWebService {
 
 	@Autowired
-	private UserService userService;
+	private IUserService userService;
 
 	@RequestMapping(value = "findbyid", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity findById(@RequestParam(value = "id") Long id) {
-		User user = userService.findById(id, User.class);
+
+		User user2 = new User("Bruno", "Henrique", "bh", "123456", "brunohsa@hotmail.com");
+		userService.save(user2);
+
+		User user = userService.findById(id);
 		if(Objects.isNull(user)) {
 			return new ResponseEntity("Não Encontrado",HttpStatus.NOT_FOUND);
 		}
