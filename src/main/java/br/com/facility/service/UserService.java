@@ -12,7 +12,8 @@ public class UserService extends GenericService<User> implements IUserService {
 	@Autowired
 	private UserRepository userRepository;
 
-	public UserService(CrudRepository repository) {
-		super(repository);
+	@Override
+	protected CrudRepository getRepository() {
+		return userRepository;
 	}
 }
