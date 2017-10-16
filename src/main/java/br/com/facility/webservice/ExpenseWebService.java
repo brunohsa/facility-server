@@ -1,8 +1,12 @@
 package br.com.facility.webservice;
 
+import br.com.facility.model.Expense;
 import br.com.facility.service.IExpenseService;
+import br.com.facility.util.JsonUtil;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -16,15 +20,28 @@ public class ExpenseWebService {
 	private IExpenseService expenseService;
 
 	@RequestMapping(value = "/find", produces = MediaType.APPLICATION_JSON_VALUE, method = RequestMethod.GET)
-	public void findById(@RequestParam("/id") Long id){}
+	public ResponseEntity findById(@RequestParam("/id") Long id) {
+		Expense expense = expenseService.findById(id);
+		return new ResponseEntity(expense, HttpStatus.OK);
+	}
 
 	@RequestMapping(value = "/insert", consumes = MediaType.APPLICATION_JSON_VALUE, method = RequestMethod.POST)
-	public void insert(@RequestParam("/expense") String jsonExpense){}
+	public ResponseEntity insert(@RequestParam("/expense") String jsonExpense){
+		Expense expense = JsonUtil.convertJsonToObject(jsonExpense, Expense.class);
+		Expense newExpense = expenseService.save(expense);
+		return new ResponseEntity(newExpense, HttpStatus.OK);
+	}
 
 	@RequestMapping(value = "/delte", consumes = MediaType.APPLICATION_JSON_VALUE, method = RequestMethod.DELETE)
-	public void delete(@RequestParam("/id") Long id){}
+	public void delete(@RequestParam("/id") Long id){
+		expenseService.delete(id);
+	}
 
 	@RequestMapping(value = "/update", consumes = MediaType.APPLICATION_JSON_VALUE, method = RequestMethod.POST)
-	public void update(@RequestParam("/expense") String jsonExpense){}
+	public ResponseEntity update(@RequestParam("/expense") String jsonExpense){
+		Expense expense = JsonUtil.convertJsonToObject(jsonExpense, Expense.class);
+		Expense newExpense = expenseService.save(expense);
+		return new ResponseEntity(newExpense, HttpStatus.OK);
+	}
 
 }
