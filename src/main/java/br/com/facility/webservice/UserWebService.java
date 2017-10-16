@@ -2,7 +2,6 @@ package br.com.facility.webservice;
 
 import br.com.facility.model.User;
 import br.com.facility.service.IUserService;
-import br.com.facility.service.UserService;
 import br.com.facility.util.JsonUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

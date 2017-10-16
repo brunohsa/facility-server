@@ -5,5 +5,5 @@ import br.com.facility.repository.ExpenseRepository;
 import org.springframework.stereotype.Service;
 
 @Service
-public class ExpenseService extends GenericService<Expense, ExpenseRepository> {
+public class ExpenseService extends GenericService<Expense, ExpenseRepository> implements IExpenseService {
 }
