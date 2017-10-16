@@ -32,7 +32,7 @@ public class ExpenseWebService {
 		return new ResponseEntity(newExpense, HttpStatus.OK);
 	}
 
-	@RequestMapping(value = "/delte", consumes = MediaType.APPLICATION_JSON_VALUE, method = RequestMethod.DELETE)
+	@RequestMapping(value = "/delete", consumes = MediaType.APPLICATION_JSON_VALUE, method = RequestMethod.DELETE)
 	public void delete(@RequestParam("/id") Long id){
 		expenseService.delete(id);
 	}

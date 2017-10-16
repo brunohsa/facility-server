@@ -1,6 +1,7 @@
 package br.com.facility.model;
 
 import br.com.facility.model.enuns.PaymentType;
+import br.com.facility.model.enuns.StatusFinance;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -40,16 +41,23 @@ public class Finance {
     @NotNull
     private PaymentType paymentType;
 
+    @Enumerated(EnumType.STRING)
+    @Column(name = "STATUS")
+    @NotNull
+    private StatusFinance status;
+
     public Finance() {
     }
 
-    public Finance(BigDecimal value, LocalDateTime releaseDate, User user, String description, String observation, PaymentType paymentType) {
+    public Finance(BigDecimal value, User user, String description, String observation, PaymentType paymentType,
+            StatusFinance status) {
         this.value = value;
-        this.releaseDate = releaseDate;
+        this.releaseDate = LocalDateTime.now();
         this.user = user;
         this.description = description;
         this.observation = observation;
         this.paymentType = paymentType;
+        this.status = status;
     }
 
     public BigDecimal getValue() {
@@ -98,5 +106,13 @@ public class Finance {
 
     public void setPaymentType(PaymentType paymentType) {
         this.paymentType = paymentType;
+    }
+
+    public StatusFinance getStatus() {
+        return status;
+    }
+
+    public void setStatus(StatusFinance status) {
+        this.status = status;
     }
 }

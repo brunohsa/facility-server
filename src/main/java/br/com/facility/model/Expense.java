@@ -1,11 +1,9 @@
 package br.com.facility.model;
 
-import br.com.facility.model.enuns.StatusExpenses;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
 
 @Entity(name = "EXPENSE")
@@ -22,11 +20,6 @@ public class Expense extends Finance{
     @Column(name = "PAYMENT_DATE")
     @JsonInclude(JsonInclude.Include.NON_NULL)
     private LocalDate paymentDate;
-
-    @Enumerated(EnumType.STRING)
-    @Column(name = "STATUS")
-    @NotNull
-    private StatusExpenses status;
 
     public Long getId() {
         return id;
@@ -50,13 +43,5 @@ public class Expense extends Finance{
 
     public void setPaymentDate(LocalDate paymentDate) {
         this.paymentDate = paymentDate;
-    }
-
-    public StatusExpenses getStatus() {
-        return status;
-    }
-
-    public void setStatus(StatusExpenses status) {
-        this.status = status;
     }
 }
