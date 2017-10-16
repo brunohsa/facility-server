@@ -2,11 +2,20 @@ package br.com.facility.model.enuns;
 
 public enum PaymentType {
 
-    MONEY,
-    DEBIT,
-    CREDIT,
-    //BOLETO
-    BANK_SLIP,
-    CHECK
-    //TODO ADICIONAR TIPO: TRANSFERENCIA BANCARIA
+    MONEY("payment.type.money"),
+    DEBIT("payment.type.debit"),
+    CREDIT("payment.type.credit"),
+    BANK_SLIP("payment.type.bank.slip"),
+    CHECK("payment.type.check");
+    //TODO ADICIONAR TIPO: TRANSFERENCIA BANCÁRIA
+
+    private String paymentName;
+
+    PaymentType(String paymentName) {
+       this.paymentName = paymentName;
+    }
+
+    public String getPaymentName(){
+        return paymentName;
+    }
 }
