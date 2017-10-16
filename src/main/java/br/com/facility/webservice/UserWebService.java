@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.Objects;
 
 @RestController
-@RequestMapping(value = "/user")
+@RequestMapping("/user")
 public class UserWebService {
 
 	@Autowired
