@@ -10,6 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
+import java.time.LocalDateTime;
 
 @RestController
 @RequestMapping("/expenses")
@@ -29,6 +30,7 @@ public class ExpenseWebService {
 		Expense expense = null;
 		try {
 			expense = JsonUtil.convertJsonToObject(jsonExpense, Expense.class);
+			expense.setReleaseDate(LocalDateTime.now());
 		} catch (IOException e) {
 			e.printStackTrace();
 			return new ResponseEntity(HttpStatus.OK);

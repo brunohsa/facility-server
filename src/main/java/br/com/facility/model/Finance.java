@@ -2,6 +2,12 @@ package br.com.facility.model;
 
 import br.com.facility.model.enuns.PaymentType;
 import br.com.facility.model.enuns.StatusFinance;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateDeserializer;
+import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateTimeDeserializer;
+import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateSerializer;
+import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateTimeSerializer;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -22,6 +28,7 @@ public class Finance {
 
     @Column(name = "RELEASE_DATE", nullable = false)
     @NotNull
+    @JsonSerialize(using = LocalDateTimeSerializer.class)
     private LocalDateTime releaseDate;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
