@@ -24,7 +24,7 @@ public class Finance {
     @NotNull
     private LocalDateTime releaseDate;
 
-    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL, optional = false)
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "USER_ID", referencedColumnName = "ID")
     @NotNull
     private User user;
