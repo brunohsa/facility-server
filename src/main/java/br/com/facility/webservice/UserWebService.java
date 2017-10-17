@@ -1,5 +1,6 @@
 package br.com.facility.webservice;
 
+import br.com.facility.model.JsonError;
 import br.com.facility.model.User;
 import br.com.facility.service.IUserService;
 import br.com.facility.util.JsonUtil;
@@ -12,20 +13,22 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.io.IOException;
 import java.util.Objects;
 
 @RestController
-@RequestMapping("/user")
+@RequestMapping("/users")
 public class UserWebService {
 
 	@Autowired
 	private IUserService userService;
 
-	@RequestMapping(value = "findbyid", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+	@RequestMapping(value = "/findbyid", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity findById(@RequestParam(value = "id") Long id) {
 		User user = userService.findById(id);
-		if(Objects.isNull(user)) {
-			return new ResponseEntity("Não Encontrado",HttpStatus.NOT_FOUND);
+		if (Objects.isNull(user)) {
+			JsonError error = new JsonError(HttpStatus.NOT_FOUND, "Não foi possível encontrat o usuário com a identificação " + id, "Usuário inexistente");
+			return new ResponseEntity(error, HttpStatus.NOT_FOUND);
 		}
 		return new ResponseEntity(user, HttpStatus.OK);
 	}
@@ -47,10 +50,15 @@ public class UserWebService {
 	}
 
 	private ResponseEntity save(String userJson) {
-		User user = JsonUtil.convertJsonToObject(userJson, User.class);
-		if (Objects.isNull(user)) {
-			return new ResponseEntity(HttpStatus.INTERNAL_SERVER_ERROR);
+		User user = null;
+		try {
+			user = JsonUtil.convertJsonToObject(userJson, User.class);
+		} catch (IOException e) {
+			e.printStackTrace();
+			JsonError error = new JsonError(HttpStatus.INTERNAL_SERVER_ERROR, e.getMessage(), "Erro a fazer o parse do json.");
+			return new ResponseEntity(error, HttpStatus.INTERNAL_SERVER_ERROR);
 		}
+
 		userService.save(user);
 		return new ResponseEntity(user, HttpStatus.OK);
 	}

@@ -12,10 +12,10 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.*;
 
 @RestController
-@RequestMapping("/infos")
-public class InformationsWebService {
+@RequestMapping("/payments/types")
+public class PaymentTypeWebService {
 
-	@RequestMapping(value = "/getpaymentnames", produces = MediaType.APPLICATION_JSON_VALUE, method = RequestMethod.GET)
+	@RequestMapping(produces = MediaType.APPLICATION_JSON_VALUE, method = RequestMethod.GET)
 	public ResponseEntity getPaymentTypes() {
 		List<PaymentType> payments = Arrays.asList(PaymentType.values());
 

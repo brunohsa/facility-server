@@ -1,12 +1,17 @@
 package br.com.facility.model;
 
+import br.com.facility.util.DateUtil;
+import org.springframework.http.HttpStatus;
+
 import java.time.LocalDateTime;
 
 public class JsonError {
 
-	private LocalDateTime dateTime;
+	private String dateTime;
 
 	private String httpStatus;
+
+	private String typeHttpStatus;
 
 	private String cause;
 
@@ -15,18 +20,19 @@ public class JsonError {
 	public JsonError() {
 	}
 
-	public JsonError(LocalDateTime dateTime, String httpStatus, String cause, String description) {
-		this.dateTime = dateTime;
-		this.httpStatus = httpStatus;
+	public JsonError(HttpStatus httpStatus, String cause, String description) {
+		this.dateTime = DateUtil.formattDateTime(LocalDateTime.now());
+		this.httpStatus = httpStatus.toString();
+		this.typeHttpStatus = httpStatus.getReasonPhrase();
 		this.cause = cause;
 		this.description = description;
 	}
 
-	public LocalDateTime getDateTime() {
+	public String getDateTime() {
 		return dateTime;
 	}
 
-	public void setDateTime(LocalDateTime dateTime) {
+	public void setDateTime(String dateTime) {
 		this.dateTime = dateTime;
 	}
 
@@ -52,5 +58,13 @@ public class JsonError {
 
 	public void setDescription(String description) {
 		this.description = description;
+	}
+
+	public String getTypeHttpStatus() {
+		return typeHttpStatus;
+	}
+
+	public void setTypeHttpStatus(String typeHttpStatus) {
+		this.typeHttpStatus = typeHttpStatus;
 	}
 }

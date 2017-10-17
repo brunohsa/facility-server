@@ -1,5 +1,6 @@
 package br.com.facility.util;
 
+import java.util.Objects;
 import java.util.ResourceBundle;
 
 public class Messages {
@@ -12,7 +13,7 @@ public class Messages {
     }
 
     private static ResourceBundle getBundle() {
-        if (bundle == null) {
+        if (Objects.isNull(bundle)) {
             bundle = ResourceBundle.getBundle(BUNDLE_MESSAGE, new MessagesUTF8Control());
         }
         return bundle;

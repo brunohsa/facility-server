@@ -12,8 +12,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.io.IOException;
+
 @RestController
-@RequestMapping("expense")
+@RequestMapping("/expenses")
 public class ExpenseWebService {
 
 	@Autowired
@@ -27,7 +29,13 @@ public class ExpenseWebService {
 
 	@RequestMapping(value = "/insert", consumes = MediaType.APPLICATION_JSON_VALUE, method = RequestMethod.POST)
 	public ResponseEntity insert(@RequestParam("/expense") String jsonExpense){
-		Expense expense = JsonUtil.convertJsonToObject(jsonExpense, Expense.class);
+		Expense expense = null;
+		try {
+			expense = JsonUtil.convertJsonToObject(jsonExpense, Expense.class);
+		} catch (IOException e) {
+			e.printStackTrace();
+			return new ResponseEntity(HttpStatus.OK);
+		}
 		Expense newExpense = expenseService.save(expense);
 		return new ResponseEntity(newExpense, HttpStatus.OK);
 	}
@@ -39,7 +47,13 @@ public class ExpenseWebService {
 
 	@RequestMapping(value = "/update", consumes = MediaType.APPLICATION_JSON_VALUE, method = RequestMethod.POST)
 	public ResponseEntity update(@RequestParam("/expense") String jsonExpense){
-		Expense expense = JsonUtil.convertJsonToObject(jsonExpense, Expense.class);
+		Expense expense = null;
+		try {
+			expense = JsonUtil.convertJsonToObject(jsonExpense, Expense.class);
+		} catch (IOException e) {
+			e.printStackTrace();
+			return new ResponseEntity(HttpStatus.OK);
+		}
 		Expense newExpense = expenseService.save(expense);
 		return new ResponseEntity(newExpense, HttpStatus.OK);
 	}
