@@ -2,12 +2,6 @@ package br.com.facility.model;
 
 import br.com.facility.model.enuns.PaymentType;
 import br.com.facility.model.enuns.StatusFinance;
-import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
-import com.fasterxml.jackson.databind.annotation.JsonSerialize;
-import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateDeserializer;
-import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateTimeDeserializer;
-import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateSerializer;
-import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateTimeSerializer;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -16,7 +10,7 @@ import java.time.LocalDateTime;
 
 @Entity(name = "FINANCE")
 @Inheritance(strategy = InheritanceType.JOINED)
-public class Finance {
+public abstract class Finance {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

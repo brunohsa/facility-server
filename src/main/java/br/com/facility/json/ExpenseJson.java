@@ -3,7 +3,9 @@ package br.com.facility.json;
 import br.com.facility.model.Expense;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateDeserializer;
 import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateSerializer;
 
 import java.time.LocalDate;
@@ -15,10 +17,12 @@ public class ExpenseJson extends FinanceJson {
     private Long id;
 
     @JsonInclude(JsonInclude.Include.NON_NULL)
+    @JsonDeserialize(using = LocalDateDeserializer.class)
     @JsonSerialize(using = LocalDateSerializer.class)
     private LocalDate expirationDate;
 
     @JsonInclude(JsonInclude.Include.NON_NULL)
+    @JsonDeserialize(using = LocalDateDeserializer.class)
     @JsonSerialize(using = LocalDateSerializer.class)
     private LocalDate paymentDate;
 

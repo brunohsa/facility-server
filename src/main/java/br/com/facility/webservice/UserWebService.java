@@ -4,14 +4,12 @@ import br.com.facility.json.JsonError;
 import br.com.facility.json.UserJson;
 import br.com.facility.model.User;
 import br.com.facility.service.IUserService;
-import br.com.facility.util.JsonUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.io.IOException;
 import java.util.Objects;
 
 @RestController
@@ -28,11 +26,11 @@ public class UserWebService {
 			JsonError error = new JsonError(HttpStatus.NOT_FOUND, "Não foi possível encontrat o usuário com a identificação " + id, "Usuário inexistente");
 			return new ResponseEntity(error, HttpStatus.NOT_FOUND);
 		}
-		return new ResponseEntity(user, HttpStatus.OK);
+		return new ResponseEntity(new UserJson(user), HttpStatus.OK);
 	}
 
 	@RequestMapping(value = "/insert", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity insert(@RequestParam("user") String userJson) {
+	public ResponseEntity insert(@RequestBody UserJson userJson) {
 		return save(userJson);
 	}
 
@@ -42,23 +40,15 @@ public class UserWebService {
 		return new ResponseEntity(HttpStatus.OK);
 	}
 
-	@RequestMapping(value = "/update/{user}", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity update(@PathVariable("user") String userJson) {
+	@RequestMapping(value = "/update", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity update(@RequestBody UserJson userJson) {
 		return save(userJson);
 	}
 
-	private ResponseEntity save(String userJsonStr) {
-		UserJson userJson = null;
-		try {
-			userJson = JsonUtil.convertJsonToObject(userJsonStr, UserJson.class);
-		} catch (IOException e) {
-			e.printStackTrace();
-			JsonError error = new JsonError(HttpStatus.INTERNAL_SERVER_ERROR, e.getMessage(), "Erro a fazer o parse do json.");
-			return new ResponseEntity(error, HttpStatus.INTERNAL_SERVER_ERROR);
-		}
+	private ResponseEntity save(UserJson userJson) {
 		User user = new User(userJson);
-		userService.save(user);
-		return new ResponseEntity(user, HttpStatus.OK);
+		User newUser = userService.save(user);
+		return new ResponseEntity(new UserJson(newUser), HttpStatus.OK);
 	}
 }
 

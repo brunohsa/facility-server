@@ -2,7 +2,9 @@ package br.com.facility.util;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 
 public class DateUtil {
 
@@ -41,5 +43,11 @@ public class DateUtil {
 	public static String formattDate(LocalDate date) {
 		DateTimeFormatter formatter = DateTimeFormatter.ofPattern(COMPLETE_DATE_FORMATTER);
 		return date.format(formatter);
+	}
+
+	public static LocalDateTime stringDateHyphenFormattToDateTimeWithoutHours(String localDate) throws DateTimeParseException{
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-dd-MM");
+		LocalDate date = LocalDate.parse(localDate, formatter);
+		return LocalDateTime.of(date, LocalTime.MIDNIGHT);
 	}
 }

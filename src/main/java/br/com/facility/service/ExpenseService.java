@@ -6,7 +6,7 @@ import br.com.facility.repository.ExpenseRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Service
@@ -21,7 +21,7 @@ public class ExpenseService extends GenericService<Expense, ExpenseRepository> i
 	}
 
 	@Override
-	public List<Expense> filterExpensesByDate(LocalDate date) {
+	public List<Expense> filterExpensesByDate(LocalDateTime date) {
 		return repository.filterExpensesByDate(date);
 	}
 }

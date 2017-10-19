@@ -10,13 +10,15 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 @RestController
 @RequestMapping("/facility")
 public class FacilityWebService {
 
-	@RequestMapping(value ="/payment/types", produces = MediaType.APPLICATION_JSON_VALUE, method = RequestMethod.GET)
+	@RequestMapping(value ="/payments/types", produces = MediaType.APPLICATION_JSON_VALUE, method = RequestMethod.GET)
 	public ResponseEntity getPaymentTypes() {
 		List<PaymentType> payments = Arrays.asList(PaymentType.values());
 
@@ -27,7 +29,7 @@ public class FacilityWebService {
 	}
 
 	@RequestMapping(value ="/status/finances", produces = MediaType.APPLICATION_JSON_VALUE, method = RequestMethod.GET)
-	public ResponseEntity getStatusFinance() {
+	public ResponseEntity getStatusFinances() {
 		List<StatusFinance> statusFinances = Arrays.asList(StatusFinance.values());
 
 		List<String> statusNames = new ArrayList<>();

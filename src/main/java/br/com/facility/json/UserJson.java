@@ -1,6 +1,8 @@
 package br.com.facility.json;
 
+import br.com.facility.model.User;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
@@ -10,6 +12,7 @@ public class UserJson {
 
     private String name;
 
+    @JsonInclude(JsonInclude.Include.NON_NULL)
     private String lastName;
 
     private String userName;
@@ -19,13 +22,12 @@ public class UserJson {
 
     private String email;
 
-    public UserJson(Long id, String name, String lastName, String userName, String password, String email) {
-        this.id = id;
-        this.name = name;
-        this.lastName = lastName;
-        this.userName = userName;
-        this.password = password;
-        this.email = email;
+    public UserJson(User user) {
+        this.id = user.getId();
+        this.name = user.getName();
+        this.userName = user.getUserName();
+        this.password = user.getPassword();
+        this.email = user.getEmail();
     }
 
     public Long getId() {

@@ -1,5 +1,6 @@
 package br.com.facility.util;
 
+import java.util.MissingResourceException;
 import java.util.Objects;
 import java.util.ResourceBundle;
 
@@ -9,7 +10,11 @@ public class Messages {
     private static ResourceBundle bundle;
 
     public static String getMessage(String key) {
-        return getBundle().getString(key);
+        try {
+            return getBundle().getString(key);
+        } catch (MissingResourceException e) {
+            return key;
+        }
     }
 
     private static ResourceBundle getBundle() {
