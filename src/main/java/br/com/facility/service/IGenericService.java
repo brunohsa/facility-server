@@ -8,7 +8,7 @@ public interface IGenericService<E> {
 
 	public E save(E entity);
 
-	public List<E> getAll();
+	public List<E> findAll();
 
 	public void delete(Long id);
 }

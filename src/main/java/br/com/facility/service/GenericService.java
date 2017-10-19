@@ -1,17 +1,15 @@
 package br.com.facility.service;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.repository.CrudRepository;
 
 import java.io.Serializable;
 import java.util.List;
 
-public class GenericService<E> implements IGenericService<E>, Serializable {
+public class GenericService<E, T extends CrudRepository> implements IGenericService<E>, Serializable {
 
-	private final CrudRepository repository;
-
-	public GenericService(CrudRepository repository) {
-		this.repository = repository;
-	}
+	@Autowired
+	private T repository;
 
 	@Override
 	public E save(E entity) {
@@ -19,7 +17,7 @@ public class GenericService<E> implements IGenericService<E>, Serializable {
 	}
 
 	@Override
-	public List<E> getAll() {
+	public List<E> findAll() {
 		return (List<E>) repository.findAll();
 	}
 

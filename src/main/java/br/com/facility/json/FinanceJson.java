@@ -1,58 +1,46 @@
-package br.com.facility.model;
+package br.com.facility.json;
 
 import br.com.facility.model.enuns.PaymentType;
 import br.com.facility.model.enuns.StatusFinance;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateTimeDeserializer;
+import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateTimeSerializer;
 
-import javax.persistence.*;
-import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
-@Entity(name = "FINANCE")
-@Inheritance(strategy = InheritanceType.JOINED)
-public abstract class Finance {
+@JsonIgnoreProperties(ignoreUnknown = true)
+public abstract class FinanceJson {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-
-    @Column(name = "VALUE", nullable = false)
-    @NotNull
     private BigDecimal value;
 
-    @Column(name = "RELEASE_DATE", nullable = false)
-    @NotNull
+    @JsonDeserialize(using = LocalDateTimeDeserializer.class)
+    @JsonSerialize(using = LocalDateTimeSerializer.class)
     private LocalDateTime releaseDate;
 
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "USER_ID", referencedColumnName = "ID")
-    @NotNull
-    private User user;
+    private Long userId;
 
-    @Column(name = "DESCRIPTION", nullable = false)
-    @NotNull
     private String description;
 
-    @Column(name = "OBSERVATION")
+    @JsonInclude(JsonInclude.Include.NON_NULL)
     private String observation;
 
-    @Enumerated(EnumType.STRING)
-    @Column(name = "PAYMENT_TYPE", nullable = false)
+    @JsonInclude(JsonInclude.Include.NON_NULL)
     private PaymentType paymentType;
 
-    @Enumerated(EnumType.STRING)
-    @Column(name = "STATUS")
-    @NotNull
     private StatusFinance status;
 
-    public Finance() {
+    public FinanceJson() {
+        this.releaseDate = LocalDateTime.now();
     }
 
-    public Finance(BigDecimal value, User user, String description, String observation, PaymentType paymentType,
-            StatusFinance status) {
+    public FinanceJson(BigDecimal value, LocalDateTime releaseDate, Long userId, String description, String observation, PaymentType paymentType, StatusFinance status) {
         this.value = value;
-        this.releaseDate = LocalDateTime.now();
-        this.user = user;
+        this.releaseDate = releaseDate;
+        this.userId = userId;
         this.description = description;
         this.observation = observation;
         this.paymentType = paymentType;
@@ -75,12 +63,12 @@ public abstract class Finance {
         this.releaseDate = releaseDate;
     }
 
-    public User getUser() {
-        return user;
+    public Long getUserId() {
+        return userId;
     }
 
-    public void setUser(User user) {
-        this.user = user;
+    public void setUserId(Long userId) {
+        this.userId = userId;
     }
 
     public String getDescription() {

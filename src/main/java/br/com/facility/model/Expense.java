@@ -1,15 +1,14 @@
 package br.com.facility.model;
 
-import br.com.facility.model.enuns.StatusExpenses;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.annotation.JsonInclude;
+import br.com.facility.json.ExpenseJson;
+import br.com.facility.model.enuns.PaymentType;
+import br.com.facility.model.enuns.StatusFinance;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotNull;
+import java.math.BigDecimal;
 import java.time.LocalDate;
 
 @Entity(name = "EXPENSE")
-@JsonIgnoreProperties(ignoreUnknown = true)
 public class Expense extends Finance{
 
     @Id
@@ -20,13 +19,23 @@ public class Expense extends Finance{
     private LocalDate expirationDate;
 
     @Column(name = "PAYMENT_DATE")
-    @JsonInclude(JsonInclude.Include.NON_NULL)
     private LocalDate paymentDate;
 
-    @Enumerated(EnumType.STRING)
-    @Column(name = "STATUS")
-    @NotNull
-    private StatusExpenses status;
+    public Expense() {}
+
+    public Expense(ExpenseJson expenseJson, User user) {
+        super(expenseJson.getValue(), user, expenseJson.getDescription(), expenseJson.getObservation(), expenseJson.getPaymentType(), expenseJson.getStatus());
+        expenseJson.getId();
+        this.expirationDate = expenseJson.getExpirationDate();
+        this.paymentDate = expenseJson.getPaymentDate();
+    }
+
+    public Expense(BigDecimal value, User user, String description, String observation, PaymentType paymentType, StatusFinance status, LocalDate expirationDate,
+            LocalDate paymentDate) {
+        super(value, user, description, observation, paymentType, status);
+        this.expirationDate = expirationDate;
+        this.paymentDate = paymentDate;
+    }
 
     public Long getId() {
         return id;
@@ -50,13 +59,5 @@ public class Expense extends Finance{
 
     public void setPaymentDate(LocalDate paymentDate) {
         this.paymentDate = paymentDate;
-    }
-
-    public StatusExpenses getStatus() {
-        return status;
-    }
-
-    public void setStatus(StatusExpenses status) {
-        this.status = status;
     }
 }
