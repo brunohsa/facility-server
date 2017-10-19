@@ -31,7 +31,8 @@ public class UserWebService {
 
 	@RequestMapping(value = "/insert", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity insert(@RequestBody UserJson userJson) {
-		return save(userJson);
+		UserJson user = save(userJson);
+		return new ResponseEntity(user, HttpStatus.CREATED);
 	}
 
 	@RequestMapping(value = "/delete/{id}", method = RequestMethod.DELETE, consumes = MediaType.APPLICATION_JSON_VALUE)
@@ -42,13 +43,14 @@ public class UserWebService {
 
 	@RequestMapping(value = "/update", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity update(@RequestBody UserJson userJson) {
-		return save(userJson);
+		UserJson user = save(userJson);
+		return new ResponseEntity(user, HttpStatus.OK);
 	}
 
-	private ResponseEntity save(UserJson userJson) {
+	private UserJson save(UserJson userJson) {
 		User user = new User(userJson);
 		User newUser = userService.save(user);
-		return new ResponseEntity(new UserJson(newUser), HttpStatus.OK);
+		return new UserJson(newUser);
 	}
 }
 
