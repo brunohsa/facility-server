@@ -1,13 +1,15 @@
-package br.com.facility.model;
+package br.com.facility.json;
 
-import br.com.facility.util.DateUtil;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateSerializer;
 import org.springframework.http.HttpStatus;
 
 import java.time.LocalDateTime;
 
 public class JsonError {
 
-	private String dateTime;
+	@JsonSerialize(using = LocalDateSerializer.class)
+	private LocalDateTime dateTime;
 
 	private String httpStatus;
 
@@ -21,18 +23,18 @@ public class JsonError {
 	}
 
 	public JsonError(HttpStatus httpStatus, String cause, String description) {
-		this.dateTime = DateUtil.formattDateTime(LocalDateTime.now());
+		this.dateTime = LocalDateTime.now();
 		this.httpStatus = httpStatus.toString();
 		this.typeHttpStatus = httpStatus.getReasonPhrase();
 		this.cause = cause;
 		this.description = description;
 	}
 
-	public String getDateTime() {
+	public LocalDateTime getDateTime() {
 		return dateTime;
 	}
 
-	public void setDateTime(String dateTime) {
+	public void setDateTime(LocalDateTime dateTime) {
 		this.dateTime = dateTime;
 	}
 

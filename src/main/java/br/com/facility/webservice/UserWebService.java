@@ -1,6 +1,7 @@
 package br.com.facility.webservice;
 
-import br.com.facility.model.JsonError;
+import br.com.facility.json.JsonError;
+import br.com.facility.json.UserJson;
 import br.com.facility.model.User;
 import br.com.facility.service.IUserService;
 import br.com.facility.util.JsonUtil;
@@ -46,16 +47,16 @@ public class UserWebService {
 		return save(userJson);
 	}
 
-	private ResponseEntity save(String userJson) {
-		User user = null;
+	private ResponseEntity save(String userJsonStr) {
+		UserJson userJson = null;
 		try {
-			user = JsonUtil.convertJsonToObject(userJson, User.class);
+			userJson = JsonUtil.convertJsonToObject(userJsonStr, UserJson.class);
 		} catch (IOException e) {
 			e.printStackTrace();
 			JsonError error = new JsonError(HttpStatus.INTERNAL_SERVER_ERROR, e.getMessage(), "Erro a fazer o parse do json.");
 			return new ResponseEntity(error, HttpStatus.INTERNAL_SERVER_ERROR);
 		}
-
+		User user = new User(userJson);
 		userService.save(user);
 		return new ResponseEntity(user, HttpStatus.OK);
 	}

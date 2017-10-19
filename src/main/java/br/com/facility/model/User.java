@@ -1,13 +1,14 @@
 package br.com.facility.model;
 
+import br.com.facility.json.UserJson;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonProperty.Access;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 
 @Entity(name = "USER")
-@JsonIgnoreProperties(ignoreUnknown = true)
 public class User {
 
     @Id
@@ -15,22 +16,33 @@ public class User {
     private Long id;
 
     @Column(name = "NAME")
+    @NotNull
     private String name;
 
     @Column(name = "LAST_NAME")
     private String lastName;
 
     @Column(name = "USER_NAME", unique = true)
+    @NotNull
     private String userName;
 
     @Column(name = "PASSWORD")
-    @JsonProperty(access = Access.WRITE_ONLY)
+    @NotNull
     private String password;
 
     @Column(name = "EMAIL")
     private String email;
 
     public User() {
+    }
+
+    public User(UserJson user) {
+        this.id = user.getId();
+        this.name = user.getName();
+        this.lastName = user.getName();
+        this.userName = user.getUserName();
+        this.password = user.getPassword();
+        this.email = user.getEmail();
     }
 
     public User(String name, String lastName, String userName, String password, String email) {

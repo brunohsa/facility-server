@@ -1,5 +1,6 @@
 package br.com.facility.model;
 
+import br.com.facility.json.ExpenseJson;
 import br.com.facility.model.enuns.PaymentType;
 import br.com.facility.model.enuns.StatusFinance;
 import com.fasterxml.jackson.annotation.JsonFormat;
@@ -15,7 +16,6 @@ import java.math.BigDecimal;
 import java.time.LocalDate;
 
 @Entity(name = "EXPENSE")
-@JsonIgnoreProperties(ignoreUnknown = true)
 public class Expense extends Finance{
 
     @Id
@@ -23,15 +23,19 @@ public class Expense extends Finance{
     private Long id;
 
     @Column(name = "EXPIRATION_DATE")
-    @JsonSerialize(using = LocalDateSerializer.class)
     private LocalDate expirationDate;
 
     @Column(name = "PAYMENT_DATE")
-    @JsonInclude(JsonInclude.Include.NON_NULL)
-    @JsonSerialize(using = LocalDateSerializer.class)
     private LocalDate paymentDate;
 
     public Expense() {}
+
+    public Expense(ExpenseJson expenseJson, User user) {
+        super(expenseJson.getValue(), user, expenseJson.getDescription(), expenseJson.getObservation(), expenseJson.getPaymentType(), expenseJson.getStatus());
+        expenseJson.getId();
+        this.expirationDate = expenseJson.getExpirationDate();
+        this.paymentDate = expenseJson.getPaymentDate();
+    }
 
     public Expense(BigDecimal value, User user, String description, String observation, PaymentType paymentType, StatusFinance status, LocalDate expirationDate,
             LocalDate paymentDate) {
