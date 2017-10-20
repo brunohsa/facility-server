@@ -11,7 +11,7 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 import java.util.List;
 
 @RestController
@@ -47,12 +47,12 @@ public class ExpenseWebService {
     }
 
     @RequestMapping(value = "/filterbydate/{date}", produces = MediaType.APPLICATION_JSON_VALUE, method = RequestMethod.GET)
-    public ResponseEntity filterByDate(@PathVariable("date") LocalDateTime localDateTime) {
-        List<ExpenseResponse> expensesJson = expenseFacade.filterByDate(localDateTime);
+    public ResponseEntity filterByDate(@PathVariable("date") LocalDate localDate) {
+        List<ExpenseResponse> expensesJson = expenseFacade.filterByDate(localDate);
         return new ResponseEntity(expensesJson, HttpStatus.OK);
     }
 
-    private JsonError createMessageError(HttpStatus status, String cause, String description) {
+    private JsonError createMessageError(HttpStatus status, String cause, String description){
         return new JsonError(status, Messages.getMessage(cause), Messages.getMessage(description));
     }
 }

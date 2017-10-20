@@ -3,7 +3,7 @@ package br.com.facility.facade;
 import br.com.facility.json.request.ExpenseRequest;
 import br.com.facility.json.response.ExpenseResponse;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 import java.util.List;
 
 public interface IExpenseFacade {
@@ -12,7 +12,7 @@ public interface IExpenseFacade {
 
 	ExpenseResponse findById(Long id);
 
-	List<ExpenseResponse> filterByDate(LocalDateTime dateTime);
+	List<ExpenseResponse> filterByDate(LocalDate date);
 
 	void delete(Long id);
 

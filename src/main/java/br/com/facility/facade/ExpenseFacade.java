@@ -9,8 +9,9 @@ import br.com.facility.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.time.temporal.ChronoField;
+import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -43,8 +44,8 @@ public class ExpenseFacade implements IExpenseFacade {
 	}
 
 	@Override
-	public List<ExpenseResponse> filterByDate(LocalDateTime dateTime) {
-		dateTime.with(ChronoField.HOUR_OF_DAY, 0).with(ChronoField.MINUTE_OF_DAY, 0).with(ChronoField.SECOND_OF_MINUTE, 0);
+	public List<ExpenseResponse> filterByDate(LocalDate date) {
+		LocalDateTime dateTime = LocalDateTime.of(date, LocalTime.MIDNIGHT);
 
 		List<Expense> expenses = expenseService.filterExpensesByDate(dateTime);
 		List<ExpenseResponse> expensesJson = new ArrayList<>();
