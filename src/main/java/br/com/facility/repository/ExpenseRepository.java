@@ -14,9 +14,9 @@ import java.util.List;
 public interface ExpenseRepository extends CrudRepository<Expense, Long> {
 
 	@Query("select e from EXPENSE e where e.status = :status")
-	public List<Expense> getExpensesByStatus(@Param("status") StatusFinance statusFinance);
+	List<Expense> getExpensesByStatus(@Param("status") StatusFinance statusFinance);
 
 	//filtra as despesas pela data envida até data atual.
 	@Query("select e from EXPENSE e where e.releaseDate >= :date")
-	public List<Expense> filterExpensesByDate(@Param("date") LocalDateTime date);
+	List<Expense> filterExpensesByDate(@Param("date") LocalDateTime date);
 }

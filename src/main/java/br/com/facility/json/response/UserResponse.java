@@ -1,8 +1,7 @@
 package br.com.facility.json.response;
 
 import br.com.facility.model.User;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.*;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class UserResponse {

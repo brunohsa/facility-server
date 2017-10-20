@@ -11,6 +11,7 @@ public class DateUtil {
 	private static final String COMPLETE_DATE_FORMATTER = "dd/MM/yyyy";
 	private static final String COMPLETE_HOURS_FORMATTER = "hh:mm:ss";
 	private static final String COMPLETE_DATE_AND_HOURS_FORMATTER = "dd/MM/yyyy hh:mm:ss";
+	private static final String NANO_SECOND_FORMATTER = "ddMMuuuuHHmmssSSSSSS";
 
 	/**
 	 * Retorna a data formatada com as horas
@@ -31,6 +32,11 @@ public class DateUtil {
 	 */
 	public static String formattHours(LocalDateTime dateTime) {
 		DateTimeFormatter formatter = DateTimeFormatter.ofPattern(COMPLETE_HOURS_FORMATTER);
+		return dateTime.format(formatter);
+	}
+
+	public static String formattNanoSecond(LocalDateTime dateTime){
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern(NANO_SECOND_FORMATTER);
 		return dateTime.format(formatter);
 	}
 

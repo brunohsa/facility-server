@@ -28,7 +28,7 @@ public class UserWebService {
     @Autowired
     private IIncomeService incomeService;
 
-    @RequestMapping(value = "/findbyid/{id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+    @RequestMapping(value = "/find/{id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity findById(@PathVariable("id") Long id) {
         User user = userService.findById(id);
         if (Objects.isNull(user)) {
