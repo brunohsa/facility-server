@@ -1,12 +1,11 @@
-package br.com.facility.json;
+package br.com.facility.json.response;
 
 import br.com.facility.model.User;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
-import com.fasterxml.jackson.annotation.JsonProperty;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class UserJson {
+public class UserResponse {
 
     private Long id;
 
@@ -17,16 +16,12 @@ public class UserJson {
 
     private String userName;
 
-    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
-    private String password;
-
     private String email;
 
-    public UserJson(User user) {
+    public UserResponse(User user) {
         this.id = user.getId();
         this.name = user.getName();
         this.userName = user.getUserName();
-        this.password = user.getPassword();
         this.email = user.getEmail();
     }
 
@@ -60,14 +55,6 @@ public class UserJson {
 
     public void setUserName(String userName) {
         this.userName = userName;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
     }
 
     public String getEmail() {

@@ -1,6 +1,6 @@
 package br.com.facility.model;
 
-import br.com.facility.json.UserJson;
+import br.com.facility.json.request.UserRequest;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -33,21 +33,13 @@ public class User {
     public User() {
     }
 
-    public User(UserJson user) {
+    public User(UserRequest user) {
         this.id = user.getId();
         this.name = user.getName();
         this.lastName = user.getName();
         this.userName = user.getUserName();
         this.password = user.getPassword();
         this.email = user.getEmail();
-    }
-
-    public User(String name, String lastName, String userName, String password, String email) {
-        this.name = name;
-        this.lastName = lastName;
-        this.userName = userName;
-        this.password = password;
-        this.email = email;
     }
 
     public Long getId() {

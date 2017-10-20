@@ -1,17 +1,18 @@
 package br.com.facility.facade;
 
-import br.com.facility.json.ExpenseJson;
+import br.com.facility.json.request.ExpenseRequest;
+import br.com.facility.json.response.ExpenseResponse;
 
 import java.time.LocalDateTime;
 import java.util.List;
 
 public interface IExpenseFacade {
 
-	ExpenseJson save(ExpenseJson expenseJson);
+	ExpenseResponse save(ExpenseRequest expenseRequest);
 
-	ExpenseJson findById(Long id);
+	ExpenseResponse findById(Long id);
 
-	List<ExpenseJson> filterByDate(LocalDateTime dateTime);
+	List<ExpenseResponse> filterByDate(LocalDateTime dateTime);
 
 	void delete(Long id);
 

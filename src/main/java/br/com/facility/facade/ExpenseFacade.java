@@ -1,6 +1,7 @@
 package br.com.facility.facade;
 
-import br.com.facility.json.ExpenseJson;
+import br.com.facility.json.request.ExpenseRequest;
+import br.com.facility.json.response.ExpenseResponse;
 import br.com.facility.model.Expense;
 import br.com.facility.model.User;
 import br.com.facility.service.ExpenseService;
@@ -24,30 +25,30 @@ public class ExpenseFacade implements IExpenseFacade {
 	private ExpenseService expenseService;
 
 	@Override
-	public ExpenseJson save(ExpenseJson expenseJson) {
-		User user = userService.findById(expenseJson.getUserId());
+	public ExpenseResponse save(ExpenseRequest expenseRequest) {
+		User user = userService.findById(expenseRequest.getUserId());
 		if (Objects.isNull(user)) {
 			//throw a exception
 		}
-		Expense expense = new Expense(expenseJson, user);
+		Expense expense = new Expense(expenseRequest, user);
 		Expense expenseSaved = expenseService.save(expense);
-		return new ExpenseJson(expenseSaved);
+		return new ExpenseResponse(expenseSaved);
 	}
 
 	@Override
-	public ExpenseJson findById(Long id) {
+	public ExpenseResponse findById(Long id) {
 		Expense expense = expenseService.findById(id);
 		//verificar se é nulo, se for lança exceção
-		return new ExpenseJson(expense);
+		return new ExpenseResponse(expense);
 	}
 
 	@Override
-	public List<ExpenseJson> filterByDate(LocalDateTime dateTime) {
+	public List<ExpenseResponse> filterByDate(LocalDateTime dateTime) {
 		dateTime.with(ChronoField.HOUR_OF_DAY, 0).with(ChronoField.MINUTE_OF_DAY, 0).with(ChronoField.SECOND_OF_MINUTE, 0);
 
 		List<Expense> expenses = expenseService.filterExpensesByDate(dateTime);
-		List<ExpenseJson> expensesJson = new ArrayList<>();
-		expenses.forEach(expense -> expensesJson.add(new ExpenseJson(expense)));
+		List<ExpenseResponse> expensesJson = new ArrayList<>();
+		expenses.forEach(expense -> expensesJson.add(new ExpenseResponse(expense)));
 
 		return expensesJson;
 	}
