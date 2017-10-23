@@ -24,8 +24,8 @@ public abstract class Finance {
     @NotNull
     private LocalDateTime releaseDate;
 
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "USER_ID", referencedColumnName = "ID")
+    @ManyToOne(fetch= FetchType.LAZY, cascade = CascadeType.REMOVE)
+    @JoinColumn(name = "USER_ID", referencedColumnName = "ID", foreignKey = @ForeignKey(name = "FK_USER_FINANCE"))
     @NotNull
     private User user;
 

@@ -1,8 +1,9 @@
 package br.com.facility.webservice;
 
 import br.com.facility.facade.IExpenseFacade;
-import br.com.facility.json.ExpenseJson;
 import br.com.facility.json.JsonError;
+import br.com.facility.json.request.ExpenseRequest;
+import br.com.facility.json.response.ExpenseResponse;
 import br.com.facility.util.Messages;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -10,7 +11,7 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 import java.util.List;
 
 @RestController
@@ -24,13 +25,13 @@ public class ExpenseWebService {
 
     @RequestMapping(value = "/findbyid/{id}", produces = MediaType.APPLICATION_JSON_VALUE, method = RequestMethod.GET)
     public ResponseEntity findById(@PathVariable("id") Long id) {
-        ExpenseJson expense = expenseFacade.findById(id);
+        ExpenseResponse expense = expenseFacade.findById(id);
         return new ResponseEntity(expense, HttpStatus.OK);
     }
 
     @RequestMapping(value = "/insert", consumes = MediaType.APPLICATION_JSON_VALUE, method = RequestMethod.POST)
-    public ResponseEntity<ExpenseJson> insert(@RequestBody ExpenseJson jsonRequest) {
-        ExpenseJson newExpense = expenseFacade.save(jsonRequest);
+    public ResponseEntity<ExpenseResponse> insert(@RequestBody ExpenseRequest expense) {
+        ExpenseResponse newExpense = expenseFacade.save(expense);
         return new ResponseEntity(newExpense, HttpStatus.CREATED);
     }
 
@@ -40,14 +41,14 @@ public class ExpenseWebService {
     }
 
     @RequestMapping(value = "/update", consumes = MediaType.APPLICATION_JSON_VALUE, method = RequestMethod.POST)
-    public ResponseEntity update(@RequestBody ExpenseJson jsonRequest) {
-        ExpenseJson updatedExpense = expenseFacade.save(jsonRequest);
+    public ResponseEntity update(@RequestBody ExpenseRequest jsonRequest) {
+        ExpenseResponse updatedExpense = expenseFacade.save(jsonRequest);
         return new ResponseEntity(updatedExpense, HttpStatus.OK);
     }
 
     @RequestMapping(value = "/filterbydate/{date}", produces = MediaType.APPLICATION_JSON_VALUE, method = RequestMethod.GET)
-    public ResponseEntity filterByDate(@PathVariable("date") LocalDateTime localDateTime) {
-        List<ExpenseJson> expensesJson = expenseFacade.filterByDate(localDateTime);
+    public ResponseEntity filterByDate(@PathVariable("date") LocalDate localDate) {
+        List<ExpenseResponse> expensesJson = expenseFacade.filterByDate(localDate);
         return new ResponseEntity(expensesJson, HttpStatus.OK);
     }
 
