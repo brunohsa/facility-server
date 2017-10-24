@@ -56,7 +56,7 @@ public class ExpenseFacade implements IExpenseFacade {
 
 	@Override
 	public void delete(Long id) {
-		userService.delete(id);
+		expenseService.delete(id);
 	}
 
 }

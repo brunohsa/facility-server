@@ -14,7 +14,7 @@ public class RequestInterceptor extends HandlerInterceptorAdapter {
 	public boolean preHandle(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, Object o) throws Exception {
 		System.out.println("preHandle");
 		//TODO IMPLEMENTAR A VERIFICAÇÃO DO USUÁRIO
-		return false;
+		return true;
 	}
 
 	@Override
