@@ -4,9 +4,11 @@ import br.com.facility.model.User;
 
 public interface IUserService {
 
-	public User findById(Long id);
+	User findById(Long id);
 
-	public User save(User user);
+	User save(User user);
 
-	public void delete(Long id);
+	void delete(Long id);
+
+	User doLogin(String userName, String password);
 }

@@ -4,6 +4,7 @@ import br.com.facility.json.request.UserRequest;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import java.time.LocalDateTime;
 
 @Entity(name = "USER")
 public class User {
@@ -29,6 +30,12 @@ public class User {
 
     @Column(name = "EMAIL")
     private String email;
+
+    @Column(name = "TOKEN")
+    private String token;
+
+    @Column(name = "lastLogin")
+    private LocalDateTime lastLogin;
 
     public User() {
     }
@@ -84,5 +91,21 @@ public class User {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public String getToken() {
+        return token;
+    }
+
+    public void setToken(String token) {
+        this.token = token;
+    }
+
+    public LocalDateTime getLastLogin() {
+        return lastLogin;
+    }
+
+    public void setLastLogin(LocalDateTime lastLogin) {
+        this.lastLogin = lastLogin;
     }
 }
