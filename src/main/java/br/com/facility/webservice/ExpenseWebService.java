@@ -23,7 +23,7 @@ public class ExpenseWebService {
 
     //@RequestHeader("Accept-Encoding") String header <- MANEIRA DE RECUPERAR UM HEADER
 
-    @RequestMapping(value = "/findbyid/{id}", produces = MediaType.APPLICATION_JSON_VALUE, method = RequestMethod.GET)
+    @RequestMapping(value = "/find/{id}", produces = MediaType.APPLICATION_JSON_VALUE, method = RequestMethod.GET)
     public ResponseEntity findById(@PathVariable("id") Long id) {
         ExpenseResponse expense = expenseFacade.findById(id);
         return new ResponseEntity(expense, HttpStatus.OK);

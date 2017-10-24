@@ -45,18 +45,16 @@ public class ExpenseFacade implements IExpenseFacade {
 
 	@Override
 	public List<ExpenseResponse> filterByDate(LocalDate date) {
-		LocalDateTime dateTime = LocalDateTime.of(date, LocalTime.MIDNIGHT);
+		List<Expense> expenses = expenseService.filterExpensesByDate(date);
 
-		List<Expense> expenses = expenseService.filterExpensesByDate(dateTime);
 		List<ExpenseResponse> expensesJson = new ArrayList<>();
 		expenses.forEach(expense -> expensesJson.add(new ExpenseResponse(expense)));
-
 		return expensesJson;
 	}
 
 	@Override
 	public void delete(Long id) {
-		userService.delete(id);
+		expenseService.delete(id);
 	}
 
 }
