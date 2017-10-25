@@ -23,23 +23,23 @@ public class UserService extends GenericService<User, UserRepository> implements
 			//throw a exception
 			return null;
 		}
-		updateUserLoginData(user);
+		updateDatasUserLogin(user);
 		return user;
 	}
 
-	private void updateUserLoginData(User user) {
-		String token = generateToken();
+	private void updateDatasUserLogin(User user) {
+		String token = generateToken(user.getUserName());
 		user.setToken(token);
 		user.setLastLogin(LocalDateTime.now());
 		userRepository.save(user);
 	}
 
-	private String generateToken() {
+	private String generateToken(String userName) {
 		String separator = "|";
 
-		String date = DateUtil.formattNanoSecond(LocalDateTime.now());
 		String uuid = UUID.randomUUID().toString().replace("-", "");
+		String date = DateUtil.formattNanoSecond(LocalDateTime.now());
 
-		return date.concat(separator).concat(uuid);
+		return userName.concat(separator).concat(uuid).concat(separator).concat(date);
 	}
 }
