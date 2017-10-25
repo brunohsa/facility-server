@@ -19,12 +19,17 @@ public class ExpenseService extends GenericService<Expense, ExpenseRepository> i
 
 	@Override
 	public List<Expense> getExpensesByStatus(StatusFinance status) {
-		return repository.getExpensesByStatus(status);
+		return repository.getByStatus(status);
 	}
 
 	@Override
 	public List<Expense> filterExpensesByDate(LocalDate date) {
 		LocalDateTime dateTime = LocalDateTime.of(date, LocalTime.MIDNIGHT);
 		return repository.filterExpensesByDate(dateTime);
+	}
+
+	@Override
+	public void deleteExpensesByUserId(Long id) {
+		repository.deleteByUserId(id);
 	}
 }

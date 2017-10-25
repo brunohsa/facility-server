@@ -18,4 +18,6 @@ public interface IExpenseService {
 	public List<Expense> getExpensesByStatus(StatusFinance status);
 
 	public List<Expense> filterExpensesByDate(LocalDate date);
+
+	void deleteExpensesByUserId(Long id);
 }

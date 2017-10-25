@@ -9,4 +9,6 @@ public interface IIncomeService {
 	public Income save(Income entity);
 
 	public void delete(Long id);
+
+	void deleteFinancesByUserId(Long id);
 }

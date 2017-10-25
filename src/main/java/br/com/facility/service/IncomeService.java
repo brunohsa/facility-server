@@ -10,4 +10,9 @@ public class IncomeService extends GenericService<Income, IncomeRepository> impl
 
     @Autowired
     private IncomeRepository incomeRepository;
+
+    @Override
+    public void deleteFinancesByUserId(Long id) {
+        incomeRepository.deleteByUserId(id);
+    }
 }
