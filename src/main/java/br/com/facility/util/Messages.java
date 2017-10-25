@@ -10,6 +10,9 @@ public class Messages {
     private static ResourceBundle bundle;
 
     public static String getMessage(String key) {
+        if (Objects.isNull(key) || key.isEmpty()) {
+            return "";
+        }
         try {
             return getBundle().getString(key);
         } catch (MissingResourceException e) {

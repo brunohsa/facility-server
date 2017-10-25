@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface UserRepository extends CrudRepository<User, Long> {
 
-	@Query("select u from USER u where u.userName = :userName and u.password = :password")
-	User findUserByUserNameAndPassword(@Param("userName") String userName,@Param("password") String password);
+	User getByUserNameAndPassword(@Param("userName") String userName, @Param("password") String password);
+
+	User getByToken(@Param("token") String token);
 }

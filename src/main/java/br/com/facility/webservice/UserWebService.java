@@ -1,10 +1,9 @@
 package br.com.facility.webservice;
 
-import br.com.facility.json.JsonError;
+import br.com.facility.json.response.error.ResponseError;
 import br.com.facility.json.request.UserRequest;
 import br.com.facility.json.response.UserResponse;
 import br.com.facility.model.User;
-import br.com.facility.model.enuns.StatusFinance;
 import br.com.facility.service.IExpenseService;
 import br.com.facility.service.IIncomeService;
 import br.com.facility.service.IUserService;
@@ -33,8 +32,8 @@ public class UserWebService {
     public ResponseEntity findById(@PathVariable("id") Long id) {
         User user = userService.findById(id);
         if (Objects.isNull(user)) {
-            JsonError error = new JsonError(HttpStatus.NOT_FOUND, "Não foi possível encontrat o usuário com a identificação " + id, "Usuário inexistente");
-            return new ResponseEntity(error, HttpStatus.NOT_FOUND);
+            ResponseEntity error = ResponseError.notFound("Não foi possível encontrat o usuário com a identificação " + id, "Usuário inexistente");
+            return error;
         }
         return new ResponseEntity(new UserResponse(user), HttpStatus.OK);
     }
@@ -46,7 +45,6 @@ public class UserWebService {
 
     @RequestMapping(value = "/delete/{id}", method = RequestMethod.DELETE, consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity delete(@PathVariable("id") Long id) {
-        //TODO REMOVER FINANÇAS E DESPESAS ANTES DE REMOVER O USUÁRIO
         incomeService.deleteFinancesByUserId(id);
         expenseService.deleteExpensesByUserId(id);
         userService.delete(id);

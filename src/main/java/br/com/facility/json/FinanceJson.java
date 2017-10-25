@@ -51,55 +51,27 @@ public abstract class FinanceJson {
         return value;
     }
 
-    public void setValue(BigDecimal value) {
-        this.value = value;
-    }
-
     public LocalDateTime getReleaseDate() {
         return releaseDate;
-    }
-
-    public void setReleaseDate(LocalDateTime releaseDate) {
-        this.releaseDate = releaseDate;
     }
 
     public Long getUserId() {
         return userId;
     }
 
-    public void setUserId(Long userId) {
-        this.userId = userId;
-    }
-
     public String getDescription() {
         return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
     }
 
     public String getObservation() {
         return observation;
     }
 
-    public void setObservation(String observation) {
-        this.observation = observation;
-    }
-
     public PaymentType getPaymentType() {
         return paymentType;
     }
 
-    public void setPaymentType(PaymentType paymentType) {
-        this.paymentType = paymentType;
-    }
-
     public StatusFinance getStatus() {
         return status;
-    }
-
-    public void setStatus(StatusFinance status) {
-        this.status = status;
     }
 }

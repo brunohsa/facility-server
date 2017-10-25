@@ -1,5 +1,7 @@
 package br.com.facility.service;
 
+import br.com.facility.exceptions.InvalidLoginException;
+import br.com.facility.exceptions.InvalidTokenException;
 import br.com.facility.model.User;
 import br.com.facility.repository.UserRepository;
 import br.com.facility.util.DateUtil;
@@ -17,14 +19,24 @@ public class UserService extends GenericService<User, UserRepository> implements
 	private UserRepository userRepository;
 
 	@Override
-	public User doLogin(String userName, String password) {
-		User user = userRepository.findUserByUserNameAndPassword(userName, password);
-		if (Objects.isNull(user)) {
-			//throw a exception
-			return null;
+	public User doLogin(String userName, String password) throws InvalidLoginException {
+		User user = userRepository.getByUserNameAndPassword(userName, password);
+		if (user == null) {
+			throw new InvalidLoginException("login.webservice.wrong_user_or_password", "login.webservice.login_error");
 		}
 		updateDatasUserLogin(user);
 		return user;
+	}
+
+	@Override
+	public void validateUser(String token) throws InvalidTokenException {
+		if(token == null || token.isEmpty()){
+			throw new InvalidTokenException("Token vazio, para fazer requisições é necessário informar o token do usuário.", "Falha na autenticação do usuário.");
+		}
+		User user = userRepository.getByToken(token);
+		if (user == null) {
+			throw new InvalidTokenException("Token inválido","Falha na autenticação do usuário.");
+		}
 	}
 
 	private void updateDatasUserLogin(User user) {

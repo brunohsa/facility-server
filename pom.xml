@@ -25,6 +25,7 @@
 		<mysql-connector>5.1.40</mysql-connector>
 		<junit-version>4.12</junit-version>
 		<jackson-version>2.9.0</jackson-version>
+		<jackson-jsr310>2.4.0</jackson-jsr310>
 	</properties>
 
 	<dependencies>
@@ -58,7 +59,7 @@
 		<dependency>
 			<groupId>com.fasterxml.jackson.datatype</groupId>
 			<artifactId>jackson-datatype-jsr310</artifactId>
-			<version>2.4.0</version>
+			<version>${jackson-jsr310}</version>
 		</dependency>
 
 	</dependencies>
