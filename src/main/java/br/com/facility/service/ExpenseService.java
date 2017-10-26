@@ -23,9 +23,9 @@ public class ExpenseService extends GenericService<Expense, ExpenseRepository> i
 	}
 
 	@Override
-	public List<Expense> filterExpensesByDate(LocalDate date) {
+	public List<Expense> filterExpensesByDate(LocalDate date, String token) {
 		LocalDateTime dateTime = LocalDateTime.of(date, LocalTime.MIDNIGHT);
-		return repository.filterExpensesByDate(dateTime);
+		return repository.filterExpensesByDate(dateTime, token);
 	}
 
 	@Override

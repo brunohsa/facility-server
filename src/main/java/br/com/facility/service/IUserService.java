@@ -14,5 +14,7 @@ public interface IUserService {
 
 	User doLogin(String userName, String password) throws InvalidLoginException;
 
-	void validateUser(String token) throws InvalidTokenException;
+	void validateToken(String token) throws InvalidTokenException;
+
+	User findByUserName(String username);
 }

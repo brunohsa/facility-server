@@ -18,8 +18,8 @@ public interface ExpenseRepository extends CrudRepository<Expense, Long> {
 	List<Expense> getByStatus(@Param("status") StatusFinance statusFinance);
 
 	//filtra as despesas pela data envida até data atual.
-	@Query("select e from EXPENSE e where e.releaseDate >= :date")
-	List<Expense> filterExpensesByDate(@Param("date") LocalDateTime date);
+	@Query("select e from EXPENSE e where e.releaseDate >= :date AND e.user.token = :token")
+	List<Expense> filterExpensesByDate(@Param("date") LocalDateTime date, @Param("token") String token);
 
 	void deleteByUserId(@Param("id") Long userId);
 }

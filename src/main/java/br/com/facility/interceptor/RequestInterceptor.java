@@ -2,7 +2,6 @@ package br.com.facility.interceptor;
 
 import br.com.facility.exceptions.InvalidTokenException;
 import br.com.facility.json.response.error.JsonError;
-import br.com.facility.json.response.error.ResponseError;
 import br.com.facility.service.IUserService;
 import br.com.facility.util.JsonUtil;
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -29,7 +28,7 @@ public class RequestInterceptor extends HandlerInterceptorAdapter {
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object o) {
 		String auth = request.getHeader(TOKEN);
 		try {
-			userService.validateUser(auth);
+			userService.validateToken(auth);
 		} catch (InvalidTokenException e) {
 			registerLoginError(response, e.getCauseMessage(), e.getMessage());
 			return false;

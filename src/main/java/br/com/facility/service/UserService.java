@@ -29,7 +29,7 @@ public class UserService extends GenericService<User, UserRepository> implements
 	}
 
 	@Override
-	public void validateUser(String token) throws InvalidTokenException {
+	public void validateToken(String token) throws InvalidTokenException {
 		if(token == null || token.isEmpty()){
 			throw new InvalidTokenException("Token vazio, para fazer requisições é necessário informar o token do usuário.", "Falha na autenticação do usuário.");
 		}
@@ -39,19 +39,22 @@ public class UserService extends GenericService<User, UserRepository> implements
 		}
 	}
 
+	@Override
+	public User findByUserName(String username) {
+		return userRepository.findByUserName(username);
+	}
+
 	private void updateDatasUserLogin(User user) {
-		String token = generateToken(user.getUserName());
+		String token = generateToken();
 		user.setToken(token);
 		user.setLastLogin(LocalDateTime.now());
 		userRepository.save(user);
 	}
 
-	private String generateToken(String userName) {
-		String separator = "|";
-
+	private String generateToken() {
 		String uuid = UUID.randomUUID().toString().replace("-", "");
 		String date = DateUtil.formattNanoSecond(LocalDateTime.now());
 
-		return userName.concat(separator).concat(uuid).concat(separator).concat(date);
+		return uuid.concat(date);
 	}
 }

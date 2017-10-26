@@ -27,7 +27,7 @@ public class ExpenseResponse extends FinanceJson {
     }
 
     public ExpenseResponse(Expense expense) {
-        super(expense.getValue(), expense.getReleaseDate(), expense.getUser().getId(), expense.getDescription(), expense.getObservation(),
+        super(expense.getValue(), expense.getReleaseDate(), expense.getUser(), expense.getDescription(), expense.getObservation(),
                 expense.getPaymentType(), expense.getStatus());
         this.id = expense.getId();
         this.expirationDate = expense.getExpirationDate();

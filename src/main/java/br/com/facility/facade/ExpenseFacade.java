@@ -10,8 +10,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -27,7 +25,7 @@ public class ExpenseFacade implements IExpenseFacade {
 
 	@Override
 	public ExpenseResponse save(ExpenseRequest expenseRequest) {
-		User user = userService.findById(expenseRequest.getUserId());
+		User user = userService.findByUserName(expenseRequest.getUserName());
 		if (Objects.isNull(user)) {
 			//throw a exception
 		}
@@ -44,8 +42,8 @@ public class ExpenseFacade implements IExpenseFacade {
 	}
 
 	@Override
-	public List<ExpenseResponse> filterByDate(LocalDate date) {
-		List<Expense> expenses = expenseService.filterExpensesByDate(date);
+	public List<ExpenseResponse> filterByDate(LocalDate date, String token) {
+		List<Expense> expenses = expenseService.filterExpensesByDate(date, token);
 
 		List<ExpenseResponse> expensesJson = new ArrayList<>();
 		expenses.forEach(expense -> expensesJson.add(new ExpenseResponse(expense)));

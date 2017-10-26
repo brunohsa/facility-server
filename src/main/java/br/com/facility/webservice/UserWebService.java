@@ -28,11 +28,11 @@ public class UserWebService {
     @Autowired
     private IIncomeService incomeService;
 
-    @RequestMapping(value = "/find/{id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity findById(@PathVariable("id") Long id) {
-        User user = userService.findById(id);
+    @RequestMapping(value = "/find/{username}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity findByUsername(@PathVariable("username") String username) {
+        User user = userService.findByUserName(username);
         if (Objects.isNull(user)) {
-            ResponseEntity error = ResponseError.notFound("Não foi possível encontrat o usuário com a identificação " + id, "Usuário inexistente");
+            ResponseEntity error = ResponseError.notFound("Não foi possível encontrat o usuário " + username, "Usuário inexistente");
             return error;
         }
         return new ResponseEntity(new UserResponse(user), HttpStatus.OK);
