@@ -1,12 +1,12 @@
 package br.com.facility.webservice;
 
-import br.com.facility.json.response.error.ResponseError;
 import br.com.facility.json.request.UserRequest;
 import br.com.facility.json.response.UserResponse;
+import br.com.facility.json.response.error.ResponseError;
 import br.com.facility.model.User;
-import br.com.facility.service.IExpenseService;
-import br.com.facility.service.IIncomeService;
-import br.com.facility.service.IUserService;
+import br.com.facility.service.ExpenseService;
+import br.com.facility.service.IncomeService;
+import br.com.facility.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -20,13 +20,13 @@ import java.util.Objects;
 public class UserWebService {
 
     @Autowired
-    private IUserService userService;
+    private UserService userService;
 
     @Autowired
-    private IExpenseService expenseService;
+    private ExpenseService expenseService;
 
     @Autowired
-    private IIncomeService incomeService;
+    private IncomeService incomeService;
 
     @RequestMapping(value = "/find/{username}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity findByUsername(@PathVariable("username") String username) {
@@ -44,9 +44,9 @@ public class UserWebService {
     }
 
     @RequestMapping(value = "/delete/{id}", method = RequestMethod.DELETE, consumes = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity delete(@PathVariable("id") Long id) {
-        incomeService.deleteFinancesByUserId(id);
-        expenseService.deleteExpensesByUserId(id);
+    public ResponseEntity delete(@PathVariable("id") Long id, @RequestHeader("token") String token) {
+        incomeService.delete(id);
+        expenseService.delete(id);
         userService.delete(id);
         return new ResponseEntity(HttpStatus.OK);
     }

@@ -13,5 +13,5 @@ public interface UserRepository extends CrudRepository<User, Long> {
 
 	User getByUserNameAndPassword(@Param("userName") String userName, @Param("password") String password);
 
-	User getByToken(@Param("token") String token);
+	boolean existsByToken(@Param("token") String token);
 }
