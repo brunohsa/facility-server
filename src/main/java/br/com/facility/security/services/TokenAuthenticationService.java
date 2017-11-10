@@ -26,7 +26,7 @@ public class TokenAuthenticationService {
     private UserService userService;
 
     // EXPIRATION_TIME = 1 minuto
-    static final long EXPIRATION_TIME = 60000;
+    static final long EXPIRATION_TIME = 240000;
     static final String TOKEN = "token";
     static final String SECRET = "f@cility_";
 
