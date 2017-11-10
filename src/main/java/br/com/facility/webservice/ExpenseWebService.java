@@ -21,7 +21,7 @@ public class ExpenseWebService {
     private IExpenseFacade expenseFacade;
 
     @RequestMapping(value = "/find/{id}", produces = MediaType.APPLICATION_JSON_VALUE, method = RequestMethod.GET)
-    public ResponseEntity findById(@PathVariable("id") Long id, @RequestHeader("token") String token) {
+    public ResponseEntity findById(@PathVariable("id") Long id) {
         ExpenseResponse expense = expenseFacade.findById(id);
         return ResponseEntity.ok(expense);
     }
