@@ -40,28 +40,29 @@ public class LoginFilter extends AbstractAuthenticationProcessingFilter {
 
         LoginRequest login = getLoginRequest(httpServletRequest.getInputStream());
         UsernamePasswordAuthenticationToken userAuthenticator = getUserAuthenticate(login);
-
-        Authentication authentication = null;
         try {
-            authentication = getAuthenticationManager().authenticate(userAuthenticator);
+            return getAuthenticationManager().authenticate(userAuthenticator);
         } catch (BadCredentialsException e) {
-            HttpStatus httpStatus = HttpStatus.UNAUTHORIZED;
-            JsonError error = new JsonError(httpStatus, getMessage("login.wrong_user_or_password"), getMessage("login.login_error"));
-
-            response.getWriter().write(error.toJson());
-            response.setContentType(MediaType.APPLICATION_JSON_VALUE);
-            response.setStatus(httpStatus.value());
+            setAuthenticationErrorResponse(response, HttpStatus.UNAUTHORIZED, "login.wrong_user_or_password", "login.login_error");
+            return null;
         }
-        return authentication;
     }
 
-    private String getMessage(String key) {
-        return Messages.getMessage(key);
+    private void setAuthenticationErrorResponse(HttpServletResponse response, HttpStatus httpStatus, String cause, String description) throws IOException {
+        JsonError error = new JsonError(httpStatus, getMessage(cause), getMessage(description));
+
+        response.getWriter().write(error.toJson());
+        response.setContentType(MediaType.APPLICATION_JSON_VALUE);
+        response.setStatus(httpStatus.value());
     }
 
     private LoginRequest getLoginRequest(ServletInputStream inputStream) throws IOException {
         ObjectMapper mapper = new ObjectMapper();
         return mapper.readValue(inputStream, LoginRequest.class);
+    }
+
+    private String getMessage(String key) {
+        return Messages.getMessage(key);
     }
 
     private UsernamePasswordAuthenticationToken getUserAuthenticate(LoginRequest login) {

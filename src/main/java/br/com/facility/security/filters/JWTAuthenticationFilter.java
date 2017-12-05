@@ -32,7 +32,6 @@ public class JWTAuthenticationFilter extends GenericFilterBean {
 			throws IOException, ServletException {
 		try {
 			Authentication authentication = authenticationService.getAuthentication((HttpServletRequest) request);
-
 			SecurityContextHolder.getContext().setAuthentication(authentication);
 			filterChain.doFilter(request, response);
 		} catch (ExpiredTokenException e) {

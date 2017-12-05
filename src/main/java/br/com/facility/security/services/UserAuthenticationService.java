@@ -1,6 +1,5 @@
 package br.com.facility.security.services;
 
-import br.com.facility.exceptions.InvalidLoginException;
 import br.com.facility.model.User;
 import br.com.facility.repository.UserRepository;
 import br.com.facility.security.UserDetail;
