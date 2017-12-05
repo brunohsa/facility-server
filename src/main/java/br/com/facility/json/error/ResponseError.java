@@ -1,4 +1,4 @@
-package br.com.facility.json.response.error;
+package br.com.facility.json.error;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

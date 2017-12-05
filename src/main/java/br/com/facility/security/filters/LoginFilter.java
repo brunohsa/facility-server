@@ -1,9 +1,14 @@
 package br.com.facility.security.filters;
 
+import br.com.facility.json.error.JsonError;
 import br.com.facility.json.request.LoginRequest;
 import br.com.facility.security.services.TokenAuthenticationService;
+import br.com.facility.util.Messages;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
+import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
@@ -12,6 +17,7 @@ import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 import javax.servlet.FilterChain;
 import javax.servlet.ServletException;
+import javax.servlet.ServletInputStream;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
@@ -29,20 +35,42 @@ public class LoginFilter extends AbstractAuthenticationProcessingFilter {
     }
 
     @Override
-    public Authentication attemptAuthentication(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse)
+    public Authentication attemptAuthentication(HttpServletRequest httpServletRequest, HttpServletResponse response)
             throws AuthenticationException, IOException, ServletException {
 
-        LoginRequest login = new ObjectMapper()
-                .readValue(httpServletRequest.getInputStream(), LoginRequest.class);
+        LoginRequest login = getLoginRequest(httpServletRequest.getInputStream());
+        UsernamePasswordAuthenticationToken userAuthenticator = getUserAuthenticate(login);
 
-        UsernamePasswordAuthenticationToken userAuthenticator = new UsernamePasswordAuthenticationToken(login.getUserName(), login.getPassword(), Collections.emptyList());
-        return getAuthenticationManager().authenticate(userAuthenticator);
+        Authentication authentication = null;
+        try {
+            authentication = getAuthenticationManager().authenticate(userAuthenticator);
+        } catch (BadCredentialsException e) {
+            HttpStatus httpStatus = HttpStatus.UNAUTHORIZED;
+            JsonError error = new JsonError(httpStatus, getMessage("login.wrong_user_or_password"), getMessage("login.login_error"));
+
+            response.getWriter().write(error.toJson());
+            response.setContentType(MediaType.APPLICATION_JSON_VALUE);
+            response.setStatus(httpStatus.value());
+        }
+        return authentication;
+    }
+
+    private String getMessage(String key) {
+        return Messages.getMessage(key);
+    }
+
+    private LoginRequest getLoginRequest(ServletInputStream inputStream) throws IOException {
+        ObjectMapper mapper = new ObjectMapper();
+        return mapper.readValue(inputStream, LoginRequest.class);
+    }
+
+    private UsernamePasswordAuthenticationToken getUserAuthenticate(LoginRequest login) {
+        return new UsernamePasswordAuthenticationToken(login.getUserName(), login.getPassword(), Collections.emptyList());
     }
 
     @Override
     protected void successfulAuthentication(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain,
             Authentication auth) throws IOException, ServletException {
-
         authenticationService.addAuthentication(response, auth.getName());
     }
 }

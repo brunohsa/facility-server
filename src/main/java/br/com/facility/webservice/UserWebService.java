@@ -2,7 +2,7 @@ package br.com.facility.webservice;
 
 import br.com.facility.json.request.UserRequest;
 import br.com.facility.json.response.UserResponse;
-import br.com.facility.json.response.error.ResponseError;
+import br.com.facility.json.error.ResponseError;
 import br.com.facility.model.User;
 import br.com.facility.service.ExpenseService;
 import br.com.facility.service.IncomeService;

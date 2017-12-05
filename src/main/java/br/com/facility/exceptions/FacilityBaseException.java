@@ -1,9 +1,11 @@
 package br.com.facility.exceptions;
 
-public class FacilityBaseException extends Exception {
+import br.com.facility.util.Messages;
+
+public class FacilityBaseException extends RuntimeException {
 
 	public FacilityBaseException(String message, String cause) {
-		super(message, new Throwable(cause));
+		super(Messages.getMessage(message), new Throwable(cause));
 	}
 
 	public String getCauseMessage(){

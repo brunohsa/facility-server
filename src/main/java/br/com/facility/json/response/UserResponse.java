@@ -6,8 +6,6 @@ import com.fasterxml.jackson.annotation.*;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class UserResponse {
 
-    private Long id;
-
     private String name;
 
     @JsonInclude(JsonInclude.Include.NON_NULL)
@@ -18,18 +16,9 @@ public class UserResponse {
     private String email;
 
     public UserResponse(User user) {
-        this.id = user.getId();
         this.name = user.getName();
         this.userName = user.getUserName();
         this.email = user.getEmail();
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
     }
 
     public String getName() {

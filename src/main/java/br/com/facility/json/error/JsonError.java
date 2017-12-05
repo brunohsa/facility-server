@@ -1,5 +1,8 @@
-package br.com.facility.json.response.error;
+package br.com.facility.json.error;
 
+import br.com.facility.exceptions.FacilityBaseException;
+import br.com.facility.util.JsonUtil;
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateTimeSerializer;
 import org.springframework.http.HttpStatus;
@@ -18,9 +21,6 @@ public class JsonError {
 	private String cause;
 
 	private String description;
-
-	public JsonError() {
-	}
 
 	public JsonError(HttpStatus httpStatus, String cause, String description) {
 		this.dateTime = LocalDateTime.now();
@@ -48,5 +48,14 @@ public class JsonError {
 
 	public String getTypeHttpStatus() {
 		return typeHttpStatus;
+	}
+
+	public String toJson() {
+		try {
+			return JsonUtil.convertObjectToJson(this);
+		} catch (JsonProcessingException e) {
+			e.printStackTrace();
+		}
+		return "";
 	}
 }
