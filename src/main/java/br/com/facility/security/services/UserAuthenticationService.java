@@ -19,10 +19,11 @@ public class UserAuthenticationService implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        Optional<User> user = userRepository.findByUsername(username);
-        if (!user.isPresent()) {
-            return null;
+        Optional<User> userOpt = userRepository.findByUsername(username);
+        if (!userOpt.isPresent()) {
+            return new UserDetail();
         }
-        return new UserDetail(username, user.get().getPassword());
+        User user = userOpt.get();
+        return new UserDetail(username, user.getPassword());
     }
 }
