@@ -39,7 +39,7 @@ public abstract class FinanceJson {
     }
 
     public FinanceJson(BigDecimal value, LocalDateTime releaseDate, User user, String description, String observation, PaymentType paymentType, StatusFinance status) {
-        this(value, releaseDate, user.getUserName(), description, observation, paymentType, status);
+        this(value, releaseDate, user.getUsername(), description, observation, paymentType, status);
     }
 
     public FinanceJson(BigDecimal value, LocalDateTime releaseDate, String userName, String description, String observation, PaymentType paymentType, StatusFinance status) {

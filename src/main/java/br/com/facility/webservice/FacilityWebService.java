@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/facility")
@@ -22,8 +23,9 @@ public class FacilityWebService {
 	public ResponseEntity getPaymentTypes() {
 		List<PaymentType> payments = Arrays.asList(PaymentType.values());
 
-		List<String> paymentNames = new ArrayList<>();
-		payments.forEach(paymentType -> paymentNames.add(Messages.getMessage(paymentType.getPaymentName())));
+		List<String> paymentNames = payments.stream()
+				.map(paymentType -> Messages.getMessage(paymentType.getPaymentName()))
+				.collect(Collectors.toList());
 
 		return new ResponseEntity(paymentNames, HttpStatus.OK);
 	}
@@ -32,8 +34,9 @@ public class FacilityWebService {
 	public ResponseEntity getStatusFinances() {
 		List<StatusFinance> statusFinances = Arrays.asList(StatusFinance.values());
 
-		List<String> statusNames = new ArrayList<>();
-		statusFinances.forEach(statusName -> statusNames.add(Messages.getMessage(statusName.getStatusName())));
+		List<String> statusNames = statusFinances.stream()
+				.map(statusName -> Messages.getMessage(statusName.getStatusName()))
+				.collect(Collectors.toList());
 
 		return new ResponseEntity(statusNames, HttpStatus.OK);
 	}

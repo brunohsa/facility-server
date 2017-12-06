@@ -12,8 +12,10 @@ public interface IExpenseFacade {
 
 	ExpenseResponse findById(Long id);
 
-	List<ExpenseResponse> filterByDate(LocalDate date, String token);
+	List<ExpenseResponse> filterByDate(LocalDate date);
 
 	void delete(Long id);
+
+	List<ExpenseResponse> findAll();
 
 }

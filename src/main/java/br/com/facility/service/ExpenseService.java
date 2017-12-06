@@ -12,24 +12,17 @@ import java.time.LocalTime;
 import java.util.List;
 
 @Service
-public class ExpenseService extends GenericService<Expense, ExpenseRepository> implements IExpenseService {
+public class ExpenseService extends IncomeAndExpenseServiceBase<Expense, ExpenseRepository> {
 
 	@Autowired
 	private ExpenseRepository repository;
 
-	@Override
 	public List<Expense> getExpensesByStatus(StatusFinance status) {
-		return repository.getByStatus(status);
+		return repository.getByStatusAndUserUsername(status, getLoggedUser());
 	}
 
-	@Override
-	public List<Expense> filterExpensesByDate(LocalDate date, String token) {
+	public List<Expense> filterExpensesByDate(LocalDate date) {
 		LocalDateTime dateTime = LocalDateTime.of(date, LocalTime.MIDNIGHT);
-		return repository.filterExpensesByDate(dateTime, token);
-	}
-
-	@Override
-	public void deleteExpensesByUserId(Long id) {
-		repository.deleteByUserId(id);
+		return repository.filterExpensesByDate(dateTime, getLoggedUser());
 	}
 }

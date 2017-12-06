@@ -24,11 +24,14 @@ public class ExpenseWebService {
 
     @RequestMapping(value = "/find/{id}", produces = MediaType.APPLICATION_JSON_VALUE, method = RequestMethod.GET)
     public ResponseEntity findById(@PathVariable("id") Long id) {
-//        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-//        String user = auth.getName();
-
         ExpenseResponse expense = expenseFacade.findById(id);
         return ResponseEntity.ok(expense);
+    }
+
+    @RequestMapping(value = "/findall", produces = MediaType.APPLICATION_JSON_VALUE, method = RequestMethod.GET)
+    public ResponseEntity findAll() {
+        List<ExpenseResponse> expenses = expenseFacade.findAll();
+        return ResponseEntity.ok(expenses);
     }
 
     @RequestMapping(value = "/insert", consumes = MediaType.APPLICATION_JSON_VALUE, method = RequestMethod.POST)
@@ -49,9 +52,8 @@ public class ExpenseWebService {
     }
 
     @RequestMapping(value = "/filter/{date}", produces = MediaType.APPLICATION_JSON_VALUE, method = RequestMethod.GET)
-    public ResponseEntity filterByDate(@DateTimeFormat(pattern = "yyyy-MM-dd") @PathVariable("date") LocalDate localDate,
-            @RequestHeader("token") String token) {
-        List<ExpenseResponse> expensesJson = expenseFacade.filterByDate(localDate, token);
+    public ResponseEntity filterByDate(@DateTimeFormat(pattern = "yyyy-MM-dd") @PathVariable("date") LocalDate localDate) {
+        List<ExpenseResponse> expensesJson = expenseFacade.filterByDate(localDate);
         return ResponseEntity.ok(expensesJson);
     }
 }

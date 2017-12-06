@@ -1,5 +1,6 @@
 package br.com.facility.facade;
 
+import br.com.facility.exceptions.InvalidUserException;
 import br.com.facility.json.request.ExpenseRequest;
 import br.com.facility.json.response.ExpenseResponse;
 import br.com.facility.model.Expense;
@@ -13,6 +14,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+import java.util.stream.Collectors;
 
 @Service
 public class ExpenseFacade implements IExpenseFacade {
@@ -25,9 +27,11 @@ public class ExpenseFacade implements IExpenseFacade {
 
 	@Override
 	public ExpenseResponse save(ExpenseRequest expenseRequest) {
-		User user = userService.findByUserName(expenseRequest.getUserName());
-		if (Objects.isNull(user)) {
-			//throw a exception
+		User user = null;
+		try {
+			user = userService.findByUserName(expenseRequest.getUserName());
+		} catch (InvalidUserException e) {
+			e.printStackTrace();
 		}
 		Expense expense = new Expense(expenseRequest, user);
 		Expense expenseSaved = expenseService.save(expense);
@@ -42,17 +46,28 @@ public class ExpenseFacade implements IExpenseFacade {
 	}
 
 	@Override
-	public List<ExpenseResponse> filterByDate(LocalDate date, String token) {
-		List<Expense> expenses = expenseService.filterExpensesByDate(date, token);
+	public List<ExpenseResponse> filterByDate(LocalDate date) {
+		List<Expense> expenses = expenseService.filterExpensesByDate(date);
+		List<ExpenseResponse> expensesJson = expenses.stream()
+				.map(expense -> new ExpenseResponse(expense))
+				.collect(Collectors.toList());
 
-		List<ExpenseResponse> expensesJson = new ArrayList<>();
-		expenses.forEach(expense -> expensesJson.add(new ExpenseResponse(expense)));
 		return expensesJson;
 	}
 
 	@Override
 	public void delete(Long id) {
 		expenseService.delete(id);
+	}
+
+	@Override
+	public List<ExpenseResponse> findAll() {
+		List<Expense> expenses = expenseService.findAll();
+		List<ExpenseResponse> expensesJson = expenses.stream()
+				.map(expense -> new ExpenseResponse(expense))
+				.collect(Collectors.toList());
+
+		return expensesJson;
 	}
 
 }

@@ -4,32 +4,22 @@ import br.com.facility.model.User;
 import com.fasterxml.jackson.annotation.*;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class UserResponse {
-
-    private Long id;
 
     private String name;
 
-    @JsonInclude(JsonInclude.Include.NON_NULL)
     private String lastName;
 
-    private String userName;
+    private String username;
 
     private String email;
 
     public UserResponse(User user) {
-        this.id = user.getId();
         this.name = user.getName();
-        this.userName = user.getUserName();
+        this.lastName = user.getLastName();
+        this.username = user.getUsername();
         this.email = user.getEmail();
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
     }
 
     public String getName() {
@@ -48,12 +38,12 @@ public class UserResponse {
         this.lastName = lastName;
     }
 
-    public String getUserName() {
-        return userName;
+    public String getUsername() {
+        return username;
     }
 
-    public void setUserName(String userName) {
-        this.userName = userName;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     public String getEmail() {

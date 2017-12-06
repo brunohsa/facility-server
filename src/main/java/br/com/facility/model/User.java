@@ -22,7 +22,7 @@ public class User {
 
     @Column(name = "USER_NAME", unique = true)
     @NotNull
-    private String userName;
+    private String username;
 
     @Column(name = "PASSWORD")
     @NotNull
@@ -41,10 +41,9 @@ public class User {
     }
 
     public User(UserRequest user) {
-        this.id = user.getId();
         this.name = user.getName();
         this.lastName = user.getName();
-        this.userName = user.getUserName();
+        this.username = user.getUsername();
         this.password = user.getPassword();
         this.email = user.getEmail();
     }
@@ -69,12 +68,12 @@ public class User {
         this.lastName = lastName;
     }
 
-    public String getUserName() {
-        return userName;
+    public String getUsername() {
+        return username;
     }
 
-    public void setUserName(String userName) {
-        this.userName = userName;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     public String getPassword() {

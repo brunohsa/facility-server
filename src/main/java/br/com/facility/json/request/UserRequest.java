@@ -5,16 +5,14 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class UserRequest {
-
-    private Long id;
 
     private String name;
 
-    @JsonInclude(JsonInclude.Include.NON_NULL)
     private String lastName;
 
-    private String userName;
+    private String username;
 
     private String password;
 
@@ -24,19 +22,10 @@ public class UserRequest {
     }
 
     public UserRequest(User user) {
-        this.id = user.getId();
         this.name = user.getName();
-        this.userName = user.getUserName();
+        this.username = user.getUsername();
         this.password = user.getPassword();
         this.email = user.getEmail();
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
     }
 
     public String getName() {
@@ -55,12 +44,12 @@ public class UserRequest {
         this.lastName = lastName;
     }
 
-    public String getUserName() {
-        return userName;
+    public String getUsername() {
+        return username;
     }
 
-    public void setUserName(String userName) {
-        this.userName = userName;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     public String getPassword() {

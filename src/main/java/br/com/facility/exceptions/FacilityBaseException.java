@@ -1,6 +1,6 @@
 package br.com.facility.exceptions;
 
-public class FacilityBaseException extends Exception {
+public class FacilityBaseException extends RuntimeException {
 
 	public FacilityBaseException(String message, String cause) {
 		super(message, new Throwable(cause));
