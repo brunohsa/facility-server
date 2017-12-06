@@ -21,7 +21,7 @@ public class UserAuthenticationService implements UserDetailsService {
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         Optional<User> user = userRepository.findByUsername(username);
         if (!user.isPresent()) {
-            return null;
+			return new UserDetail();
         }
         return new UserDetail(username, user.get().getPassword());
     }

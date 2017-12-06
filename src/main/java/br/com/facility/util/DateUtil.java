@@ -50,10 +50,4 @@ public class DateUtil {
 		DateTimeFormatter formatter = DateTimeFormatter.ofPattern(COMPLETE_DATE_FORMATTER);
 		return date.format(formatter);
 	}
-
-	public static LocalDateTime stringDateHyphenFormattToDateTimeWithoutHours(String localDate) throws DateTimeParseException{
-		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-dd-MM");
-		LocalDate date = LocalDate.parse(localDate, formatter);
-		return LocalDateTime.of(date, LocalTime.MIDNIGHT);
-	}
 }
