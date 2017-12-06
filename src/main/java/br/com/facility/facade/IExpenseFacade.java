@@ -10,6 +10,8 @@ public interface IExpenseFacade {
 
 	ExpenseResponse save(ExpenseRequest expenseRequest);
 
+	ExpenseResponse update(ExpenseRequest expenseRequest);
+
 	ExpenseResponse findById(Long id);
 
 	List<ExpenseResponse> filterByDate(LocalDate date);

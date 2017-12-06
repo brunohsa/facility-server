@@ -1,11 +1,16 @@
 package br.com.facility.model.enuns;
 
+import br.com.facility.util.Messages;
+
 public enum StatusFinance {
 
 	PAID("status.finance.paid"),
 	PENDING("status.finance.pending"),
-	EXPIRED("status.finance.expired"),
-	CANCELLED("status.finance.cancelled");
+	OVERDUE("status.finance.overdue"),
+	CANCELLED("status.finance.cancelled"),
+
+	//TODO REMOVER
+	EXPIRED("status.finance.overdue");
 
 	private String statusFinanceName;
 
@@ -14,6 +19,6 @@ public enum StatusFinance {
 	}
 
 	public String getStatusName() {
-		return statusFinanceName;
+		return Messages.getMessage(statusFinanceName);
 	}
 }

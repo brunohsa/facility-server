@@ -1,5 +1,7 @@
 package br.com.facility.model.enuns;
 
+import br.com.facility.util.Messages;
+
 public enum PaymentType {
 
     MONEY("payment.type.money"),
@@ -16,6 +18,6 @@ public enum PaymentType {
     }
 
     public String getPaymentName(){
-        return paymentName;
+        return Messages.getMessage(paymentName);
     }
 }

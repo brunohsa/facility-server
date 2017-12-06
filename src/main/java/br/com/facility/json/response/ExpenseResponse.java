@@ -10,16 +10,15 @@ import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateSerializer;
 import java.time.LocalDate;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class ExpenseResponse extends FinanceJson {
 
-    @JsonInclude(JsonInclude.Include.NON_NULL)
+
     private Long id;
 
-    @JsonInclude(JsonInclude.Include.NON_NULL)
     @JsonSerialize(using = LocalDateSerializer.class)
     private LocalDate expirationDate;
 
-    @JsonInclude(JsonInclude.Include.NON_NULL)
     @JsonSerialize(using = LocalDateSerializer.class)
     private LocalDate paymentDate;
 
@@ -27,7 +26,7 @@ public class ExpenseResponse extends FinanceJson {
     }
 
     public ExpenseResponse(Expense expense) {
-        super(expense.getValue(), expense.getReleaseDate(), expense.getUser(), expense.getDescription(), expense.getObservation(),
+        super(expense.getValue(), expense.getReleaseDate(), expense.getDescription(), expense.getObservation(),
                 expense.getPaymentType(), expense.getStatus());
         this.id = expense.getId();
         this.expirationDate = expense.getExpirationDate();

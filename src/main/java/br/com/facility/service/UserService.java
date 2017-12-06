@@ -18,21 +18,18 @@ public class UserService {
 
 	public User findByUserName(String username) throws InvalidUserException {
 		Optional<User> user = userRepository.findByUsername(username);
-		if (!user.isPresent()) {
-			throw new InvalidUserException("User not found", "Invalid user");
-		}
-		return user.get();
+		return user.orElseThrow(() -> new InvalidUserException());
 	}
 
-	public void delete(){
+	public void delete() {
 		userRepository.deleteByUsername(getLoggedUsername());
 	}
 
-	public User save(User user){
+	public User save(User user) {
 		return userRepository.save(user);
 	}
 
-	public User findLoggedUser(){
+	public User findLoggedUser() {
 		return userRepository.findByUsername(getLoggedUsername()).get();
 	}
 

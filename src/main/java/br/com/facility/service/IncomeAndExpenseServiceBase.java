@@ -1,5 +1,6 @@
 package br.com.facility.service;
 
+import br.com.facility.exceptions.DataNotFoundException;
 import br.com.facility.model.enuns.StatusFinance;
 import br.com.facility.repository.IncomeAndExposeRepositoryBase;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,6 +9,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public abstract class IncomeAndExpenseServiceBase<E, T extends IncomeAndExposeRepositoryBase> {
@@ -23,8 +25,8 @@ public abstract class IncomeAndExpenseServiceBase<E, T extends IncomeAndExposeRe
         return repository.findAllByUserUsername(getLoggedUser());
     }
 
-    public void delete(Long id){
-        repository.deleteByIdAndUserUsername(id, getLoggedUser());
+    public void delete(Long id) {
+        repository.delete(id);
     }
 
     public void deleteAll() {
@@ -35,8 +37,9 @@ public abstract class IncomeAndExpenseServiceBase<E, T extends IncomeAndExposeRe
         return (E) repository.save(entity);
     }
 
-    public E findById(Long id){
-        return (E) repository.findByIdAndUserUsername(id, getLoggedUser());
+    public E findById(Long id) throws DataNotFoundException {
+        Optional<E> finance = repository.findByIdAndUserUsername(id, getLoggedUser());
+        return finance.orElseThrow(() -> new DataNotFoundException());
     }
 
     public String getLoggedUser() {

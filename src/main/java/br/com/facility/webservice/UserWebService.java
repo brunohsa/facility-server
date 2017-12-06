@@ -1,6 +1,7 @@
 package br.com.facility.webservice;
 
 import br.com.facility.exceptions.InvalidUserException;
+import br.com.facility.json.request.ChangePasswordRequest;
 import br.com.facility.json.request.UserRequest;
 import br.com.facility.json.response.UserResponse;
 import br.com.facility.json.error.ResponseError;
@@ -32,7 +33,7 @@ public class UserWebService {
 
     @RequestMapping(value = "/find/{username}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity findByUsername(@PathVariable("username") String username) {
-        User user = null;
+        User user;
         try {
             user = userService.findByUserName(username);
         } catch (InvalidUserException e) {
@@ -44,7 +45,9 @@ public class UserWebService {
 
     @RequestMapping(value = "/insert", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity insert(@RequestBody UserRequest userJson) {
-        return save(userJson);
+        User user = new User(userJson);
+        user = userService.save(user);
+        return new ResponseEntity(new UserResponse(user), HttpStatus.OK);
     }
 
     @RequestMapping(value = "/delete", method = RequestMethod.DELETE, consumes = MediaType.APPLICATION_JSON_VALUE)
@@ -61,15 +64,17 @@ public class UserWebService {
         user.setEmail(Optional.ofNullable(userJson.getEmail()).orElse(user.getEmail()));
         user.setName(Optional.ofNullable(userJson.getName()).orElse(user.getName()));
         user.setLastName(Optional.ofNullable(userJson.getLastName()).orElse(user.getLastName()));
-        user.setPassword(Optional.ofNullable(userJson.getPassword()).orElse(user.getPassword()));
+
         user = userService.save(user);
         return new ResponseEntity(new UserResponse(user), HttpStatus.OK);
     }
 
-    private ResponseEntity save(UserRequest userJson) {
-        User user = new User(userJson);
-        user = userService.save(user);
-        return new ResponseEntity(new UserResponse(user), HttpStatus.OK);
+    @RequestMapping(value = "/password/change", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity changePassword(@RequestBody ChangePasswordRequest changePasswordRequest) {
+
+        //TODO FAZER AS VERIFICAÇÕES PARA A TROCA DE SENHA
+
+        return null;
     }
 }
 
