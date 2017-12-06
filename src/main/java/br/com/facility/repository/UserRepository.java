@@ -6,9 +6,12 @@ import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
+import java.util.Optional;
+
 @Repository
 public interface UserRepository extends CrudRepository<User, Long> {
 
-	@Query("select u from USER u where u.userName = :userName and u.password = :password")
-	User findUserByUserNameAndPassword(@Param("userName") String userName,@Param("password") String password);
+	Optional<User> findByUsername(@Param("username") String username);
+
+	void deleteByUsername(@Param("username") String username);
 }

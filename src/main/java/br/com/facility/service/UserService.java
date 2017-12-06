@@ -1,45 +1,43 @@
 package br.com.facility.service;
 
+import br.com.facility.exceptions.InvalidUserException;
 import br.com.facility.model.User;
 import br.com.facility.repository.UserRepository;
-import br.com.facility.util.DateUtil;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalDateTime;
-import java.util.Objects;
-import java.util.UUID;
+import java.util.Optional;
 
 @Service
-public class UserService extends GenericService<User, UserRepository> implements IUserService {
+public class UserService {
 
 	@Autowired
 	private UserRepository userRepository;
 
-	@Override
-	public User doLogin(String userName, String password) {
-		User user = userRepository.findUserByUserNameAndPassword(userName, password);
-		if (Objects.isNull(user)) {
-			//throw a exception
-			return null;
+	public User findByUserName(String username) throws InvalidUserException {
+		Optional<User> user = userRepository.findByUsername(username);
+		if (!user.isPresent()) {
+			throw new InvalidUserException("User not found", "Invalid user");
 		}
-		updateUserLoginData(user);
-		return user;
+		return user.get();
 	}
 
-	private void updateUserLoginData(User user) {
-		String token = generateToken();
-		user.setToken(token);
-		user.setLastLogin(LocalDateTime.now());
-		userRepository.save(user);
+	public void delete(){
+		userRepository.deleteByUsername(getLoggedUsername());
 	}
 
-	private String generateToken() {
-		String separator = "|";
+	public User save(User user){
+		return userRepository.save(user);
+	}
 
-		String date = DateUtil.formattNanoSecond(LocalDateTime.now());
-		String uuid = UUID.randomUUID().toString().replace("-", "");
+	public User findLoggedUser(){
+		return userRepository.findByUsername(getLoggedUsername()).get();
+	}
 
-		return date.concat(separator).concat(uuid);
+	public String getLoggedUsername() {
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		return auth.getName();
 	}
 }

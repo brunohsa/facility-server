@@ -1,14 +1,15 @@
 package br.com.facility.webservice;
 
 import br.com.facility.facade.IExpenseFacade;
-import br.com.facility.json.JsonError;
 import br.com.facility.json.request.ExpenseRequest;
 import br.com.facility.json.response.ExpenseResponse;
-import br.com.facility.util.Messages;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
@@ -21,12 +22,16 @@ public class ExpenseWebService {
     @Autowired
     private IExpenseFacade expenseFacade;
 
-    //@RequestHeader("Accept-Encoding") String header <- MANEIRA DE RECUPERAR UM HEADER
-
     @RequestMapping(value = "/find/{id}", produces = MediaType.APPLICATION_JSON_VALUE, method = RequestMethod.GET)
     public ResponseEntity findById(@PathVariable("id") Long id) {
         ExpenseResponse expense = expenseFacade.findById(id);
-        return new ResponseEntity(expense, HttpStatus.OK);
+        return ResponseEntity.ok(expense);
+    }
+
+    @RequestMapping(value = "/findall", produces = MediaType.APPLICATION_JSON_VALUE, method = RequestMethod.GET)
+    public ResponseEntity findAll() {
+        List<ExpenseResponse> expenses = expenseFacade.findAll();
+        return ResponseEntity.ok(expenses);
     }
 
     @RequestMapping(value = "/insert", consumes = MediaType.APPLICATION_JSON_VALUE, method = RequestMethod.POST)
@@ -43,16 +48,12 @@ public class ExpenseWebService {
     @RequestMapping(value = "/update", consumes = MediaType.APPLICATION_JSON_VALUE, method = RequestMethod.POST)
     public ResponseEntity update(@RequestBody ExpenseRequest jsonRequest) {
         ExpenseResponse updatedExpense = expenseFacade.save(jsonRequest);
-        return new ResponseEntity(updatedExpense, HttpStatus.OK);
+        return ResponseEntity.ok(updatedExpense);
     }
 
-    @RequestMapping(value = "/filterbydate/{date}", produces = MediaType.APPLICATION_JSON_VALUE, method = RequestMethod.GET)
-    public ResponseEntity filterByDate(@PathVariable("date") LocalDate localDate) {
+    @RequestMapping(value = "/filter/{date}", produces = MediaType.APPLICATION_JSON_VALUE, method = RequestMethod.GET)
+    public ResponseEntity filterByDate(@DateTimeFormat(pattern = "yyyy-MM-dd") @PathVariable("date") LocalDate localDate) {
         List<ExpenseResponse> expensesJson = expenseFacade.filterByDate(localDate);
-        return new ResponseEntity(expensesJson, HttpStatus.OK);
-    }
-
-    private JsonError createMessageError(HttpStatus status, String cause, String description){
-        return new JsonError(status, Messages.getMessage(cause), Messages.getMessage(description));
+        return ResponseEntity.ok(expensesJson);
     }
 }

@@ -6,8 +6,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
-public class IncomeService extends GenericService<Income, IncomeRepository> implements IIncomeService {
+public class IncomeService extends IncomeAndExpenseServiceBase<Income, IncomeRepository> {
 
     @Autowired
     private IncomeRepository incomeRepository;
+
 }

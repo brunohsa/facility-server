@@ -16,4 +16,6 @@ public interface IExpenseFacade {
 
 	void delete(Long id);
 
+	List<ExpenseResponse> findAll();
+
 }

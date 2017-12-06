@@ -1,5 +1,6 @@
 package br.com.facility.json;
 
+import br.com.facility.model.User;
 import br.com.facility.model.enuns.PaymentType;
 import br.com.facility.model.enuns.StatusFinance;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
@@ -21,7 +22,7 @@ public abstract class FinanceJson {
     @JsonSerialize(using = LocalDateTimeSerializer.class)
     private LocalDateTime releaseDate;
 
-    private Long userId;
+    private String userName;
 
     private String description;
 
@@ -37,10 +38,14 @@ public abstract class FinanceJson {
         this.releaseDate = LocalDateTime.now();
     }
 
-    public FinanceJson(BigDecimal value, LocalDateTime releaseDate, Long userId, String description, String observation, PaymentType paymentType, StatusFinance status) {
+    public FinanceJson(BigDecimal value, LocalDateTime releaseDate, User user, String description, String observation, PaymentType paymentType, StatusFinance status) {
+        this(value, releaseDate, user.getUsername(), description, observation, paymentType, status);
+    }
+
+    public FinanceJson(BigDecimal value, LocalDateTime releaseDate, String userName, String description, String observation, PaymentType paymentType, StatusFinance status) {
         this.value = value;
         this.releaseDate = releaseDate;
-        this.userId = userId;
+        this.userName = userName;
         this.description = description;
         this.observation = observation;
         this.paymentType = paymentType;
@@ -51,55 +56,27 @@ public abstract class FinanceJson {
         return value;
     }
 
-    public void setValue(BigDecimal value) {
-        this.value = value;
-    }
-
     public LocalDateTime getReleaseDate() {
         return releaseDate;
     }
 
-    public void setReleaseDate(LocalDateTime releaseDate) {
-        this.releaseDate = releaseDate;
-    }
-
-    public Long getUserId() {
-        return userId;
-    }
-
-    public void setUserId(Long userId) {
-        this.userId = userId;
+    public String getUserName() {
+        return userName;
     }
 
     public String getDescription() {
         return description;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
     public String getObservation() {
         return observation;
-    }
-
-    public void setObservation(String observation) {
-        this.observation = observation;
     }
 
     public PaymentType getPaymentType() {
         return paymentType;
     }
 
-    public void setPaymentType(PaymentType paymentType) {
-        this.paymentType = paymentType;
-    }
-
     public StatusFinance getStatus() {
         return status;
-    }
-
-    public void setStatus(StatusFinance status) {
-        this.status = status;
     }
 }

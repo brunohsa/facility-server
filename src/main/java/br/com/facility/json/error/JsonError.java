@@ -1,8 +1,9 @@
-package br.com.facility.json;
+package br.com.facility.json.error;
 
-import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import br.com.facility.exceptions.FacilityBaseException;
+import br.com.facility.util.JsonUtil;
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
-import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateTimeDeserializer;
 import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateTimeSerializer;
 import org.springframework.http.HttpStatus;
 
@@ -11,7 +12,6 @@ import java.time.LocalDateTime;
 public class JsonError {
 
 	@JsonSerialize(using = LocalDateTimeSerializer.class)
-	@JsonDeserialize(using = LocalDateTimeDeserializer.class)
 	private LocalDateTime dateTime;
 
 	private String httpStatus;
@@ -21,9 +21,6 @@ public class JsonError {
 	private String cause;
 
 	private String description;
-
-	public JsonError() {
-	}
 
 	public JsonError(HttpStatus httpStatus, String cause, String description) {
 		this.dateTime = LocalDateTime.now();
@@ -37,39 +34,28 @@ public class JsonError {
 		return dateTime;
 	}
 
-	public void setDateTime(LocalDateTime dateTime) {
-		this.dateTime = dateTime;
-	}
-
 	public String getHttpStatus() {
 		return httpStatus;
-	}
-
-	public void setHttpStatus(String httpStatus) {
-		this.httpStatus = httpStatus;
 	}
 
 	public String getCause() {
 		return cause;
 	}
 
-	public void setCause(String cause) {
-		this.cause = cause;
-	}
-
 	public String getDescription() {
 		return description;
-	}
-
-	public void setDescription(String description) {
-		this.description = description;
 	}
 
 	public String getTypeHttpStatus() {
 		return typeHttpStatus;
 	}
 
-	public void setTypeHttpStatus(String typeHttpStatus) {
-		this.typeHttpStatus = typeHttpStatus;
+	public String toJson() {
+		try {
+			return JsonUtil.convertObjectToJson(this);
+		} catch (JsonProcessingException e) {
+			e.printStackTrace();
+		}
+		return "";
 	}
 }
