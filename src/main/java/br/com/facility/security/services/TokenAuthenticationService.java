@@ -1,8 +1,8 @@
 package br.com.facility.security.services;
 
-import br.com.facility.exceptions.ExpiredTokenException;
-import br.com.facility.exceptions.InternalErrorException;
-import br.com.facility.exceptions.InvalidTokenException;
+import br.com.facility.exceptions.InternalServerErrorException;
+import br.com.facility.exceptions.webservice.ExpiredTokenException;
+import br.com.facility.exceptions.webservice.InvalidTokenException;
 import br.com.facility.json.response.LoginResponse;
 import br.com.facility.model.User;
 import br.com.facility.service.UserService;
@@ -23,7 +23,6 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.Collections;
 import java.util.Date;
-import java.util.Objects;
 import java.util.Optional;
 
 @Component
@@ -37,23 +36,29 @@ public class TokenAuthenticationService {
     static final String TOKEN = "token";
     static final String SECRET = "f@cility_";
 
-    public void addAuthentication(HttpServletResponse response, String username) throws IOException, InternalErrorException {
+    public void addAuthentication(HttpServletResponse response, String username) throws IOException, InternalServerErrorException {
         String token = getToken(username);
         String userResponse = getSucessAuthenticationJson(token, username);
+        addResponseSucessMessage(response, userResponse);
+    }
+
+    private void addResponseSucessMessage(HttpServletResponse response, String responseBody) {
         try {
-            response.getWriter().write(userResponse);
+            response.getWriter().write(responseBody);
             response.setStatus(HttpStatus.OK.value());
             response.setContentType(MediaType.APPLICATION_JSON_VALUE);
         } catch (IOException e) {
             e.printStackTrace();
-            throw new InternalErrorException("IO error", "erro");
+            throw new InternalServerErrorException("IO error");
         }
     }
 
     private String getToken(String username) {
         Date expitationDate = getDateExpirationLogin();
 
-        String token = Jwts.builder().setSubject(username).setExpiration(expitationDate)
+        String token = Jwts.builder()
+                .setSubject(username)
+                .setExpiration(expitationDate)
                 .signWith(SignatureAlgorithm.HS512, SECRET)
                 .compact();
 
@@ -64,18 +69,18 @@ public class TokenAuthenticationService {
         return new Date(System.currentTimeMillis() + EXPIRATION_TIME);
     }
 
-    private String getSucessAuthenticationJson(String token, String username) throws InternalErrorException{
+    private String getSucessAuthenticationJson(String token, String username) throws InternalServerErrorException {
         User user = userService.findByUserName(username);
         try {
             return JsonUtil.convertObjectToJson(new LoginResponse(token, user));
         } catch (JsonProcessingException e) {
             e.printStackTrace();
-            throw new InternalErrorException("erro ao converter", "erro ao converter");
+            throw new InternalServerErrorException("erro ao converter");
         }
     }
 
     public Authentication getAuthentication(HttpServletRequest request) throws ExpiredJwtException, InvalidTokenException {
-        Optional<String> tokenOptional = Optional.of(request.getHeader(TOKEN));
+        Optional<String> tokenOptional = Optional.ofNullable(request.getHeader(TOKEN));
         String token = tokenOptional.orElseThrow(() -> new InvalidTokenException());
 
         String user;

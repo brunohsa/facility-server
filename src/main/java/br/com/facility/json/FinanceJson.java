@@ -1,6 +1,5 @@
 package br.com.facility.json;
 
-import br.com.facility.model.User;
 import br.com.facility.model.enuns.PaymentType;
 import br.com.facility.model.enuns.StatusFinance;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;

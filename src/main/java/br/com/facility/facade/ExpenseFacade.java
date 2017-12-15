@@ -1,7 +1,5 @@
 package br.com.facility.facade;
 
-import br.com.facility.exceptions.DataNotFoundException;
-import br.com.facility.exceptions.InvalidUserException;
 import br.com.facility.json.request.ExpenseRequest;
 import br.com.facility.json.response.ExpenseResponse;
 import br.com.facility.model.Expense;
@@ -41,7 +39,7 @@ public class ExpenseFacade implements IExpenseFacade {
 	}
 
 	@Override
-	public ExpenseResponse findById(Long id) throws DataNotFoundException {
+	public ExpenseResponse findById(Long id) {
 		Expense expense = expenseService.findById(id);
 		return new ExpenseResponse(expense);
 	}

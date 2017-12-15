@@ -1,6 +1,5 @@
 package br.com.facility.json.error;
 
-import br.com.facility.exceptions.FacilityBaseException;
 import br.com.facility.util.JsonUtil;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;

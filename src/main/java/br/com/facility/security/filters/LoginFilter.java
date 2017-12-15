@@ -1,14 +1,9 @@
 package br.com.facility.security.filters;
 
-import br.com.facility.json.error.JsonError;
 import br.com.facility.json.request.LoginRequest;
 import br.com.facility.security.services.TokenAuthenticationService;
-import br.com.facility.util.Messages;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
-import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
@@ -40,29 +35,12 @@ public class LoginFilter extends AbstractAuthenticationProcessingFilter {
 
         LoginRequest login = getLoginRequest(httpServletRequest.getInputStream());
         UsernamePasswordAuthenticationToken userAuthenticator = getUserAuthenticate(login);
-        try {
-            return getAuthenticationManager().authenticate(userAuthenticator);
-        } catch (BadCredentialsException e) {
-            setAuthenticationErrorResponse(response, HttpStatus.UNAUTHORIZED, "login.wrong_user_or_password", "login.login_error");
-            return null;
-        }
-    }
-
-    private void setAuthenticationErrorResponse(HttpServletResponse response, HttpStatus httpStatus, String cause, String description) throws IOException {
-        JsonError error = new JsonError(httpStatus, getMessage(cause), getMessage(description));
-
-        response.getWriter().write(error.toJson());
-        response.setContentType(MediaType.APPLICATION_JSON_VALUE);
-        response.setStatus(httpStatus.value());
+        return getAuthenticationManager().authenticate(userAuthenticator);
     }
 
     private LoginRequest getLoginRequest(ServletInputStream inputStream) throws IOException {
         ObjectMapper mapper = new ObjectMapper();
         return mapper.readValue(inputStream, LoginRequest.class);
-    }
-
-    private String getMessage(String key) {
-        return Messages.getMessage(key);
     }
 
     private UsernamePasswordAuthenticationToken getUserAuthenticate(LoginRequest login) {
@@ -72,6 +50,7 @@ public class LoginFilter extends AbstractAuthenticationProcessingFilter {
     @Override
     protected void successfulAuthentication(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain,
             Authentication auth) throws IOException, ServletException {
+
         authenticationService.addAuthentication(response, auth.getName());
     }
 }
