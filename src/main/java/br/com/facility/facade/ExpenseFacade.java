@@ -1,6 +1,5 @@
 package br.com.facility.facade;
 
-import br.com.facility.exceptions.InvalidUserException;
 import br.com.facility.json.request.ExpenseRequest;
 import br.com.facility.json.response.ExpenseResponse;
 import br.com.facility.model.Expense;
@@ -11,9 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 import java.util.stream.Collectors;
 
 @Service
@@ -27,21 +24,23 @@ public class ExpenseFacade implements IExpenseFacade {
 
 	@Override
 	public ExpenseResponse save(ExpenseRequest expenseRequest) {
-		User user = null;
-		try {
-			user = userService.findByUserName(expenseRequest.getUserName());
-		} catch (InvalidUserException e) {
-			e.printStackTrace();
-		}
+		User user = userService.findLoggedUser();
 		Expense expense = new Expense(expenseRequest, user);
 		Expense expenseSaved = expenseService.save(expense);
 		return new ExpenseResponse(expenseSaved);
 	}
 
 	@Override
+	public ExpenseResponse update(ExpenseRequest expense) {
+		Expense expenseSaved = expenseService
+				.update(expense.getValue(), expense.getDescription(), expense.getObservation(), expense.getPaymentType(), expense.getStatus(),
+						expense.getExpirationDate(), expense.getId());
+		return new ExpenseResponse(expenseSaved);
+	}
+
+	@Override
 	public ExpenseResponse findById(Long id) {
 		Expense expense = expenseService.findById(id);
-		//verificar se é nulo, se for lança exceção
 		return new ExpenseResponse(expense);
 	}
 

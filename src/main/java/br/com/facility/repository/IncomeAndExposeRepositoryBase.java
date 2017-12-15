@@ -7,6 +7,7 @@ import org.springframework.data.repository.query.Param;
 
 import java.io.Serializable;
 import java.util.List;
+import java.util.Optional;
 
 @NoRepositoryBean
 public interface IncomeAndExposeRepositoryBase<E, Long extends Serializable> extends CrudRepository<E, Long> {
@@ -19,5 +20,5 @@ public interface IncomeAndExposeRepositoryBase<E, Long extends Serializable> ext
 
     void deleteByIdAndUserUsername(@Param("id") Long id, @Param("username") String username);
 
-    E findByIdAndUserUsername(@Param("id") Long id, @Param("username") String username);
+    Optional<E> findByIdAndUserUsername(@Param("id") Long id, @Param("username") String username);
 }
