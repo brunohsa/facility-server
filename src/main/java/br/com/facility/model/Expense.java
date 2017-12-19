@@ -35,13 +35,6 @@ public class Expense extends Finance {
         this.paymentDate = expenseJson.getPaymentDate();
     }
 
-    public Expense(BigDecimal value, User user, String description, String observation, PaymentType paymentType, StatusFinance status, LocalDate expirationDate,
-                   LocalDate paymentDate) {
-        super(value, user, description, observation, paymentType, status);
-        this.expirationDate = expirationDate;
-        this.paymentDate = paymentDate;
-    }
-
     public Long getId() {
         return id;
     }

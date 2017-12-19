@@ -25,8 +25,8 @@ public class ResponseError {
 		return newResponseEntityWithJsonErrorBody(httpStatus, message, cause);
 	}
 
-	private static ResponseEntity<JsonError> newResponseEntityWithJsonErrorBody(HttpStatus httpStatus, String message, String cause) {
-		JsonError error = new JsonError(httpStatus, message, cause);
+	private static ResponseEntity<ErrorModel> newResponseEntityWithJsonErrorBody(HttpStatus httpStatus, String message, String cause) {
+		ErrorModel error = new ErrorModel(httpStatus, message, cause);
 		return new ResponseEntity(error, httpStatus);
 	}
 }

@@ -8,7 +8,7 @@ import org.springframework.http.HttpStatus;
 
 import java.time.LocalDateTime;
 
-public class JsonError {
+public class ErrorModel {
 
 	@JsonSerialize(using = LocalDateTimeSerializer.class)
 	private LocalDateTime dateTime;
@@ -21,7 +21,7 @@ public class JsonError {
 
 	private String description;
 
-	public JsonError(HttpStatus httpStatus, String cause, String description) {
+	public ErrorModel(HttpStatus httpStatus, String cause, String description) {
 		this.dateTime = LocalDateTime.now();
 		this.httpStatus = httpStatus.toString();
 		this.typeHttpStatus = httpStatus.getReasonPhrase();

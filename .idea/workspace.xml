@@ -2,39 +2,18 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="17a171c2-3b73-4d28-8014-3ee5a3f2c9fd" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/br/com/facility/exceptions/InternalServerErrorException.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/br/com/facility/exceptions/webservice/DataNotFoundException.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/br/com/facility/exceptions/webservice/ExpiredTokenException.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/br/com/facility/exceptions/webservice/FacilityWSBaseException.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/br/com/facility/exceptions/webservice/InvalidDateFormatException.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/br/com/facility/exceptions/webservice/InvalidTokenException.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/br/com/facility/exceptions/webservice/InvalidUserException.java" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/br/com/facility/exceptions/DataNotFoundException.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/br/com/facility/exceptions/ExpiredTokenException.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/br/com/facility/exceptions/FacilityBaseException.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/br/com/facility/exceptions/InternalErrorException.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/br/com/facility/exceptions/InvalidDateFormatException.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/br/com/facility/exceptions/InvalidTokenException.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/br/com/facility/exceptions/InvalidUserException.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/br/com/facility/exceptions/webservice/InvalidTokenException.java" afterPath="" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/br/com/facility/exceptions/handler/FacilityWSHandlerException.java" afterPath="$PROJECT_DIR$/src/main/java/br/com/facility/exceptions/handlers/FacilityWSHandlerException.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/br/com/facility/exceptions/handler/FailureAuthenticationHandler.java" afterPath="$PROJECT_DIR$/src/main/java/br/com/facility/exceptions/handlers/AuthenticationLoginFailureHandler.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/br/com/facility/json/error/JsonError.java" afterPath="$PROJECT_DIR$/src/main/java/br/com/facility/json/error/ErrorModel.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/br/com/facility/facade/ExpenseFacade.java" afterPath="$PROJECT_DIR$/src/main/java/br/com/facility/facade/ExpenseFacade.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/br/com/facility/json/FinanceJson.java" afterPath="$PROJECT_DIR$/src/main/java/br/com/facility/json/FinanceJson.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/br/com/facility/json/error/JsonError.java" afterPath="$PROJECT_DIR$/src/main/java/br/com/facility/json/error/JsonError.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/br/com/facility/json/response/UserResponse.java" afterPath="$PROJECT_DIR$/src/main/java/br/com/facility/json/response/UserResponse.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/br/com/facility/json/error/ResponseError.java" afterPath="$PROJECT_DIR$/src/main/java/br/com/facility/json/error/ResponseError.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/br/com/facility/json/request/LoginRequest.java" afterPath="$PROJECT_DIR$/src/main/java/br/com/facility/json/request/LoginRequest.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/br/com/facility/json/response/ExpenseResponse.java" afterPath="$PROJECT_DIR$/src/main/java/br/com/facility/json/response/ExpenseResponse.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/br/com/facility/model/Expense.java" afterPath="$PROJECT_DIR$/src/main/java/br/com/facility/model/Expense.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/br/com/facility/model/Finance.java" afterPath="$PROJECT_DIR$/src/main/java/br/com/facility/model/Finance.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/br/com/facility/model/User.java" afterPath="$PROJECT_DIR$/src/main/java/br/com/facility/model/User.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/br/com/facility/repository/UserRepository.java" afterPath="$PROJECT_DIR$/src/main/java/br/com/facility/repository/UserRepository.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/br/com/facility/security/WebSecurityConfiguration.java" afterPath="$PROJECT_DIR$/src/main/java/br/com/facility/security/WebSecurityConfiguration.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/br/com/facility/security/filters/JWTAuthenticationFilter.java" afterPath="$PROJECT_DIR$/src/main/java/br/com/facility/security/filters/JWTAuthenticationFilter.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/br/com/facility/security/filters/LoginFilter.java" afterPath="$PROJECT_DIR$/src/main/java/br/com/facility/security/filters/LoginFilter.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/br/com/facility/security/services/TokenAuthenticationService.java" afterPath="$PROJECT_DIR$/src/main/java/br/com/facility/security/services/TokenAuthenticationService.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/br/com/facility/service/IncomeAndExpenseServiceBase.java" afterPath="$PROJECT_DIR$/src/main/java/br/com/facility/service/IncomeAndExpenseServiceBase.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/br/com/facility/service/UserService.java" afterPath="$PROJECT_DIR$/src/main/java/br/com/facility/service/UserService.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/br/com/facility/util/DateUtil.java" afterPath="$PROJECT_DIR$/src/main/java/br/com/facility/util/DateUtil.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/br/com/facility/webservice/ExpenseWebService.java" afterPath="$PROJECT_DIR$/src/main/java/br/com/facility/webservice/ExpenseWebService.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/br/com/facility/webservice/UserWebService.java" afterPath="$PROJECT_DIR$/src/main/java/br/com/facility/webservice/UserWebService.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/web.xml" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/web.xml" />
     </list>
     <ignored path="$PROJECT_DIR$/target/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -51,107 +30,87 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+      <file leaf-file-name="WebSecurityConfiguration.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/br/com/facility/security/WebSecurityConfiguration.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-271">
+              <caret line="32" column="0" lean-forward="true" selection-start-line="32" selection-start-column="0" selection-end-line="32" selection-end-column="0" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="AuthenticationLoginFailureHandler.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/br/com/facility/exceptions/handlers/AuthenticationLoginFailureHandler.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="136">
+              <caret line="19" column="54" lean-forward="true" selection-start-line="19" selection-start-column="54" selection-end-line="19" selection-end-column="54" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="AuthenticationEntryPointError.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/main/java/br/com/facility/exceptions/handlers/AuthenticationEntryPointError.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="15">
+              <caret line="9" column="28" lean-forward="false" selection-start-line="9" selection-start-column="28" selection-end-line="9" selection-end-column="28" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Finance.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/br/com/facility/model/Finance.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-447">
+              <caret line="24" column="22" lean-forward="false" selection-start-line="24" selection-start-column="22" selection-end-line="24" selection-end-column="22" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="LoginFilter.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/br/com/facility/security/filters/LoginFilter.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="0">
+              <caret line="0" column="41" lean-forward="true" selection-start-line="0" selection-start-column="41" selection-end-line="0" selection-end-column="41" />
+              <folding>
+                <element signature="e#1160#1161#0" expanded="true" />
+                <element signature="e#1220#1221#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
       <file leaf-file-name="FacilityWSHandlerException.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/br/com/facility/exceptions/handler/FacilityWSHandlerException.java">
+        <entry file="file://$PROJECT_DIR$/src/main/java/br/com/facility/exceptions/handlers/FacilityWSHandlerException.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="170">
-              <caret line="15" column="26" lean-forward="false" selection-start-line="15" selection-start-column="26" selection-end-line="15" selection-end-column="26" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="FailureAuthenticationHandler.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/br/com/facility/exceptions/handler/FailureAuthenticationHandler.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="306">
-              <caret line="29" column="41" lean-forward="false" selection-start-line="29" selection-start-column="41" selection-end-line="29" selection-end-column="41" />
-              <folding>
-                <element signature="imports" expanded="true" />
-                <element signature="e#1189#1190#0" expanded="true" />
-                <element signature="e#1227#1228#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="ExpiredTokenException.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/br/com/facility/exceptions/webservice/ExpiredTokenException.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="102">
-              <caret line="6" column="34" lean-forward="false" selection-start-line="6" selection-start-column="34" selection-end-line="6" selection-end-column="34" />
-              <folding>
-                <element signature="e#195#196#0" expanded="true" />
-                <element signature="e#292#293#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="InvalidTokenException.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/br/com/facility/exceptions/webservice/InvalidTokenException.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="102">
-              <caret line="6" column="11" lean-forward="false" selection-start-line="6" selection-start-column="11" selection-end-line="6" selection-end-column="11" />
+            <state relative-caret-position="238">
+              <caret line="22" column="21" lean-forward="false" selection-start-line="22" selection-start-column="21" selection-end-line="22" selection-end-column="21" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="InvalidUserException.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/br/com/facility/exceptions/webservice/InvalidUserException.java">
+      <file leaf-file-name="JWTAuthenticationFilter.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/br/com/facility/security/filters/JWTAuthenticationFilter.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="68">
-              <caret line="4" column="33" lean-forward="false" selection-start-line="4" selection-start-column="13" selection-end-line="4" selection-end-column="33" />
+            <state relative-caret-position="168">
+              <caret line="29" column="48" lean-forward="false" selection-start-line="29" selection-start-column="32" selection-end-line="29" selection-end-column="48" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="UserService.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/br/com/facility/service/UserService.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="221">
-              <caret line="21" column="5" lean-forward="false" selection-start-line="21" selection-start-column="5" selection-end-line="21" selection-end-column="5" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="FacilityWSBaseException.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/br/com/facility/exceptions/webservice/FacilityWSBaseException.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="68">
-              <caret line="5" column="13" lean-forward="false" selection-start-line="5" selection-start-column="13" selection-end-line="5" selection-end-column="13" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="DateUtil.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/br/com/facility/util/DateUtil.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="986">
-              <caret line="63" column="22" lean-forward="false" selection-start-line="63" selection-start-column="22" selection-end-line="63" selection-end-column="22" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="TokenAuthenticationService.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="TokenAuthenticationService.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/br/com/facility/security/services/TokenAuthenticationService.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="249">
-              <caret line="72" column="45" lean-forward="false" selection-start-line="72" selection-start-column="45" selection-end-line="72" selection-end-column="45" />
-              <folding>
-                <element signature="imports" expanded="true" />
-                <element signature="e#2566#2567#0" expanded="true" />
-                <element signature="e#2643#2644#0" expanded="true" />
-              </folding>
+            <state relative-caret-position="187">
+              <caret line="35" column="48" lean-forward="false" selection-start-line="35" selection-start-column="48" selection-end-line="35" selection-end-column="48" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -285,7 +244,6 @@
       <pane id="PackagesPane" />
       <pane id="AndroidView" />
       <pane id="Scope" />
-      <pane id="Scratches" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -345,8 +303,7 @@
               <item name="main" type="462c0819:PsiDirectoryNode" />
               <item name="java" type="462c0819:PsiDirectoryNode" />
               <item name="facility" type="462c0819:PsiDirectoryNode" />
-              <item name="security" type="462c0819:PsiDirectoryNode" />
-              <item name="services" type="462c0819:PsiDirectoryNode" />
+              <item name="webservice" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="facility-server" type="b2602c69:ProjectViewProjectNode" />
@@ -355,30 +312,11 @@
               <item name="main" type="462c0819:PsiDirectoryNode" />
               <item name="resources" type="462c0819:PsiDirectoryNode" />
             </path>
-            <path>
-              <item name="facility-server" type="b2602c69:ProjectViewProjectNode" />
-              <item name="facility-server" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="webapp" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="facility-server" type="b2602c69:ProjectViewProjectNode" />
-              <item name="facility-server" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="webapp" type="462c0819:PsiDirectoryNode" />
-              <item name="WEB-INF" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="facility-server" type="b2602c69:ProjectViewProjectNode" />
-              <item name="facility-server" type="462c0819:PsiDirectoryNode" />
-              <item name="target" type="462c0819:PsiDirectoryNode" />
-            </path>
           </expand>
           <select />
         </subPane>
       </pane>
+      <pane id="Scratches" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -534,36 +472,56 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-7" y="102" width="1399" height="912" extended-state="6" />
-    <editor active="true" />
+    <frame x="43" y="-4" width="1397" height="904" extended-state="6" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.31741935" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Palette&#9;" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Image Layers" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32516128" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.35096774" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3264516" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32903227" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.31014064" sideWeight="0.5" order="4" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.33086604" sideWeight="0.5" order="4" side_tool="false" content_ui="combo" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32258064" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Theme Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4283871" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="true" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3432258" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
+      <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="true" content_ui="tabs" />
+      <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="7" side_tool="false" content_ui="combo" />
+      <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4283871" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.31741935" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Palette&#9;" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Image Layers" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Coverage" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32916668" sideWeight="0.5" order="8" side_tool="true" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.35096774" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3264516" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.31014064" sideWeight="0.5" order="4" side_tool="false" content_ui="combo" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32258064" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Theme Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="true" content_ui="tabs" />
     </layout>
     <layout-to-restore>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
@@ -825,19 +783,17 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/br/com/facility/security/filters/LoginFilter.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="340">
-          <caret line="36" column="91" lean-forward="true" selection-start-line="36" selection-start-column="91" selection-end-line="36" selection-end-column="91" />
+        <state relative-caret-position="0">
+          <caret line="0" column="41" lean-forward="true" selection-start-line="0" selection-start-column="41" selection-end-line="0" selection-end-column="41" />
+          <folding>
+            <element signature="e#1160#1161#0" expanded="true" />
+            <element signature="e#1220#1221#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/br/com/facility/exceptions/webservice/BadLoginException.java" />
-    <entry file="file://$PROJECT_DIR$/src/main/java/br/com/facility/json/error/JsonError.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="241">
-          <caret line="23" column="11" lean-forward="false" selection-start-line="23" selection-start-column="11" selection-end-line="23" selection-end-column="11" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/br/com/facility/json/error/JsonError.java" />
     <entry file="file://$PROJECT_DIR$/src/main/java/br/com/facility/service/IncomeAndExpenseServiceBase.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="85">
@@ -847,8 +803,11 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/br/com/facility/security/WebSecurityConfiguration.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="383">
-          <caret line="36" column="0" lean-forward="true" selection-start-line="36" selection-start-column="0" selection-end-line="36" selection-end-column="0" />
+        <state relative-caret-position="-271">
+          <caret line="32" column="0" lean-forward="true" selection-start-line="32" selection-start-column="0" selection-end-line="32" selection-end-column="0" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -874,9 +833,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="68">
           <caret line="5" column="13" lean-forward="false" selection-start-line="5" selection-start-column="13" selection-end-line="5" selection-end-column="13" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -891,7 +847,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="986">
           <caret line="63" column="22" lean-forward="false" selection-start-line="63" selection-start-column="22" selection-end-line="63" selection-end-column="22" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -899,7 +854,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="68">
           <caret line="4" column="33" lean-forward="false" selection-start-line="4" selection-start-column="13" selection-end-line="4" selection-end-column="33" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -907,56 +861,25 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="221">
           <caret line="21" column="5" lean-forward="false" selection-start-line="21" selection-start-column="5" selection-end-line="21" selection-end-column="5" />
-          <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/br/com/facility/exceptions/handler/FacilityWSHandlerException.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="170">
-          <caret line="15" column="26" lean-forward="false" selection-start-line="15" selection-start-column="26" selection-end-line="15" selection-end-column="26" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/br/com/facility/exceptions/handler/FailureAuthenticationHandler.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="306">
-          <caret line="29" column="41" lean-forward="false" selection-start-line="29" selection-start-column="41" selection-end-line="29" selection-end-column="41" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#1189#1190#0" expanded="true" />
-            <element signature="e#1227#1228#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/br/com/facility/exceptions/handler/FacilityWSHandlerException.java" />
+    <entry file="file://$PROJECT_DIR$/src/main/java/br/com/facility/exceptions/handler/FailureAuthenticationHandler.java" />
     <entry file="file://$PROJECT_DIR$/src/main/java/br/com/facility/security/filters/JWTAuthenticationFilter.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="502">
-          <caret line="45" column="23" lean-forward="false" selection-start-line="45" selection-start-column="18" selection-end-line="45" selection-end-column="23" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/br/com/facility/exceptions/webservice/InvalidTokenException.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="102">
-          <caret line="6" column="11" lean-forward="false" selection-start-line="6" selection-start-column="11" selection-end-line="6" selection-end-column="11" />
+        <state relative-caret-position="168">
+          <caret line="29" column="48" lean-forward="false" selection-start-line="29" selection-start-column="32" selection-end-line="29" selection-end-column="48" />
           <folding />
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/br/com/facility/exceptions/webservice/InvalidTokenException.java" />
     <entry file="file://$PROJECT_DIR$/src/main/java/br/com/facility/security/services/TokenAuthenticationService.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="249">
-          <caret line="72" column="45" lean-forward="false" selection-start-line="72" selection-start-column="45" selection-end-line="72" selection-end-column="45" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#2566#2567#0" expanded="true" />
-            <element signature="e#2643#2644#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="187">
+          <caret line="35" column="48" lean-forward="false" selection-start-line="35" selection-start-column="48" selection-end-line="35" selection-end-column="48" />
+          <folding />
         </state>
       </provider>
     </entry>

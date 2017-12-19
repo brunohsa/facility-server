@@ -13,7 +13,6 @@ import java.time.LocalDate;
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class ExpenseResponse extends FinanceJson {
 
-
     private Long id;
 
     @JsonSerialize(using = LocalDateSerializer.class)

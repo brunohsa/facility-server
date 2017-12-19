@@ -1,6 +1,6 @@
-package br.com.facility.exceptions.handler;
+package br.com.facility.exceptions.handlers;
 
-import br.com.facility.json.error.JsonError;
+import br.com.facility.json.error.ErrorModel;
 import br.com.facility.util.Messages;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -14,13 +14,13 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 @Component
-public class FailureAuthenticationHandler implements AuthenticationFailureHandler {
+public class AuthenticationLoginFailureHandler implements AuthenticationFailureHandler {
 
 	@Override
 	public void onAuthenticationFailure(HttpServletRequest request, HttpServletResponse response, AuthenticationException e)
 			throws IOException, ServletException {
 
-		String error = new JsonError(HttpStatus.UNAUTHORIZED, getMessage("login.wrong_user_or_password"), getMessage("login.login_error")).toJson();
+		String error = new ErrorModel(HttpStatus.UNAUTHORIZED, getMessage("login.wrong_user_or_password"), getMessage("login.login_error")).toJson();
 		response.getWriter().write(error);
 
 		response.setContentType(MediaType.APPLICATION_JSON_VALUE);
