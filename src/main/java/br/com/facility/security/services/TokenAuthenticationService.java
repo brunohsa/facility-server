@@ -2,12 +2,12 @@ package br.com.facility.security.services;
 
 import br.com.facility.exceptions.InternalServerErrorException;
 import br.com.facility.exceptions.webservice.ExpiredTokenException;
-import br.com.facility.exceptions.webservice.InvalidTokenException;
 import br.com.facility.json.response.LoginResponse;
 import br.com.facility.model.User;
 import br.com.facility.service.UserService;
 import br.com.facility.util.JsonUtil;
 import com.fasterxml.jackson.core.JsonProcessingException;
+import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.ExpiredJwtException;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
@@ -18,6 +18,7 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Component;
 
+import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
@@ -79,9 +80,12 @@ public class TokenAuthenticationService {
         }
     }
 
-    public Authentication getAuthentication(HttpServletRequest request) throws ExpiredJwtException, InvalidTokenException {
+    public Authentication getAuthentication(HttpServletRequest request) throws ExpiredJwtException, ServletException {
         Optional<String> tokenOptional = Optional.ofNullable(request.getHeader(TOKEN));
-        String token = tokenOptional.orElseThrow(() -> new InvalidTokenException());
+        if (!tokenOptional.isPresent()) {
+            return null;
+        }
+        String token = tokenOptional.get();
 
         String user;
         try {

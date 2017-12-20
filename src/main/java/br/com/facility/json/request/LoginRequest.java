@@ -27,6 +27,8 @@ public class LoginRequest {
 		this.password = password;
 	}
 
+	//TODO REMOVER
+	@Deprecated
 	private String removeSpaces(String string) {
 		if (Objects.isNull(string) || string.isEmpty()) {
 			return "";

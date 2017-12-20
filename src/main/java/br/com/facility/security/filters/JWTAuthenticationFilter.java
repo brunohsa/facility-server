@@ -1,8 +1,7 @@
 package br.com.facility.security.filters;
 
 import br.com.facility.exceptions.webservice.ExpiredTokenException;
-import br.com.facility.exceptions.webservice.InvalidTokenException;
-import br.com.facility.json.error.JsonError;
+import br.com.facility.json.error.ErrorModel;
 import br.com.facility.security.services.TokenAuthenticationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -35,15 +34,13 @@ public class JWTAuthenticationFilter extends GenericFilterBean {
 			filterChain.doFilter(request, response);
 		} catch (ExpiredTokenException e) {
 			setJWTErrorResponse(response, HttpStatus.BAD_REQUEST, e.getCauseMessage(), e.getMessage());
-		} catch (InvalidTokenException e) {
-			setJWTErrorResponse(response, HttpStatus.UNAUTHORIZED, e.getCauseMessage(), e.getMessage());
 		}
 	}
 
 	private void setJWTErrorResponse(ServletResponse response, HttpStatus httpStatus, String cause, String description) throws IOException {
 		HttpServletResponse httpResponse = (HttpServletResponse) response;
 
-		JsonError error = new JsonError(httpStatus, cause, description);
+		ErrorModel error = new ErrorModel(httpStatus, cause, description);
 
 		httpResponse.getWriter().write(error.toJson());
 		httpResponse.setStatus(httpStatus.value());
