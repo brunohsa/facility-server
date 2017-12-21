@@ -1,6 +1,5 @@
 package br.com.facility.webservice;
 
-import br.com.facility.json.request.ChangePasswordRequest;
 import br.com.facility.json.request.UserRequest;
 import br.com.facility.json.response.UserResponse;
 import br.com.facility.model.User;
@@ -32,7 +31,7 @@ public class UserWebService {
     @Autowired
     private IncomeService incomeService;
 
-    @RequestMapping(value = "/find/{username}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+    @RequestMapping(value = "/{username}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity findByUsername(@PathVariable("username") String username) {
         User user = userService.findByUserName(username);
         return new ResponseEntity(new UserResponse(user), HttpStatus.OK);
@@ -62,14 +61,6 @@ public class UserWebService {
 
         user = userService.save(user);
         return new ResponseEntity(new UserResponse(user), HttpStatus.OK);
-    }
-
-    @RequestMapping(value = "/password/change", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity changePassword(@RequestBody ChangePasswordRequest changePasswordRequest) {
-
-        //TODO FAZER AS VERIFICAÇÕES PARA A TROCA DE SENHA
-
-        return null;
     }
 }
 

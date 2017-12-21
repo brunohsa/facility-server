@@ -1,7 +1,7 @@
 package br.com.facility.exceptions.handlers;
 
+import br.com.facility.exceptions.ErrorMessages;
 import br.com.facility.json.error.ErrorModel;
-import br.com.facility.util.Messages;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.security.core.AuthenticationException;
@@ -20,14 +20,10 @@ public class AuthenticationLoginFailureHandler implements AuthenticationFailureH
 	public void onAuthenticationFailure(HttpServletRequest request, HttpServletResponse response, AuthenticationException e)
 			throws IOException, ServletException {
 
-		String error = new ErrorModel(HttpStatus.UNAUTHORIZED, getMessage("login.wrong_user_or_password"), getMessage("login.login_error")).toJson();
-		response.getWriter().write(error);
+		String error = new ErrorModel(HttpStatus.UNAUTHORIZED, ErrorMessages.WRONG_USER_OR_PASSWORD.getText()).toJson();
 
+		response.getWriter().write(error);
 		response.setContentType(MediaType.APPLICATION_JSON_VALUE);
 		response.setStatus(HttpStatus.UNAUTHORIZED.value());
-	}
-
-	private String getMessage(String key) {
-		return Messages.getMessage(key);
 	}
 }

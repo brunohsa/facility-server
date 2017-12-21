@@ -6,7 +6,6 @@ import br.com.facility.json.response.LoginResponse;
 import br.com.facility.model.User;
 import br.com.facility.service.UserService;
 import br.com.facility.util.JsonUtil;
-import com.fasterxml.jackson.core.JsonProcessingException;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.ExpiredJwtException;
 import io.jsonwebtoken.Jwts;
@@ -49,8 +48,7 @@ public class TokenAuthenticationService {
             response.setStatus(HttpStatus.OK.value());
             response.setContentType(MediaType.APPLICATION_JSON_VALUE);
         } catch (IOException e) {
-            e.printStackTrace();
-            throw new InternalServerErrorException("IO error");
+            throw new InternalServerErrorException(e.getMessage());
         }
     }
 
@@ -72,27 +70,33 @@ public class TokenAuthenticationService {
 
     private String getSucessAuthenticationJson(String token, String username) throws InternalServerErrorException {
         User user = userService.findByUserName(username);
-        try {
-            return JsonUtil.convertObjectToJson(new LoginResponse(token, user));
-        } catch (JsonProcessingException e) {
-            e.printStackTrace();
-            throw new InternalServerErrorException("erro ao converter");
-        }
+        return JsonUtil.convertObjectToJson(new LoginResponse(token, user));
     }
 
     public Authentication getAuthentication(HttpServletRequest request) throws ExpiredJwtException, ServletException {
-        Optional<String> tokenOptional = Optional.ofNullable(request.getHeader(TOKEN));
-        if (!tokenOptional.isPresent()) {
+        Optional<String> token = getHeaderToken(request);
+        if (!token.isPresent()) {
             return null;
         }
-        String token = tokenOptional.get();
+        String user = getUsername(token.get());
+        return new UsernamePasswordAuthenticationToken(user, null, Collections.emptyList());
+    }
 
-        String user;
+    private Optional<String> getHeaderToken(HttpServletRequest request) {
+        String token = request.getHeader(TOKEN);
+        return Optional.ofNullable(token);
+    }
+
+    private String getUsername(String token) {
+        Claims claims = getClaims(token);
+        return claims.getSubject();
+    }
+
+    private Claims getClaims(String token) {
         try {
-            user = Jwts.parser().setSigningKey(SECRET).parseClaimsJws(token).getBody().getSubject();
+            return Jwts.parser().setSigningKey(SECRET).parseClaimsJws(token).getBody();
         } catch (ExpiredJwtException e) {
             throw new ExpiredTokenException();
         }
-        return new UsernamePasswordAuthenticationToken(user, null, Collections.emptyList());
     }
 }
