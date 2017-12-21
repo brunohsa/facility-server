@@ -16,7 +16,7 @@ public class Messages {
         try {
             return getBundle().getString(key);
         } catch (MissingResourceException e) {
-            return key;
+            return "!".concat(key);
         }
     }
 

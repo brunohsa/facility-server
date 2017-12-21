@@ -1,5 +1,6 @@
 package br.com.facility.exceptions.handlers;
 
+import br.com.facility.exceptions.ErrorMessages;
 import br.com.facility.json.error.ErrorModel;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -19,8 +20,7 @@ public class AuthenticationEntryPointError implements AuthenticationEntryPoint {
 	public void commence(HttpServletRequest request, HttpServletResponse response, AuthenticationException authException)
 			throws IOException, ServletException {
 
-		String error = new ErrorModel(HttpStatus.UNAUTHORIZED, "Acesso não autorizado", "")
-				.toJson();
+		String error = new ErrorModel(HttpStatus.UNAUTHORIZED, ErrorMessages.ACCESS_NOT_ALLOWED.getText()).toJson();
 
 		response.setContentType(MediaType.APPLICATION_JSON_VALUE);
 		response.setStatus(HttpStatus.UNAUTHORIZED.value());

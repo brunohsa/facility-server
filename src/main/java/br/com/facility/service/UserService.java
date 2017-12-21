@@ -1,6 +1,6 @@
 package br.com.facility.service;
 
-import br.com.facility.exceptions.webservice.InvalidUserException;
+import br.com.facility.exceptions.webservice.UserNotFoundException;
 import br.com.facility.model.User;
 import br.com.facility.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,9 +16,9 @@ public class UserService {
 	@Autowired
 	private UserRepository userRepository;
 
-	public User findByUserName(String username) throws InvalidUserException {
+	public User findByUserName(String username) throws UserNotFoundException {
 		Optional<User> user = userRepository.findByUsername(username);
-		return user.orElseThrow(() -> new InvalidUserException());
+		return user.orElseThrow(() -> new UserNotFoundException(username));
 	}
 
 	public void delete() {

@@ -1,6 +1,6 @@
 package br.com.facility.service;
 
-import br.com.facility.exceptions.webservice.DataNotFoundException;
+import br.com.facility.exceptions.webservice.FinanceNotFoundException;
 import br.com.facility.model.enuns.StatusFinance;
 import br.com.facility.repository.IncomeAndExposeRepositoryBase;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,9 +37,9 @@ public abstract class IncomeAndExpenseServiceBase<E, T extends IncomeAndExposeRe
         return (E) repository.save(entity);
     }
 
-    public E findById(Long id) throws DataNotFoundException {
+    public E findById(Long id) throws FinanceNotFoundException {
         Optional<E> finance = repository.findByIdAndUserUsername(id, getLoggedUser());
-        return finance.orElseThrow(() -> new DataNotFoundException());
+        return finance.orElseThrow(() -> new FinanceNotFoundException(id));
     }
 
     public String getLoggedUser() {

@@ -33,15 +33,14 @@ public class JWTAuthenticationFilter extends GenericFilterBean {
 			SecurityContextHolder.getContext().setAuthentication(authentication);
 			filterChain.doFilter(request, response);
 		} catch (ExpiredTokenException e) {
-			setJWTErrorResponse(response, HttpStatus.BAD_REQUEST, e.getCauseMessage(), e.getMessage());
+			setJWTErrorResponse(response, HttpStatus.BAD_REQUEST, e.getMessage());
 		}
 	}
 
-	private void setJWTErrorResponse(ServletResponse response, HttpStatus httpStatus, String cause, String description) throws IOException {
+	private void setJWTErrorResponse(ServletResponse response, HttpStatus httpStatus, String cause) throws IOException {
+		ErrorModel error = new ErrorModel(httpStatus, cause);
+
 		HttpServletResponse httpResponse = (HttpServletResponse) response;
-
-		ErrorModel error = new ErrorModel(httpStatus, cause, description);
-
 		httpResponse.getWriter().write(error.toJson());
 		httpResponse.setStatus(httpStatus.value());
 		httpResponse.setContentType(MediaType.APPLICATION_JSON_VALUE);
