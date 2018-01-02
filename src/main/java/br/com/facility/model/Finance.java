@@ -1,7 +1,7 @@
 package br.com.facility.model;
 
 import br.com.facility.model.enuns.PaymentType;
-import br.com.facility.model.enuns.StatusFinance;
+import br.com.facility.model.enuns.FinanceStatus;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -55,13 +55,13 @@ public abstract class Finance {
     @Enumerated(EnumType.STRING)
     @Column(name = "STATUS")
     @NotNull
-    private StatusFinance status;
+    private FinanceStatus status;
 
     public Finance() {
     }
 
     public Finance(BigDecimal value, User user, String description, String observation, PaymentType paymentType,
-            StatusFinance status) {
+            FinanceStatus status) {
         this.value = value;
         this.releaseDate = LocalDateTime.now();
         this.user = user;
@@ -119,11 +119,11 @@ public abstract class Finance {
         this.paymentType = paymentType;
     }
 
-    public StatusFinance getStatus() {
+    public FinanceStatus getStatus() {
         return status;
     }
 
-    public void setStatus(StatusFinance status) {
+    public void setStatus(FinanceStatus status) {
         this.status = status;
     }
 }

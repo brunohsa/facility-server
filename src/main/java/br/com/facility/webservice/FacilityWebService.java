@@ -1,7 +1,7 @@
 package br.com.facility.webservice;
 
 import br.com.facility.model.enuns.PaymentType;
-import br.com.facility.model.enuns.StatusFinance;
+import br.com.facility.model.enuns.FinanceStatus;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -30,7 +30,7 @@ public class FacilityWebService {
 
 	@RequestMapping(value ="/finances/status", produces = MediaType.APPLICATION_JSON_VALUE, method = RequestMethod.GET)
 	public ResponseEntity getStatusFinances() {
-		List<StatusFinance> statusFinances = Arrays.asList(StatusFinance.values());
+		List<FinanceStatus> statusFinances = Arrays.asList(FinanceStatus.values());
 
 		List<String> statusNames = statusFinances.stream()
 				.map(statusName -> statusName.getStatusName())

@@ -1,7 +1,5 @@
 package br.com.facility.json;
 
-import br.com.facility.model.enuns.PaymentType;
-import br.com.facility.model.enuns.StatusFinance;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
@@ -27,15 +25,14 @@ public abstract class FinanceJson {
     private String observation;
 
     @JsonInclude(JsonInclude.Include.NON_NULL)
-    private PaymentType paymentType;
+    private String paymentType;
 
-    private StatusFinance status;
+    private String status;
 
     public FinanceJson() {
-        this.releaseDate = LocalDateTime.now();
     }
 
-    public FinanceJson(BigDecimal value, LocalDateTime releaseDate, String description, String observation, PaymentType paymentType, StatusFinance status) {
+    public FinanceJson(BigDecimal value, LocalDateTime releaseDate, String description, String observation, String paymentType, String status) {
         this.value = value;
         this.releaseDate = releaseDate;
         this.description = description;
@@ -60,11 +57,11 @@ public abstract class FinanceJson {
         return observation;
     }
 
-    public PaymentType getPaymentType() {
+    public String getPaymentType() {
         return paymentType;
     }
 
-    public StatusFinance getStatus() {
+    public String getStatus() {
         return status;
     }
 }

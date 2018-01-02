@@ -11,28 +11,19 @@ public class LoginRequest {
 
 	private String password;
 
-	public String getUserName() {
-		return Objects.nonNull(userName) ? removeSpaces(userName) : userName;
+	public LoginRequest() {
 	}
 
-	public void setUserName(String userName) {
-		this.userName = removeSpaces(userName);
-	}
-
-	public String getPassword() {
-		return Objects.nonNull(password) ? removeSpaces(password) : userName;
-	}
-
-	public void setPassword(String password) {
+	public LoginRequest(String userName, String password) {
+		this.userName = userName;
 		this.password = password;
 	}
 
-	//TODO REMOVER
-	@Deprecated
-	private String removeSpaces(String string) {
-		if (Objects.isNull(string) || string.isEmpty()) {
-			return "";
-		}
-		return string.replace(" ", "");
+	public String getUserName() {
+		return userName;
+	}
+
+	public String getPassword() {
+		return password;
 	}
 }

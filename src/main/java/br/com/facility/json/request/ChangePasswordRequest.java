@@ -5,12 +5,9 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class ChangePasswordRequest {
 
-	private String newPassword;
+	private final String newPassword;
 
-	private String oldPassword;
-
-	public ChangePasswordRequest() {
-	}
+	private final String oldPassword;
 
 	public ChangePasswordRequest(String newPassword, String oldPassword) {
 		this.newPassword = newPassword;

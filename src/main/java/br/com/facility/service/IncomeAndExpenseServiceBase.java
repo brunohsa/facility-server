@@ -1,7 +1,7 @@
 package br.com.facility.service;
 
 import br.com.facility.exceptions.webservice.FinanceNotFoundException;
-import br.com.facility.model.enuns.StatusFinance;
+import br.com.facility.model.enuns.FinanceStatus;
 import br.com.facility.repository.IncomeAndExposeRepositoryBase;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
@@ -17,7 +17,7 @@ public abstract class IncomeAndExpenseServiceBase<E, T extends IncomeAndExposeRe
     @Autowired
     private T repository;
 
-    public List<E> getByStatus(StatusFinance statusFinance) {
+    public List<E> getByStatus(FinanceStatus statusFinance) {
         return repository.getByStatusAndUserUsername(statusFinance, getLoggedUser());
     }
 

@@ -13,7 +13,8 @@ public enum ErrorMessages {
 	FINANCE_NOT_FOUND("finance_not_found"),
 	INVALID_DATE_FORMAT("invalid_date_format"),
 	USER_NOT_FOUND("user_not_found"),
-	INTERNAL_SERVER_ERROR("internal_server_error");
+	INTERNAL_SERVER_ERROR("internal_server_error"),
+	INVALID_ENUM_TYPE("invalid_enum_type");
 
 	private String name;
 

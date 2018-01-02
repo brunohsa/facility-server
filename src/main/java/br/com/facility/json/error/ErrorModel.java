@@ -10,13 +10,13 @@ import java.time.LocalDateTime;
 public class ErrorModel {
 
 	@JsonSerialize(using = LocalDateTimeSerializer.class)
-	private LocalDateTime dateTime;
+	private final LocalDateTime dateTime;
 
-	private String status;
+	private final String status;
 
-	private String error;
+	private final String error;
 
-	private String cause;
+	private final String cause;
 
 	public ErrorModel(HttpStatus httpStatus, String cause) {
 		this.dateTime = LocalDateTime.now();

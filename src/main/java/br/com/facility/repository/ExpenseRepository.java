@@ -2,7 +2,7 @@ package br.com.facility.repository;
 
 import br.com.facility.model.Expense;
 import br.com.facility.model.enuns.PaymentType;
-import br.com.facility.model.enuns.StatusFinance;
+import br.com.facility.model.enuns.FinanceStatus;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -27,6 +27,6 @@ public interface ExpenseRepository extends IncomeAndExposeRepositoryBase<Expense
 			+ "paymentType =:paymentType, status =:status, expirationDate =:expirationDate "
 			+ "WHERE id = :id")
 	Integer update(@Param("value") BigDecimal value, @Param("description") String description, @Param("observation") String observation,
-			@Param("paymentType") PaymentType paymentType, @Param("status") StatusFinance status, @Param("expirationDate") LocalDate expirationDate,
+			@Param("paymentType") PaymentType paymentType, @Param("status") FinanceStatus status, @Param("expirationDate") LocalDate expirationDate,
 			@Param("id") Long id);
 }

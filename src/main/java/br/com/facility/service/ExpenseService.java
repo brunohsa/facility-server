@@ -2,7 +2,7 @@ package br.com.facility.service;
 
 import br.com.facility.model.Expense;
 import br.com.facility.model.enuns.PaymentType;
-import br.com.facility.model.enuns.StatusFinance;
+import br.com.facility.model.enuns.FinanceStatus;
 import br.com.facility.repository.ExpenseRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -19,7 +19,7 @@ public class ExpenseService extends IncomeAndExpenseServiceBase<Expense, Expense
 	@Autowired
 	private ExpenseRepository repository;
 
-	public List<Expense> getExpensesByStatus(StatusFinance status) {
+	public List<Expense> getExpensesByStatus(FinanceStatus status) {
 		return repository.getByStatusAndUserUsername(status, getLoggedUser());
 	}
 
@@ -28,7 +28,7 @@ public class ExpenseService extends IncomeAndExpenseServiceBase<Expense, Expense
 		return repository.filterExpensesByDate(dateTime, getLoggedUser());
 	}
 
-	public Expense update(BigDecimal value, String description, String observation, PaymentType paymentType, StatusFinance status, LocalDate expirationDate,
+	public Expense update(BigDecimal value, String description, String observation, PaymentType paymentType, FinanceStatus status, LocalDate expirationDate,
 			Long id) {
 
 		Integer update = repository.update(value, description, observation, paymentType, status, expirationDate, id);

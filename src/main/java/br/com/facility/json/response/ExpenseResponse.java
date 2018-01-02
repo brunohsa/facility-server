@@ -26,7 +26,7 @@ public class ExpenseResponse extends FinanceJson {
 
     public ExpenseResponse(Expense expense) {
         super(expense.getValue(), expense.getReleaseDate(), expense.getDescription(), expense.getObservation(),
-                expense.getPaymentType(), expense.getStatus());
+                expense.getPaymentType().name(), expense.getStatus().name());
         this.id = expense.getId();
         this.expirationDate = expense.getExpirationDate();
         this.paymentDate = expense.getPaymentDate();
@@ -36,23 +36,11 @@ public class ExpenseResponse extends FinanceJson {
         return id;
     }
 
-    public void setId(Long id) {
-        this.id = id;
-    }
-
     public LocalDate getExpirationDate() {
         return expirationDate;
     }
 
-    public void setExpirationDate(LocalDate expirationDate) {
-        this.expirationDate = expirationDate;
-    }
-
     public LocalDate getPaymentDate() {
         return paymentDate;
-    }
-
-    public void setPaymentDate(LocalDate paymentDate) {
-        this.paymentDate = paymentDate;
     }
 }

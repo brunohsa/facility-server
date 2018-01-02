@@ -1,13 +1,14 @@
 package br.com.facility.json.request;
 
 import br.com.facility.json.FinanceJson;
-import br.com.facility.model.Expense;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateDeserializer;
 
+import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 @JsonInclude(JsonInclude.Include.NON_NULL)
@@ -24,35 +25,23 @@ public class ExpenseRequest extends FinanceJson {
     public ExpenseRequest() {
     }
 
-    public ExpenseRequest(Expense expense) {
-        super(expense.getValue(), expense.getReleaseDate(), expense.getDescription(), expense.getObservation(),
-                expense.getPaymentType(), expense.getStatus());
-        this.id = expense.getId();
-        this.expirationDate = expense.getExpirationDate();
-        this.paymentDate = expense.getPaymentDate();
+    public ExpenseRequest(BigDecimal value, LocalDateTime releaseDate, String description, String observation, String paymentType, String status, Long id,
+            LocalDate expirationDate, LocalDate paymentDate) {
+        super(value, releaseDate, description, observation, paymentType, status);
+        this.id = id;
+        this.expirationDate = expirationDate;
+        this.paymentDate = paymentDate;
     }
 
     public Long getId() {
         return id;
     }
 
-    public void setId(Long id) {
-        this.id = id;
-    }
-
     public LocalDate getExpirationDate() {
         return expirationDate;
     }
 
-    public void setExpirationDate(LocalDate expirationDate) {
-        this.expirationDate = expirationDate;
-    }
-
     public LocalDate getPaymentDate() {
         return paymentDate;
-    }
-
-    public void setPaymentDate(LocalDate paymentDate) {
-        this.paymentDate = paymentDate;
     }
 }

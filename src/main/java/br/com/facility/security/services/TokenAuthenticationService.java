@@ -3,6 +3,7 @@ package br.com.facility.security.services;
 import br.com.facility.exceptions.InternalServerErrorException;
 import br.com.facility.exceptions.webservice.ExpiredTokenException;
 import br.com.facility.json.response.LoginResponse;
+import br.com.facility.json.response.UserResponse;
 import br.com.facility.model.User;
 import br.com.facility.service.UserService;
 import br.com.facility.util.JsonUtil;
@@ -70,7 +71,9 @@ public class TokenAuthenticationService {
 
     private String getSucessAuthenticationJson(String token, String username) throws InternalServerErrorException {
         User user = userService.findByUserName(username);
-        return JsonUtil.convertObjectToJson(new LoginResponse(token, user));
+        UserResponse userResponse = new UserResponse(user);
+
+        return JsonUtil.convertObjectToJson(new LoginResponse(token, userResponse));
     }
 
     public Authentication getAuthentication(HttpServletRequest request) throws ExpiredJwtException, ServletException {
