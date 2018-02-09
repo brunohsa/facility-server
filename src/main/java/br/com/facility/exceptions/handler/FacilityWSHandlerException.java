@@ -2,7 +2,7 @@ package br.com.facility.exceptions.handlers;
 
 import br.com.facility.exceptions.ErrorMessages;
 import br.com.facility.exceptions.InternalServerErrorException;
-import br.com.facility.exceptions.webservice.FacilityWSBaseException;
+import br.com.facility.exceptions.ws.NotFoundException;
 import br.com.facility.json.error.ErrorModel;
 import org.apache.log4j.Logger;
 import org.springframework.http.HttpStatus;
@@ -18,8 +18,8 @@ public class FacilityWSHandlerException {
 
 	static Logger log = Logger.getLogger(FacilityWSHandlerException.class);
 
-	@ExceptionHandler(FacilityWSBaseException.class)
-	public ResponseEntity<Object> facilityAPIErrors(FacilityWSBaseException ex) {
+	@ExceptionHandler(NotFoundException.class)
+	public ResponseEntity<Object> facilityAPIErrors(NotFoundException ex) {
 		ErrorModel error = new ErrorModel(ex.getHttpStatus(), ex.getMessage());
 		return new ResponseEntity(error, ex.getHttpStatus());
 	}

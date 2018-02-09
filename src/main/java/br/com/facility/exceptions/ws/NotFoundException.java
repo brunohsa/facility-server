@@ -1,4 +1,4 @@
-package br.com.facility.exceptions.webservice;
+package br.com.facility.exceptions.ws;
 
 import org.springframework.http.HttpStatus;
 
