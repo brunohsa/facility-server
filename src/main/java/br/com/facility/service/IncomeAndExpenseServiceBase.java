@@ -1,6 +1,6 @@
 package br.com.facility.service;
 
-import br.com.facility.exceptions.webservice.FinanceNotFoundException;
+import br.com.facility.exceptions.ws.FinanceNotFoundException;
 import br.com.facility.model.enuns.StatusFinance;
 import br.com.facility.repository.IncomeAndExposeRepositoryBase;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -1,7 +1,7 @@
 package br.com.facility.security.services;
 
 import br.com.facility.exceptions.InternalServerErrorException;
-import br.com.facility.exceptions.webservice.ExpiredTokenException;
+import br.com.facility.exceptions.ws.ExpiredTokenException;
 import br.com.facility.json.response.LoginResponse;
 import br.com.facility.model.User;
 import br.com.facility.service.UserService;

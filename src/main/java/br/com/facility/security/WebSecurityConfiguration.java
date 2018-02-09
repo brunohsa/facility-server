@@ -1,7 +1,7 @@
 package br.com.facility.security;
 
-import br.com.facility.exceptions.handlers.AuthenticationEntryPointError;
-import br.com.facility.exceptions.handlers.AuthenticationLoginFailureHandler;
+import br.com.facility.security.handler.AuthenticationEntryPointError;
+import br.com.facility.security.handler.AuthenticationLoginFailureHandler;
 import br.com.facility.security.filters.JWTAuthenticationFilter;
 import br.com.facility.security.filters.LoginFilter;
 import br.com.facility.security.services.UserAuthenticationService;
@@ -40,16 +40,16 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
 			.and()
 			.csrf().disable();
 
-			// filtros de login e autenticação
-		http.addFilterBefore(getLoginFilter(), UsernamePasswordAuthenticationFilter.class)
-			.addFilterBefore(authenticationFilter, UsernamePasswordAuthenticationFilter.class);
-
 		http.authorizeRequests()
 				.antMatchers("/users/insert", "/facility/**").permitAll()
 				.antMatchers(HttpMethod.POST, "/login").permitAll()
 				.anyRequest().authenticated()
 				.and()
 				.logout().permitAll();
+
+		// filtros de login e autenticação
+		http.addFilterBefore(getLoginFilter(), UsernamePasswordAuthenticationFilter.class)
+				.addFilterBefore(authenticationFilter, UsernamePasswordAuthenticationFilter.class);
 
 		http.exceptionHandling()
 				.authenticationEntryPoint(restAuthenticationEntryPoint);

@@ -1,6 +1,6 @@
 package br.com.facility.security.filters;
 
-import br.com.facility.exceptions.webservice.ExpiredTokenException;
+import br.com.facility.exceptions.ws.ExpiredTokenException;
 import br.com.facility.json.error.ErrorModel;
 import br.com.facility.security.services.TokenAuthenticationService;
 import org.springframework.beans.factory.annotation.Autowired;

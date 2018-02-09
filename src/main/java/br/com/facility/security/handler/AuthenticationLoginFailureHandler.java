@@ -1,4 +1,4 @@
-package br.com.facility.security.handlers;
+package br.com.facility.security.handler;
 
 import br.com.facility.exceptions.ErrorMessages;
 import br.com.facility.json.error.ErrorModel;

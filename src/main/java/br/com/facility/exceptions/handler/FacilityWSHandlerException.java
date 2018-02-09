@@ -1,4 +1,4 @@
-package br.com.facility.exceptions.handlers;
+package br.com.facility.exceptions.handler;
 
 import br.com.facility.exceptions.ErrorMessages;
 import br.com.facility.exceptions.InternalServerErrorException;

@@ -1,6 +1,6 @@
 package br.com.facility.util;
 
-import br.com.facility.exceptions.webservice.InvalidDateFormatException;
+import br.com.facility.exceptions.ws.InvalidDateFormatException;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;

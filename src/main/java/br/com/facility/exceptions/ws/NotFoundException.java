@@ -2,11 +2,11 @@ package br.com.facility.exceptions.ws;
 
 import org.springframework.http.HttpStatus;
 
-public class FacilityWSBaseException extends RuntimeException {
+public class NotFoundException extends RuntimeException {
 
 	private HttpStatus httpStatus;
 
-	public FacilityWSBaseException(HttpStatus httpStatus, String message) {
+	public NotFoundException(HttpStatus httpStatus, String message) {
 		super(message);
 		this.httpStatus = httpStatus;
 	}
