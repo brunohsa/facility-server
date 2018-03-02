@@ -37,6 +37,14 @@ public class User {
     public User() {
     }
 
+    public User(String name, String lastName, String username, String password, String email) {
+        this.name = name;
+        this.lastName = lastName;
+        this.username = username;
+        this.password = password;
+        this.email = email;
+    }
+
     public User(UserRequest user) {
         this.name = user.getName();
         this.lastName = user.getName();

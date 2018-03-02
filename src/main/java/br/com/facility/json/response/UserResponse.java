@@ -16,6 +16,9 @@ public class UserResponse {
 
     private String email;
 
+    public UserResponse() {
+    }
+
     public UserResponse(User user) {
         this.name = user.getName();
         this.lastName = user.getLastName();

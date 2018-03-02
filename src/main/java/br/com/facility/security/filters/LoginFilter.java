@@ -4,6 +4,7 @@ import br.com.facility.json.request.LoginRequest;
 import br.com.facility.security.services.TokenAuthenticationService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.env.Environment;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
@@ -24,6 +25,9 @@ public class LoginFilter extends AbstractAuthenticationProcessingFilter {
 
     @Autowired
     private TokenAuthenticationService authenticationService;
+
+    @Autowired
+    private Environment environment;
 
     public LoginFilter() {
         super(new AntPathRequestMatcher(LOGIN_PATH));

@@ -37,7 +37,7 @@ public abstract class IncomeAndExpenseServiceBase<E, T extends IncomeAndExposeRe
         return (E) repository.save(entity);
     }
 
-    public E findById(Long id) throws FinanceNotFoundException {
+    public E findById(Long id) {
         Optional<E> finance = repository.findByIdAndUserUsername(id, getLoggedUser());
         return finance.orElseThrow(() -> new FinanceNotFoundException(id));
     }

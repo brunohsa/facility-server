@@ -16,7 +16,7 @@ public class UserService {
 	@Autowired
 	private UserRepository userRepository;
 
-	public User findByUserName(String username) throws UserNotFoundException {
+	public User findByUserName(String username) {
 		Optional<User> user = userRepository.findByUsername(username);
 		return user.orElseThrow(() -> new UserNotFoundException(username));
 	}
@@ -30,7 +30,8 @@ public class UserService {
 	}
 
 	public User findLoggedUser() {
-		return userRepository.findByUsername(getLoggedUsername()).get();
+		return userRepository.findByUsername(getLoggedUsername())
+				.orElseThrow(() -> new UserNotFoundException(""));
 	}
 
 	public String getLoggedUsername() {

@@ -11,6 +11,14 @@ public class LoginRequest {
 
 	private String password;
 
+	public LoginRequest() {
+	}
+
+	public LoginRequest(String userName, String password) {
+		this.userName = userName;
+		this.password = password;
+	}
+
 	public String getUserName() {
 		return Objects.nonNull(userName) ? removeSpaces(userName) : userName;
 	}

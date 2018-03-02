@@ -11,6 +11,8 @@ import io.jsonwebtoken.ExpiredJwtException;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.PropertySource;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -26,15 +28,20 @@ import java.util.Date;
 import java.util.Optional;
 
 @Component
+@PropertySource("classpath:configuration.properties")
 public class TokenAuthenticationService {
 
     @Autowired
     private UserService userService;
 
-    // EXPIRATION_TIME = 24 horas -> 86400000
-    static final long EXPIRATION_TIME = 86400000;
-    static final String TOKEN = "token";
-    static final String SECRET = "f@cility_";
+    @Value("${expiration.time.token}")
+    private long EXPIRATION_TIME;
+
+    @Value("${token.header.name}")
+    private String TOKEN_HEADER_NAME;
+
+    @Value("${secret.pass.authentication}")
+    private String SECRET;
 
     public void addAuthentication(HttpServletResponse response, String username) throws IOException, InternalServerErrorException {
         String token = getToken(username);
@@ -83,7 +90,7 @@ public class TokenAuthenticationService {
     }
 
     private Optional<String> getHeaderToken(HttpServletRequest request) {
-        String token = request.getHeader(TOKEN);
+        String token = request.getHeader(TOKEN_HEADER_NAME);
         return Optional.ofNullable(token);
     }
 
