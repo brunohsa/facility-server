@@ -10,12 +10,15 @@ import java.io.IOException;
 
 public class JsonUtil {
 
+	private JsonUtil() {
+	}
+
 	public static <T> T convertJsonToObject(String json, Class<T> type) {
 		try {
 			ObjectMapper mapper = new ObjectMapper();
 			return mapper.readValue(json, type);
 		} catch (IOException e) {
-			throw new InternalServerErrorException("Erro ao converter o json " + json + "para objeto : " + e.getMessage());
+			throw new InternalServerErrorException("Erro ao converter o model " + json + "para objeto : " + e.getMessage());
 		}
 	}
 
@@ -25,7 +28,7 @@ public class JsonUtil {
 			configureSerializationDates(mapper);
 			return mapper.writeValueAsString(object);
 		} catch (JsonProcessingException e) {
-			throw new InternalServerErrorException("Erro ao converter o objeto para json : " + e.getMessage());
+			throw new InternalServerErrorException("Erro ao converter o objeto para model : " + e.getMessage());
 		}
 	}
 

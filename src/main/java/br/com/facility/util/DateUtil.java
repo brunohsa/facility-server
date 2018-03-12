@@ -17,6 +17,9 @@ public class DateUtil {
 
 	public static final String COMPLETE_HOURS_FORMATTER = "hh:mm:ss";
 
+	private DateUtil() {
+	}
+
 	/**
 	 * Retorna a data formatada com as horas
 	 *

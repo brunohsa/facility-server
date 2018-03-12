@@ -1,19 +1,19 @@
 package br.com.facility.facade;
 
-import br.com.facility.json.request.ExpenseRequest;
-import br.com.facility.json.response.ExpenseResponse;
 import br.com.facility.model.Expense;
 import br.com.facility.model.User;
 import br.com.facility.service.ExpenseService;
 import br.com.facility.service.UserService;
+import br.com.facility.webservice.model.request.ExpenseRequest;
+import br.com.facility.webservice.model.response.ExpenseResponse;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
+import org.springframework.stereotype.Component;
 
 import java.time.LocalDate;
 import java.util.List;
 import java.util.stream.Collectors;
 
-@Service
+@Component
 public class ExpenseFacade implements IExpenseFacade {
 
 	@Autowired
@@ -48,7 +48,7 @@ public class ExpenseFacade implements IExpenseFacade {
 	public List<ExpenseResponse> filterByDate(LocalDate date) {
 		List<Expense> expenses = expenseService.filterExpensesByDate(date);
 		List<ExpenseResponse> expensesJson = expenses.stream()
-				.map(expense -> new ExpenseResponse(expense))
+				.map(ExpenseResponse::new)
 				.collect(Collectors.toList());
 
 		return expensesJson;

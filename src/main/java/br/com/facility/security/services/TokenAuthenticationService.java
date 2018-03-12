@@ -2,10 +2,10 @@ package br.com.facility.security.services;
 
 import br.com.facility.exceptions.InternalServerErrorException;
 import br.com.facility.exceptions.ws.ExpiredTokenException;
-import br.com.facility.json.response.LoginResponse;
 import br.com.facility.model.User;
 import br.com.facility.service.UserService;
 import br.com.facility.util.JsonUtil;
+import br.com.facility.webservice.model.response.LoginResponse;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.ExpiredJwtException;
 import io.jsonwebtoken.Jwts;

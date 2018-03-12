@@ -1,4 +1,4 @@
-package br.com.facility.json.error;
+package br.com.facility.webservice.model.response;
 
 import br.com.facility.util.JsonUtil;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;

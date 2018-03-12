@@ -1,7 +1,7 @@
 package br.com.facility.facade;
 
-import br.com.facility.json.request.ExpenseRequest;
-import br.com.facility.json.response.ExpenseResponse;
+import br.com.facility.webservice.model.request.ExpenseRequest;
+import br.com.facility.webservice.model.response.ExpenseResponse;
 
 import java.time.LocalDate;
 import java.util.List;

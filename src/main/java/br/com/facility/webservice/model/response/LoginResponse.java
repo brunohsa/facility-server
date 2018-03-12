@@ -1,4 +1,4 @@
-package br.com.facility.json.response;
+package br.com.facility.webservice.model.response;
 
 import br.com.facility.model.User;
 
@@ -10,11 +10,6 @@ public class LoginResponse {
 	public LoginResponse() {
 	}
 
-	public LoginResponse(String token, UserResponse user) {
-		this.token = token;
-		this.user = user;
-	}
-
 	public LoginResponse(String token, User user) {
 		this.token = token;
 		this.user = new UserResponse(user);
@@ -24,15 +19,7 @@ public class LoginResponse {
 		return token;
 	}
 
-	public void setToken(String token) {
-		this.token = token;
-	}
-
 	public UserResponse getUser() {
 		return user;
-	}
-
-	public void setUser(UserResponse user) {
-		this.user = user;
 	}
 }

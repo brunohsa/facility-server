@@ -1,8 +1,8 @@
 package br.com.facility.model;
 
-import br.com.facility.json.request.ExpenseRequest;
 import br.com.facility.model.enuns.PaymentType;
 import br.com.facility.model.enuns.StatusFinance;
+import br.com.facility.webservice.model.request.ExpenseRequest;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -42,10 +42,6 @@ public class Expense extends Finance {
 
     public Long getId() {
         return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
     }
 
     public LocalDate getExpirationDate() {

@@ -1,7 +1,7 @@
 package br.com.facility.test.integration;
 
-import br.com.facility.json.request.LoginRequest;
-import br.com.facility.json.response.LoginResponse;
+import br.com.facility.webservice.model.request.LoginRequest;
+import br.com.facility.webservice.model.response.LoginResponse;
 import org.springframework.boot.context.embedded.LocalServerPort;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.client.RestTemplate;

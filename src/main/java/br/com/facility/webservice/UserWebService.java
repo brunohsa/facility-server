@@ -1,11 +1,11 @@
 package br.com.facility.webservice;
 
-import br.com.facility.json.request.UserRequest;
-import br.com.facility.json.response.UserResponse;
 import br.com.facility.model.User;
 import br.com.facility.service.ExpenseService;
 import br.com.facility.service.IncomeService;
 import br.com.facility.service.UserService;
+import br.com.facility.webservice.model.request.UserRequest;
+import br.com.facility.webservice.model.response.UserResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -37,8 +37,8 @@ public class UserWebService {
         return new ResponseEntity(new UserResponse(user), HttpStatus.OK);
     }
 
-    @RequestMapping(value = "/insert", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity insert(@RequestBody UserRequest userJson) {
+    @RequestMapping(value = "/create", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity create(@RequestBody UserRequest userJson) {
         User user = new User(userJson);
         user = userService.save(user);
         return new ResponseEntity(new UserResponse(user), HttpStatus.OK);

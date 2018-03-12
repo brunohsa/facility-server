@@ -3,7 +3,7 @@ package br.com.facility.exceptions.handler;
 import br.com.facility.exceptions.ErrorMessages;
 import br.com.facility.exceptions.InternalServerErrorException;
 import br.com.facility.exceptions.ws.NotFoundException;
-import br.com.facility.json.error.ErrorModel;
+import br.com.facility.webservice.model.response.ErrorModel;
 import org.apache.log4j.Logger;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -14,9 +14,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 @ControllerAdvice
 @RequestMapping(produces = MediaType.APPLICATION_JSON_VALUE)
-public class FacilityWSHandlerException {
+public class FacilityHandler {
 
-	static Logger log = Logger.getLogger(FacilityWSHandlerException.class);
+	static Logger log = Logger.getLogger(FacilityHandler.class);
 
 	@ExceptionHandler(NotFoundException.class)
 	public ResponseEntity<Object> facilityAPIErrors(NotFoundException ex) {

@@ -30,8 +30,7 @@ public class UserService {
 	}
 
 	public User findLoggedUser() {
-		return userRepository.findByUsername(getLoggedUsername())
-				.orElseThrow(() -> new UserNotFoundException(""));
+		return findByUserName(getLoggedUsername());
 	}
 
 	public String getLoggedUsername() {

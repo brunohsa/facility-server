@@ -1,12 +1,11 @@
 package br.com.facility.test.integration.webservice;
 
-import br.com.facility.json.response.ExpenseResponse;
-import br.com.facility.json.response.LoginResponse;
 import br.com.facility.model.Expense;
 import br.com.facility.model.User;
 import br.com.facility.test.fixture.ExpenseFixture;
 import br.com.facility.test.fixture.UserFixture;
 import br.com.facility.test.integration.BaseIntegrationTest;
+import br.com.facility.webservice.model.response.ExpenseResponse;
 import org.junit.Assert;
 import org.junit.Test;
 import org.springframework.http.HttpEntity;

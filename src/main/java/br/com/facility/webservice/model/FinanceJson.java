@@ -1,4 +1,4 @@
-package br.com.facility.json;
+package br.com.facility.webservice.model;
 
 import br.com.facility.model.enuns.PaymentType;
 import br.com.facility.model.enuns.StatusFinance;

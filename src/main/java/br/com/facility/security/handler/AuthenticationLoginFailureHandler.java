@@ -1,7 +1,7 @@
 package br.com.facility.security.handler;
 
 import br.com.facility.exceptions.ErrorMessages;
-import br.com.facility.json.error.ErrorModel;
+import br.com.facility.webservice.model.response.ErrorModel;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.security.core.AuthenticationException;

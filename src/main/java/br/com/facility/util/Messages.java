@@ -1,6 +1,7 @@
 package br.com.facility.util;
 
-import java.io.Closeable;
+import org.springframework.util.StringUtils;
+
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -11,34 +12,21 @@ public class Messages {
 
     private static final String PROPERTY_NAME = "messages.properties";
 
-    public static String getMessage(String propertyName) {
+    private Messages() {
+    }
 
-        InputStream input = null;
-        InputStreamReader reader = null;
-        try {
-            input = ClassLoader.getSystemResourceAsStream(PROPERTY_NAME);
-            reader = new InputStreamReader(input, Charset.defaultCharset());
+    public static String getMessage(String propertyName) {
+        if (StringUtils.isEmpty(propertyName)) {
+            return "!" + propertyName;
+        }
+        try (InputStream input = ClassLoader.getSystemResourceAsStream(PROPERTY_NAME);
+             InputStreamReader reader = new InputStreamReader(input, Charset.defaultCharset())) {
 
             Properties prop = new Properties();
             prop.load(reader);
             return prop.getProperty(propertyName);
         } catch (IOException ex) {
-            //TODO REMOVER
             throw new RuntimeException();
-        } finally {
-            closeInputStream(input);
-            closeInputStream(reader);
-        }
-    }
-
-    private static void closeInputStream(Closeable closeable) {
-        if(closeable != null) {
-            try {
-                closeable.close();
-            } catch (IOException e) {
-                //TODO REMOVER
-                throw new RuntimeException();
-            }
         }
     }
 }
