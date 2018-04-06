@@ -1,8 +1,7 @@
 package br.com.facility.webservice;
 
+import br.com.facility.facade.UserFacade;
 import br.com.facility.model.User;
-import br.com.facility.service.ExpenseService;
-import br.com.facility.service.IncomeService;
 import br.com.facility.service.UserService;
 import br.com.facility.webservice.model.request.UserRequest;
 import br.com.facility.webservice.model.response.UserResponse;
@@ -26,10 +25,7 @@ public class UserWebService {
     private UserService userService;
 
     @Autowired
-    private ExpenseService expenseService;
-
-    @Autowired
-    private IncomeService incomeService;
+    private UserFacade userFacade;
 
     @RequestMapping(value = "/{username}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity findByUsername(@PathVariable("username") String username) {
@@ -46,9 +42,7 @@ public class UserWebService {
 
     @RequestMapping(value = "/delete", method = RequestMethod.DELETE, consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity delete() {
-        incomeService.deleteAll();
-        expenseService.deleteAll();
-        userService.delete();
+        userFacade.delete();
         return new ResponseEntity(HttpStatus.OK);
     }
 
