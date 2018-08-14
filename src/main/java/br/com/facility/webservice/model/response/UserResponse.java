@@ -1,4 +1,4 @@
-package br.com.facility.json.request;
+package br.com.facility.webservice.model.response;
 
 import br.com.facility.model.User;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
@@ -6,7 +6,7 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public class UserRequest {
+public class UserResponse {
 
     private String name;
 
@@ -14,17 +14,15 @@ public class UserRequest {
 
     private String username;
 
-    private String password;
-
     private String email;
 
-    public UserRequest() {
+    public UserResponse() {
     }
 
-    public UserRequest(User user) {
+    public UserResponse(User user) {
         this.name = user.getName();
+        this.lastName = user.getLastName();
         this.username = user.getUsername();
-        this.password = user.getPassword();
         this.email = user.getEmail();
     }
 
@@ -50,14 +48,6 @@ public class UserRequest {
 
     public void setUsername(String username) {
         this.username = username;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
     }
 
     public String getEmail() {

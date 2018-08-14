@@ -1,4 +1,4 @@
-package br.com.facility.json.response;
+package br.com.facility.webservice.model.response;
 
 import br.com.facility.model.User;
 

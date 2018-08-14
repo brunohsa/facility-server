@@ -1,8 +1,8 @@
 package br.com.facility.security.filters;
 
-import br.com.facility.exceptions.ws.ExpiredTokenException;
-import br.com.facility.json.error.ErrorModel;
 import br.com.facility.security.services.TokenAuthenticationService;
+import br.com.facility.exceptions.ExpiredTokenException;
+import br.com.facility.webservice.model.error.ErrorModel;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;

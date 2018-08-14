@@ -1,9 +1,11 @@
-package br.com.facility.json;
+package br.com.facility.webservice.model;
 
+import br.com.facility.model.enuns.FinanceSituation;
 import br.com.facility.model.enuns.PaymentType;
-import br.com.facility.model.enuns.StatusFinance;
+import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonValue;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateTimeDeserializer;
@@ -12,10 +14,14 @@ import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateTimeSerializer;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
+import static com.fasterxml.jackson.annotation.JsonAutoDetect.Visibility.ANY;
+import static com.fasterxml.jackson.annotation.JsonAutoDetect.Visibility.NONE;
+
 @JsonIgnoreProperties(ignoreUnknown = true)
 public abstract class FinanceJson {
 
-    private BigDecimal value;
+    @JsonInclude(JsonInclude.Include.NON_NULL)
+    private BigDecimal value = BigDecimal.ZERO;
 
     @JsonDeserialize(using = LocalDateTimeDeserializer.class)
     @JsonSerialize(using = LocalDateTimeSerializer.class)
@@ -29,13 +35,13 @@ public abstract class FinanceJson {
     @JsonInclude(JsonInclude.Include.NON_NULL)
     private PaymentType paymentType;
 
-    private StatusFinance status;
+    private FinanceSituation status;
 
     public FinanceJson() {
         this.releaseDate = LocalDateTime.now();
     }
 
-    public FinanceJson(BigDecimal value, LocalDateTime releaseDate, String description, String observation, PaymentType paymentType, StatusFinance status) {
+    public FinanceJson(BigDecimal value, LocalDateTime releaseDate, String description, String observation, PaymentType paymentType, FinanceSituation status) {
         this.value = value;
         this.releaseDate = releaseDate;
         this.description = description;
@@ -64,7 +70,7 @@ public abstract class FinanceJson {
         return paymentType;
     }
 
-    public StatusFinance getStatus() {
+    public FinanceSituation getStatus() {
         return status;
     }
 }

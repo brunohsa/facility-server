@@ -1,7 +1,7 @@
 package br.com.facility.model;
 
+import br.com.facility.model.enuns.FinanceSituation;
 import br.com.facility.model.enuns.PaymentType;
-import br.com.facility.model.enuns.StatusFinance;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -55,20 +55,20 @@ public abstract class Finance {
     @Enumerated(EnumType.STRING)
     @Column(name = "STATUS")
     @NotNull
-    private StatusFinance status;
+    private FinanceSituation situation;
 
     public Finance() {
     }
 
     public Finance(BigDecimal value, User user, String description, String observation, PaymentType paymentType,
-            StatusFinance status) {
+            FinanceSituation situation) {
         this.value = value;
         this.releaseDate = LocalDateTime.now();
         this.user = user;
         this.description = description;
         this.observation = observation;
         this.paymentType = paymentType;
-        this.status = status;
+        this.situation = situation;
     }
 
     public BigDecimal getValue() {
@@ -119,11 +119,15 @@ public abstract class Finance {
         this.paymentType = paymentType;
     }
 
-    public StatusFinance getStatus() {
-        return status;
+    public FinanceSituation getSituation() {
+        return situation;
     }
 
-    public void setStatus(StatusFinance status) {
-        this.status = status;
+    public void setSituation(FinanceSituation situation) {
+        this.situation = situation;
+    }
+
+    public boolean isPayd() {
+        return this.situation.equals(FinanceSituation.PAID);
     }
 }

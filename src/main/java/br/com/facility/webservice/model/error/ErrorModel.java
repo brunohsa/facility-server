@@ -1,4 +1,4 @@
-package br.com.facility.json.error;
+package br.com.facility.webservice.model.error;
 
 import br.com.facility.util.JsonUtil;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
@@ -16,13 +16,10 @@ public class ErrorModel {
 
 	private String error;
 
-	private String cause;
-
-	public ErrorModel(HttpStatus httpStatus, String cause) {
+	public ErrorModel(HttpStatus httpStatus, String error) {
 		this.dateTime = LocalDateTime.now();
 		this.status = httpStatus.toString();
-		this.error = httpStatus.getReasonPhrase();
-		this.cause = cause;
+		this.error = error;
 	}
 
 	public LocalDateTime getDateTime() {
@@ -31,10 +28,6 @@ public class ErrorModel {
 
 	public String getStatus() {
 		return status;
-	}
-
-	public String getCause() {
-		return cause;
 	}
 
 	public String getError() {

@@ -2,8 +2,9 @@ package br.com.facility.exceptions.handler;
 
 import br.com.facility.exceptions.ErrorMessages;
 import br.com.facility.exceptions.InternalServerErrorException;
-import br.com.facility.exceptions.ws.NotFoundException;
-import br.com.facility.json.error.ErrorModel;
+import br.com.facility.exceptions.InvalidParameterException;
+import br.com.facility.exceptions.NotFoundException;
+import br.com.facility.webservice.model.error.ErrorModel;
 import org.apache.log4j.Logger;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -19,9 +20,15 @@ public class FacilityWSHandlerException {
 	static Logger log = Logger.getLogger(FacilityWSHandlerException.class);
 
 	@ExceptionHandler(NotFoundException.class)
-	public ResponseEntity<Object> facilityAPIErrors(NotFoundException ex) {
-		ErrorModel error = new ErrorModel(ex.getHttpStatus(), ex.getMessage());
-		return new ResponseEntity(error, ex.getHttpStatus());
+	public ResponseEntity<ErrorModel> facilityAPIErrors(NotFoundException ex) {
+		ErrorModel error = new ErrorModel(HttpStatus.NOT_FOUND, ex.getMessage());
+		return new ResponseEntity(error, HttpStatus.NOT_FOUND);
+	}
+
+	@ExceptionHandler(InvalidParameterException.class)
+	public ResponseEntity<Object> invalidParameter(InvalidParameterException e) {
+		ErrorModel error = new ErrorModel(HttpStatus.BAD_REQUEST, e.getMessage());
+		return new ResponseEntity(error, HttpStatus.BAD_REQUEST);
 	}
 
 	@ExceptionHandler(InternalServerErrorException.class)
@@ -29,7 +36,7 @@ public class FacilityWSHandlerException {
 		log.error(e.getMessage());
 
 		HttpStatus status = HttpStatus.INTERNAL_SERVER_ERROR;
-		ErrorModel error = new ErrorModel(status, ErrorMessages.INTERNAL_SERVER_ERROR.getText("102515"));
+		ErrorModel error = new ErrorModel(status, e.getMessage());
 		return new ResponseEntity(error, status);
 	}
 

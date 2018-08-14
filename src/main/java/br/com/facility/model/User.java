@@ -1,6 +1,6 @@
 package br.com.facility.model;
 
-import br.com.facility.json.request.UserRequest;
+import br.com.facility.webservice.model.request.UserRequest;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;

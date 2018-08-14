@@ -1,7 +1,7 @@
 package br.com.facility.security.filters;
 
-import br.com.facility.json.request.LoginRequest;
 import br.com.facility.security.services.TokenAuthenticationService;
+import br.com.facility.webservice.model.request.LoginRequest;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.env.Environment;

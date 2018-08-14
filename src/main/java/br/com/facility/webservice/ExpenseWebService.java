@@ -1,9 +1,9 @@
 package br.com.facility.webservice;
 
 import br.com.facility.facade.IExpenseFacade;
-import br.com.facility.json.request.ExpenseRequest;
-import br.com.facility.json.response.ExpenseResponse;
 import br.com.facility.util.DateUtil;
+import br.com.facility.webservice.model.request.ExpenseRequest;
+import br.com.facility.webservice.model.response.ExpenseResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -55,7 +55,6 @@ public class ExpenseWebService {
 
     @RequestMapping(value = "/filter/{date}", produces = MediaType.APPLICATION_JSON_VALUE, method = RequestMethod.GET)
     public ResponseEntity filterByDate(@PathVariable("date") String date) {
-
         LocalDate localDate = DateUtil.getLocalDate(date);
 
         List<ExpenseResponse> expensesJson = expenseFacade.filterByDate(localDate);

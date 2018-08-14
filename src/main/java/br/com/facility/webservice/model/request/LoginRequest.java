@@ -1,4 +1,4 @@
-package br.com.facility.json.request;
+package br.com.facility.webservice.model.request;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 

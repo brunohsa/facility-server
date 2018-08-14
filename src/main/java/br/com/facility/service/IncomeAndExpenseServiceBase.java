@@ -1,8 +1,8 @@
 package br.com.facility.service;
 
-import br.com.facility.exceptions.ws.FinanceNotFoundException;
-import br.com.facility.model.enuns.StatusFinance;
+import br.com.facility.model.enuns.FinanceSituation;
 import br.com.facility.repository.IncomeAndExposeRepositoryBase;
+import br.com.facility.exceptions.FinanceNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -17,8 +17,8 @@ public abstract class IncomeAndExpenseServiceBase<E, T extends IncomeAndExposeRe
     @Autowired
     private T repository;
 
-    public List<E> getByStatus(StatusFinance statusFinance) {
-        return repository.getByStatusAndUserUsername(statusFinance, getLoggedUser());
+    public List<E> getByStatus(FinanceSituation statusFinance) {
+        return repository.getBySituationAndUserUsername(statusFinance, getLoggedUser());
     }
 
     public List<E> findAll() {
@@ -26,6 +26,9 @@ public abstract class IncomeAndExpenseServiceBase<E, T extends IncomeAndExposeRe
     }
 
     public void delete(Long id) {
+        if(id == null) {
+            throw new RuntimeException();
+        }
         repository.delete(id);
     }
 
@@ -39,7 +42,7 @@ public abstract class IncomeAndExpenseServiceBase<E, T extends IncomeAndExposeRe
 
     public E findById(Long id) {
         Optional<E> finance = repository.findByIdAndUserUsername(id, getLoggedUser());
-        return finance.orElseThrow(() -> new FinanceNotFoundException(id));
+        return finance.orElseThrow(() -> new FinanceNotFoundException());
     }
 
     public String getLoggedUser() {

@@ -1,6 +1,6 @@
 package br.com.facility.repository;
 
-import br.com.facility.model.enuns.StatusFinance;
+import br.com.facility.model.enuns.FinanceSituation;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.NoRepositoryBean;
 import org.springframework.data.repository.query.Param;
@@ -12,7 +12,7 @@ import java.util.Optional;
 @NoRepositoryBean
 public interface IncomeAndExposeRepositoryBase<E, Long extends Serializable> extends CrudRepository<E, Long> {
 
-    List<E> getByStatusAndUserUsername(@Param("status") StatusFinance statusFinance, @Param("username") String username);
+    List<E> getBySituationAndUserUsername(@Param("situation") FinanceSituation situation, @Param("username") String username);
 
     List<E> findAllByUserUsername(@Param("username") String username);
 

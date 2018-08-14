@@ -1,9 +1,9 @@
 package br.com.facility.security;
 
-import br.com.facility.security.handler.AuthenticationEntryPointError;
-import br.com.facility.security.handler.AuthenticationLoginFailureHandler;
 import br.com.facility.security.filters.JWTAuthenticationFilter;
 import br.com.facility.security.filters.LoginFilter;
+import br.com.facility.security.handler.AuthenticationEntryPointError;
+import br.com.facility.security.handler.AuthenticationLoginFailureHandler;
 import br.com.facility.security.services.UserAuthenticationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;

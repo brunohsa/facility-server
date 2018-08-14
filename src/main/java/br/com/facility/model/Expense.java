@@ -1,8 +1,7 @@
 package br.com.facility.model;
 
-import br.com.facility.json.request.ExpenseRequest;
+import br.com.facility.model.enuns.FinanceSituation;
 import br.com.facility.model.enuns.PaymentType;
-import br.com.facility.model.enuns.StatusFinance;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -25,17 +24,10 @@ public class Expense extends Finance {
     @Column(name = "PAYMENT_DATE")
     private LocalDate paymentDate;
 
-    public Expense() {
-    }
+    public Expense() { }
 
-    public Expense(ExpenseRequest expenseJson, User user) {
-        this(expenseJson.getValue(), user, expenseJson.getDescription(), expenseJson.getObservation(), expenseJson.getPaymentType(), expenseJson.getStatus(),
-                expenseJson.getExpirationDate(), expenseJson.getPaymentDate());
-        this.id = expenseJson.getId();
-    }
-
-    public Expense(BigDecimal value, User user, String description, String observation, PaymentType paymentType, StatusFinance status, LocalDate expirationDate, LocalDate paymentDate) {
-        super(value, user, description, observation, paymentType, status);
+    public Expense(BigDecimal value, User user, String description, String observation, PaymentType paymentType, FinanceSituation situation, LocalDate expirationDate, LocalDate paymentDate) {
+        super(value, user, description, observation, paymentType, situation);
         this.expirationDate = expirationDate;
         this.paymentDate = paymentDate;
     }
