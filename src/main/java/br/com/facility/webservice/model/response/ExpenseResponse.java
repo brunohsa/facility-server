@@ -21,8 +21,8 @@ public class ExpenseResponse extends FinanceJson {
     public ExpenseResponse() {
     }
 
-    public ExpenseResponse(BigDecimal value, String description, String observation, PaymentType paymentType, FinanceSituation status, Long id, LocalDateTime releaseDate, List<FinanceSituation> avaliableSituations) {
-        super(value, releaseDate, description, observation, paymentType, status);
+    public ExpenseResponse(BigDecimal value, String description, String observation, PaymentType paymentType, FinanceSituation situation, Long id, LocalDateTime releaseDate, List<FinanceSituation> avaliableSituations) {
+        super(value, releaseDate, description, observation, paymentType, situation);
         this.id = id;
         this.avaliableSituations = avaliableSituations;
     }

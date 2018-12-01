@@ -40,7 +40,8 @@ public class ExpenseFacade implements IExpenseFacade {
     }
 
     @Override
-    public ExpenseResponse update(ExpenseRequest expense) {
+    public ExpenseResponse update(Long id, ExpenseRequest expenseRequest) {
+        ExpenseResponse expense = this.findById(id);
 //        Expense expenseSaved = expenseService.update(expense.getValue(), expense.getDescription(), expense.getObservation(), expense.getPaymentType(), expense.getStatus(),
 //                expense.getExpirationDate(), expense.getId());
         return null;

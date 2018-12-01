@@ -47,8 +47,8 @@ public class ExpenseWebService {
         expenseFacade.delete(id);
     }
 
-    @RequestMapping(value = "/update", consumes = MediaType.APPLICATION_JSON_VALUE, method = RequestMethod.POST)
-    public ResponseEntity update(@RequestBody ExpenseRequest jsonRequest) {
+    @RequestMapping(value = "/update/{id}", consumes = MediaType.APPLICATION_JSON_VALUE, method = RequestMethod.POST)
+    public ResponseEntity update(@PathVariable("id") Long id, @RequestBody ExpenseRequest jsonRequest) {
         ExpenseResponse updatedExpense = expenseFacade.update(jsonRequest);
         return ResponseEntity.ok(updatedExpense);
     }

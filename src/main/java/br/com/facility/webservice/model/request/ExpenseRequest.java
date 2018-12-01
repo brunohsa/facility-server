@@ -10,8 +10,6 @@ import java.time.LocalDate;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class ExpenseRequest extends FinanceJson {
 
-    private Long id;
-
     @JsonDeserialize(using = LocalDateDeserializer.class)
     private LocalDate expirationDate;
 
@@ -19,14 +17,6 @@ public class ExpenseRequest extends FinanceJson {
     private LocalDate paymentDate;
 
     public ExpenseRequest() {
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
     }
 
     public LocalDate getExpirationDate() {

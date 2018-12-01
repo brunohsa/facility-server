@@ -82,6 +82,10 @@ public class ExpenseService {
 		repository.deleteAll();
 	}
 
+	public void update() {
+
+	}
+
 	public String getLoggedUser() {
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		return auth.getName();

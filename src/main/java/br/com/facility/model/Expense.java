@@ -36,10 +36,6 @@ public class Expense extends Finance {
         return id;
     }
 
-    public void setId(Long id) {
-        this.id = id;
-    }
-
     public LocalDate getExpirationDate() {
         return expirationDate;
     }

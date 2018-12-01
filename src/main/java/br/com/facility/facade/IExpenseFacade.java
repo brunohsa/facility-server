@@ -10,7 +10,7 @@ public interface IExpenseFacade {
 
 	ExpenseResponse save(ExpenseRequest expenseRequest);
 
-	ExpenseResponse update(ExpenseRequest expenseRequest);
+	ExpenseResponse update(Long id, ExpenseRequest expenseRequest);
 
 	ExpenseResponse findById(Long id);
 
