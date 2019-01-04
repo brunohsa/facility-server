@@ -19,7 +19,7 @@ public class UserService {
 
 	public User findByUserName(String username) {
 		if(StringUtils.isEmpty(username)) {
-			//throw exception
+			throw new UserNotFoundException();
 		}
 		Optional<User> user = userRepository.findByUsername(username);
 		return user.orElseThrow(() -> new UserNotFoundException());

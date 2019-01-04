@@ -1,6 +1,6 @@
 package br.com.facility.webservice.model;
 
-import br.com.facility.model.enuns.FinanceSituation;
+import br.com.facility.model.enuns.FinanceStatus;
 import br.com.facility.model.enuns.PaymentType;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
@@ -30,13 +30,13 @@ public abstract class FinanceJson {
     @JsonInclude(JsonInclude.Include.NON_NULL)
     private PaymentType paymentType;
 
-    private FinanceSituation status;
+    private FinanceStatus status;
 
     public FinanceJson() {
         this.releaseDate = LocalDateTime.now();
     }
 
-    public FinanceJson(BigDecimal value, LocalDateTime releaseDate, String description, String observation, PaymentType paymentType, FinanceSituation status) {
+    public FinanceJson(BigDecimal value, LocalDateTime releaseDate, String description, String observation, PaymentType paymentType, FinanceStatus status) {
         this.value = value;
         this.releaseDate = releaseDate;
         this.description = description;
@@ -65,7 +65,7 @@ public abstract class FinanceJson {
         return paymentType;
     }
 
-    public FinanceSituation getStatus() {
+    public FinanceStatus getStatus() {
         return status;
     }
 }

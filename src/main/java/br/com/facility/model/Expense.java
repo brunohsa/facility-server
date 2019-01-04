@@ -1,6 +1,6 @@
 package br.com.facility.model;
 
-import br.com.facility.model.enuns.FinanceSituation;
+import br.com.facility.model.enuns.FinanceStatus;
 import br.com.facility.model.enuns.PaymentType;
 
 import javax.persistence.Column;
@@ -21,15 +21,11 @@ public class Expense extends Finance {
     @Column(name = "EXPIRATION_DATE")
     private LocalDate expirationDate;
 
-    @Column(name = "PAYMENT_DATE")
-    private LocalDate paymentDate;
-
     public Expense() { }
 
-    public Expense(BigDecimal value, User user, String description, String observation, PaymentType paymentType, FinanceSituation situation, LocalDate expirationDate, LocalDate paymentDate) {
-        super(value, user, description, observation, paymentType, situation);
+    public Expense(BigDecimal value, User user, String description, String observation, PaymentType paymentType, FinanceStatus situation, LocalDate expirationDate, LocalDate paymentDate) {
+        super(value, user, description, observation, paymentType, situation, paymentDate);
         this.expirationDate = expirationDate;
-        this.paymentDate = paymentDate;
     }
 
     public Long getId() {
@@ -42,13 +38,5 @@ public class Expense extends Finance {
 
     public void setExpirationDate(LocalDate expirationDate) {
         this.expirationDate = expirationDate;
-    }
-
-    public LocalDate getPaymentDate() {
-        return paymentDate;
-    }
-
-    public void setPaymentDate(LocalDate paymentDate) {
-        this.paymentDate = paymentDate;
     }
 }

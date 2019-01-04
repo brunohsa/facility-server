@@ -1,8 +1,10 @@
 package br.com.facility.facade;
 
+import br.com.facility.exceptions.ExpenseNotFoundException;
 import br.com.facility.model.Expense;
 import br.com.facility.model.User;
 import br.com.facility.service.ExpenseService;
+import br.com.facility.service.StatusMachineService;
 import br.com.facility.service.UserService;
 import br.com.facility.webservice.model.request.ExpenseRequest;
 import br.com.facility.webservice.model.response.ExpenseResponse;
@@ -22,6 +24,9 @@ public class ExpenseFacade implements IExpenseFacade {
     @Autowired
     private ExpenseService expenseService;
 
+    @Autowired
+    private StatusMachineService statusMachineService;
+
     @Override
     public ExpenseResponse save(ExpenseRequest expenseRequest) {
         User user = userService.findLoggedUser();
@@ -35,16 +40,24 @@ public class ExpenseFacade implements IExpenseFacade {
                 expenseRequest.getExpirationDate(),
                 expenseRequest.getPaymentDate()
         );
-        Expense expenseSaved = expenseService.save(expense);
-        return mapExpenseToExpenseResponse(expenseSaved);
+
+        return mapExpenseToExpenseResponse(expenseService.save(expense));
     }
 
     @Override
     public ExpenseResponse update(Long id, ExpenseRequest expenseRequest) {
-        ExpenseResponse expense = this.findById(id);
-//        Expense expenseSaved = expenseService.update(expense.getValue(), expense.getDescription(), expense.getObservation(), expense.getPaymentType(), expense.getStatus(),
-//                expense.getExpirationDate(), expense.getId());
-        return null;
+        Expense expense = expenseService.findById(id);
+
+        if (expense == null) {
+            throw new ExpenseNotFoundException();
+        }
+
+        expense.setDescription(expenseRequest.getDescription());
+        expense.setObservation(expenseRequest.getObservation());
+        expense.setExpirationDate(expenseRequest.getExpirationDate());
+        expense.setValue(expenseRequest.getValue());
+
+        return mapExpenseToExpenseResponse(expenseService.save(expense));
     }
 
     @Override
@@ -54,8 +67,8 @@ public class ExpenseFacade implements IExpenseFacade {
     }
 
     @Override
-    public List<ExpenseResponse> filterByDate(LocalDate date) {
-        List<Expense> expenses = expenseService.filterExpensesByDate(date);
+    public List<ExpenseResponse> filterByDate(LocalDate from, LocalDate to) {
+        List<Expense> expenses = expenseService.filterExpensesByDate(from, to);
         List<ExpenseResponse> expensesJson = expenses.stream()
                 .map(expense -> mapExpenseToExpenseResponse(expense))
                 .collect(Collectors.toList());
@@ -78,16 +91,34 @@ public class ExpenseFacade implements IExpenseFacade {
         return expensesJson;
     }
 
+    @Override
+    public ExpenseResponse pay(Long id) {
+        Expense expense = expenseService.findById(id);
+        return mapExpenseToExpenseResponse((Expense) statusMachineService.toPaid(expense));
+    }
+
+    @Override
+    public ExpenseResponse cancell(Long id) {
+        Expense expense = expenseService.findById(id);
+        return mapExpenseToExpenseResponse((Expense) statusMachineService.toCancelled(expense));
+    }
+
+    @Override
+    public ExpenseResponse overdue(Long id) {
+        Expense expense = expenseService.findById(id);
+        return mapExpenseToExpenseResponse((Expense) statusMachineService.toOverdue(expense));
+    }
+
     private ExpenseResponse mapExpenseToExpenseResponse(Expense expense) {
         return new ExpenseResponse(
                 expense.getValue(),
                 expense.getDescription(),
                 expense.getObservation(),
                 expense.getPaymentType(),
-                expense.getSituation(),
+                expense.getStatus(),
                 expense.getId(),
                 expense.getReleaseDate(),
-                expense.getSituation().getAvaliableSituations()
+                expense.getStatus().getAvaliableSituations()
         );
     }
 }

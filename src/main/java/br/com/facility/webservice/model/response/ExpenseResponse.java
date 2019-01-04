@@ -1,6 +1,6 @@
 package br.com.facility.webservice.model.response;
 
-import br.com.facility.model.enuns.FinanceSituation;
+import br.com.facility.model.enuns.FinanceStatus;
 import br.com.facility.model.enuns.PaymentType;
 import br.com.facility.webservice.model.FinanceJson;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
@@ -16,12 +16,12 @@ public class ExpenseResponse extends FinanceJson {
 
     private Long id;
 
-    private List<FinanceSituation> avaliableSituations;
+    private List<FinanceStatus> avaliableSituations;
 
     public ExpenseResponse() {
     }
 
-    public ExpenseResponse(BigDecimal value, String description, String observation, PaymentType paymentType, FinanceSituation situation, Long id, LocalDateTime releaseDate, List<FinanceSituation> avaliableSituations) {
+    public ExpenseResponse(BigDecimal value, String description, String observation, PaymentType paymentType, FinanceStatus situation, Long id, LocalDateTime releaseDate, List<FinanceStatus> avaliableSituations) {
         super(value, releaseDate, description, observation, paymentType, situation);
         this.id = id;
         this.avaliableSituations = avaliableSituations;
@@ -31,7 +31,7 @@ public class ExpenseResponse extends FinanceJson {
         return id;
     }
 
-    public List<FinanceSituation> getAvaliableSituations() {
+    public List<FinanceStatus> getAvaliableSituations() {
         return avaliableSituations;
     }
 }

@@ -1,6 +1,6 @@
 package br.com.facility.model;
 
-import br.com.facility.model.enuns.FinanceSituation;
+import br.com.facility.model.enuns.FinanceStatus;
 import br.com.facility.model.enuns.PaymentType;
 
 import javax.persistence.Column;
@@ -18,6 +18,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Entity(name = "FINANCE")
@@ -36,7 +37,7 @@ public abstract class Finance {
     @NotNull
     private LocalDateTime releaseDate;
 
-    @ManyToOne(fetch= FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "USER_ID", referencedColumnName = "ID", foreignKey = @ForeignKey(name = "FK_USER_FINANCE"))
     @NotNull
     private User user;
@@ -55,20 +56,24 @@ public abstract class Finance {
     @Enumerated(EnumType.STRING)
     @Column(name = "STATUS")
     @NotNull
-    private FinanceSituation situation;
+    private FinanceStatus status;
+
+    @Column(name = "PAYMENT_DATE")
+    private LocalDate paymentDate;
 
     public Finance() {
     }
 
     public Finance(BigDecimal value, User user, String description, String observation, PaymentType paymentType,
-            FinanceSituation situation) {
+                   FinanceStatus status, LocalDate paymentDate) {
         this.value = value;
         this.releaseDate = LocalDateTime.now();
         this.user = user;
         this.description = description;
         this.observation = observation;
         this.paymentType = paymentType;
-        this.situation = situation;
+        this.status = status;
+        this.paymentDate = paymentDate;
     }
 
     public BigDecimal getValue() {
@@ -119,15 +124,23 @@ public abstract class Finance {
         this.paymentType = paymentType;
     }
 
-    public FinanceSituation getSituation() {
-        return situation;
+    public FinanceStatus getStatus() {
+        return status;
     }
 
-    public void setSituation(FinanceSituation situation) {
-        this.situation = situation;
+    public void setStatus(FinanceStatus status) {
+        this.status = status;
     }
 
-    public boolean isPayd() {
-        return this.situation.equals(FinanceSituation.PAID);
+    public LocalDate getPaymentDate() {
+        return paymentDate;
+    }
+
+    public void setPaymentDate(LocalDate paymentDate) {
+        this.paymentDate = paymentDate;
+    }
+
+    public boolean isPaid() {
+        return this.status.equals(FinanceStatus.PAID);
     }
 }

@@ -10,5 +10,9 @@ public interface IUserFacade {
 
     User findByUserName(String username);
 
+    User findLoggedUser();
+
     void delete();
+
+    UserResponse update(UserRequest userRequest);
 }

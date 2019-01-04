@@ -47,16 +47,9 @@ public class UserWebService {
     }
 
     @RequestMapping(value = "/update", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity update(@RequestBody UserRequest userJson) {
-        User user = null;
-//        User user = userService.findLoggedUser();
-//        user.setEmail(Optional.ofNullable(userJson.getEmail()).orElse(user.getEmail()));
-//        user.setName(Optional.ofNullable(userJson.getName()).orElse(user.getName()));
-//        user.setLastName(Optional.ofNullable(userJson.getLastName()).orElse(user.getLastName()));
-//
-//        user = userService.save(user);
-
-        return new ResponseEntity(new UserResponse(user), HttpStatus.OK);
+    public ResponseEntity update(@RequestBody UserRequest userRequest) {
+        UserResponse user = userFacade.update(userRequest);
+        return new ResponseEntity(user, HttpStatus.OK);
     }
 }
 

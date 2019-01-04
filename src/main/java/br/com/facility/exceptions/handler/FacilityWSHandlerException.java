@@ -1,5 +1,6 @@
 package br.com.facility.exceptions.handler;
 
+import br.com.facility.exceptions.BaseException;
 import br.com.facility.exceptions.ErrorMessages;
 import br.com.facility.exceptions.InternalServerErrorException;
 import br.com.facility.exceptions.InvalidParameterException;
@@ -25,8 +26,8 @@ public class FacilityWSHandlerException {
 		return new ResponseEntity(error, HttpStatus.NOT_FOUND);
 	}
 
-	@ExceptionHandler(InvalidParameterException.class)
-	public ResponseEntity<Object> invalidParameter(InvalidParameterException e) {
+	@ExceptionHandler({InvalidParameterException.class, IllegalStateException.class})
+	public ResponseEntity<Object> invalidParameter(BaseException e) {
 		ErrorModel error = new ErrorModel(HttpStatus.BAD_REQUEST, e.getMessage());
 		return new ResponseEntity(error, HttpStatus.BAD_REQUEST);
 	}

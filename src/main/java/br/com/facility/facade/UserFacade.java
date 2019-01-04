@@ -9,6 +9,8 @@ import br.com.facility.webservice.model.response.UserResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
+
 @Service
 public class UserFacade implements IUserFacade {
 
@@ -20,6 +22,16 @@ public class UserFacade implements IUserFacade {
 
     @Autowired
     private IncomeService incomeService;
+
+    @Override
+    public UserResponse update(UserRequest userRequest) {
+        User user = userService.findLoggedUser();
+        user.setEmail(userRequest.getEmail());
+        user.setName(userRequest.getName());
+        user.setLastName(userRequest.getLastName());
+
+        return new UserResponse(userService.save(user));
+    }
 
     @Override
     public UserResponse save(UserRequest userRequest) {
@@ -39,8 +51,13 @@ public class UserFacade implements IUserFacade {
     }
 
     @Override
+    public User findLoggedUser() {
+        return userService.findLoggedUser();
+    }
+
+    @Override
     public void delete() {
-        incomeService.deleteAll();
+        //incomeService.deleteAll();
         expenseService.deleteAll();
         userService.delete();
     }

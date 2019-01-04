@@ -1,10 +1,10 @@
 package br.com.facility.service;
 
-import br.com.facility.model.Expense;
-import br.com.facility.model.enuns.FinanceSituation;
-import br.com.facility.repository.ExpenseRepository;
-import br.com.facility.exceptions.FinanceNotFoundException;
+import br.com.facility.exceptions.ExpenseNotFoundException;
 import br.com.facility.exceptions.InvalidParameterException;
+import br.com.facility.model.Expense;
+import br.com.facility.model.enuns.FinanceStatus;
+import br.com.facility.repository.ExpenseRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -24,13 +24,15 @@ public class ExpenseService {
 	@Autowired
 	private ExpenseRepository repository;
 
-	public List<Expense> getExpensesByStatus(FinanceSituation status) {
-		return repository.getBySituationAndUserUsername(status, getLoggedUser());
+	public List<Expense> getExpensesByStatus(FinanceStatus status) {
+		return repository.getByStatusAndUserUsername(status, getLoggedUser());
 	}
 
-	public List<Expense> filterExpensesByDate(LocalDate date) {
-		LocalDateTime dateTime = LocalDateTime.of(date, LocalTime.MIDNIGHT);
-		return repository.filterExpensesByDate(dateTime, getLoggedUser());
+	public List<Expense> filterExpensesByDate(LocalDate from, LocalDate to) {
+		LocalDateTime fromDate = LocalDateTime.of(from, LocalTime.MIDNIGHT);
+		LocalDateTime toDate = LocalDateTime.of(to, LocalTime.MAX);
+
+		return repository.filterExpensesByDate(fromDate, toDate, getLoggedUser());
 	}
 
 	public Expense save(Expense entity) {
@@ -43,16 +45,16 @@ public class ExpenseService {
 		if (entity.getPaymentType() == null) {
 			throw new InvalidParameterException("Tipo de pagamento inválido");
 		}
-		if (entity.getSituation() == null) {
+		if (entity.getStatus() == null) {
 			throw new InvalidParameterException("Status da despesa inválido");
 		}
 		if (entity.getValue().compareTo(BigDecimal.ZERO) == 0 || entity.getValue().compareTo(BigDecimal.ZERO) == -1) {
 			throw new InvalidParameterException("Valor da despesa deve ser maior do que zero.");
 		}
-		if(entity.isPayd() && entity.getPaymentDate() == null) {
+		if(entity.isPaid() && entity.getPaymentDate() == null) {
 			throw new InvalidParameterException("Despesas pagas devem possuir data de pagamento.");
 		}
-		if(!entity.isPayd() && entity.getPaymentDate() != null) {
+		if(!entity.isPaid() && entity.getPaymentDate() != null) {
 			throw new InvalidParameterException("Data de pagamento deve ser preenchida apenas para despesas pagas.");
 		}
 		return repository.save(entity);
@@ -63,7 +65,7 @@ public class ExpenseService {
 			throw new InvalidParameterException("Por favor, informe um id.");
 		}
 		Optional<Expense> finance = repository.findByIdAndUserUsername(id, getLoggedUser());
-		return finance.orElseThrow(() -> new FinanceNotFoundException());
+		return finance.orElseThrow(() -> new ExpenseNotFoundException());
 	}
 
 	public List<Expense> findAll() {
@@ -80,10 +82,6 @@ public class ExpenseService {
 
 	public void deleteAll() {
 		repository.deleteAll();
-	}
-
-	public void update() {
-
 	}
 
 	public String getLoggedUser() {
